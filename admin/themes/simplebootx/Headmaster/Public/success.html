@@ -1,0 +1,29 @@
+<php>
+	$time = time();
+</php>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>申请成功</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="list-success">
+			<div class="success">
+				<img src="__PUBLIC__/simpleboot/headmaster/images/success.png" alt="">
+			</div>
+			<dt>您的申请提交成功</dt>
+			<span>{$time|date="Y-m-d H:i:s",###}</span>
+			<dl  onclick="location='{:U('Headmaster/user/user_apply')}'">查看我的申请</dl>
+			<button  onclick="location='{:U('index/index')}'">确定</button>
+		</div>
+	</div>
+</body>
+</html>

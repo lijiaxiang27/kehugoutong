@@ -1,0 +1,62 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Lecture/index')}">家庭讲座申请列表</a></li>
+		</ul>
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>讲座名称</th>
+					<th>申请人</th>
+					<th>所在地区</th>
+					<th>开始时间</th>
+					<th>参会人数</th>
+					<th>申请时间</th>
+					<th>申请校区</th>
+					<th>状态</th>
+					<th width="120">{:L('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<php>$user_statuses=array("0"=>L('USER_STATUS_BLOCKED'),"1"=>L('USER_STATUS_ACTIVATED'),"2"=>L('USER_STATUS_UNVERIFIED'));</php>
+				<foreach name="lectures" item="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.title}</td>
+					<td>{$vo.person}</td>
+					<td>{$vo.province}-{$vo.city}-{$vo.county}</td>
+					<td>{$vo.start}</td>
+					<td>{$vo.num}</td>
+					<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+					<td>{$vo.user_nicename}</td>
+					<td>
+						<if condition="$vo['status'] eq '0' ">
+							<span style="color: #d41e24">未读</span>
+							<elseif condition="$vo['status'] eq '1'"/>
+							审批中
+							<elseif condition="$vo['status'] eq '2'"/>
+							审批通过,待评价
+							<elseif condition="$vo['status'] eq '3'"/>
+							<span style="color: #0071ce">完成</span>
+						</if>
+					</td>
+					<td>
+
+							<a href='{:U("lecture/edit",array("id"=>$vo["id"]))}'>查看详情</a>
+
+							<a class="js-ajax-delete" href="{:U('lecture/delete',array('id'=>$vo['id']))}">{:L('DELETE')}</a>
+
+					</td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+		<div class="pagination">{$page}</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

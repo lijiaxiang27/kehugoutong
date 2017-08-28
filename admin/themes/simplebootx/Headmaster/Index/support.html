@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>服务支持</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="serve">
+		<div class="banner">
+			<div class="swiper-container"style="width: 100%;">  
+			    <div class="swiper-wrapper">
+					<php>
+						$slides=sp_getslide('banner');
+					</php>
+					<foreach name="slides" item="vo">
+						<div class="swiper-slide"><img src="{:sp_get_asset_upload_path($vo['slide_pic'])}"></div>
+					</foreach>
+			    </div>  
+			    <div class="swiper-pagination"></div>
+			</div>  
+		</div>
+		<div class="market">
+			<h2>市场支持</h2>
+			<ul class="clear">
+				<li onclick="location='{:U('down/sc_data')}'">
+					<img src="__PUBLIC__/simpleboot/headmaster/images/serve-1.png" alt="">
+					<p>市场方案</p>
+				</li>
+				<li onclick="location='{:U('down/px_data')}'">
+					<img src="__PUBLIC__/simpleboot/headmaster/images/serve-2.png" alt="">
+					<p>开业方案</p>
+				</li>
+				<li onclick="location='{:U('down/yy_data')}'">
+					<img src="__PUBLIC__/simpleboot/headmaster/images/serve-3.png" alt="">
+					<p>物料设计</p>
+				</li>
+			</ul>
+		</div>
+		<div class="support">
+			<h2>支持运营中心</h2>
+			<ul>
+
+				<li onclick="location='{:U('index/bjsupport')}'">
+					<img src="__PUBLIC__/simpleboot/headmaster/images/serve-6.png" alt="">
+					<p>北京运营支持中心</p>
+				</li>
+				<li onclick="location='{:U('index/cssupport')}'">
+					<img src="__PUBLIC__/simpleboot/headmaster/images/serve-4.png" alt="">
+					<p>长沙运营支持中心</p>
+				</li>
+
+			</ul>
+		</div>
+		<div class="story">
+			<h2>凹凸故事<span>每个人都有自己的故事</span></h2>
+			<foreach name="storys" item="vo">
+				<php> $smeta=json_decode($vo['smeta'], true); </php>
+				<div onclick="location='{:U('Atlive/index',array('id'=>$vo['id']))}'">
+					<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" alt="">
+					<p>{$vo.post_title}</p>
+				</div>
+			</foreach>
+		</div>
+	</div>
+<admintpl file="footer" />
+<script src="__PUBLIC__/simpleboot/headmaster/js/swiper.js"></script>
+<script type="text/javascript">  
+    var mySwiper = new Swiper(".swiper-container",{  
+        direction:"horizontal",/*横向滑动*/  
+        loop:true,/*形成环路（即：可以从最后一张图跳转到第一张图*/  
+        pagination:".swiper-pagination",/*分页器*/  
+        prevButton:".swiper-button-prev",/*前进按钮*/  
+        nextButton:".swiper-button-next",/*后退按钮*/  
+        autoplay:5000/*每隔3秒自动播放*/  
+    })  
+</script>
+</body>
+</html>

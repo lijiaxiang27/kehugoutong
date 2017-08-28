@@ -1,0 +1,215 @@
+/* p_s = person_setting */
+body {
+  background: white;
+}
+.p_s_padding {
+  padding: 0.5rem;
+}
+.p_s_header img {
+  width: 1.4rem;
+  height: 1.4rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  float: left;
+}
+.p_s_header .p_s_header_right {
+  float: left;
+  text-align: left;
+  padding-left: 0.5rem;
+}
+.p_s_header .p_s_header_name {
+  font-weight: 400;
+}
+.p_s_header .p_s_header_area {
+  font-size: 0.28rem;
+}
+.p_s_header span {
+  font-size: 0.28rem;
+}
+.p_s_color-block {
+  height: 0.24rem;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  background: #f6f6f6;
+}
+/*个人介绍*/
+.p_s_introduce h3 {
+  float: left;
+  font-size: 0.26rem;
+  font-weight: 400;
+}
+.p_s_introduce p {
+  float: left;
+  width: 73%;
+  margin-left: 0.5rem;
+  margin-top: 0;
+  text-align: left;
+  color: #969696;
+  font-size: 0.24rem;
+}
+/*擅长业务*/
+.p_s_advantage h3 {
+  float: left;
+  font-size: 0.26rem;
+  font-weight: 400;
+}
+.p_s_advantage p {
+  float: left;
+  width: 72%;
+  margin-left: 0.5rem;
+  margin-top: 0;
+  text-align: left;
+  color: #969696;
+  font-size: 0.24rem;
+}
+.p_s_advantage p span {
+  color: #2a94c5;
+}
+/*修改头像弹出框*/
+.mask-bg {
+  width: 7.5rem;
+  height: 100%;
+  background: rgba(30, 30, 30, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: none;
+}
+.change_head_box {
+  width: 7.1rem;
+  position: fixed;
+  bottom: -28%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 9;
+  padding-bottom: 0.3rem;
+  letter-spacing: 1px;
+}
+.change_head_box {
+  text-align: center;
+}
+.change_head_box p {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.28rem;
+  color: #0198fc;
+  background: white;
+}
+.change_head_box .change_head {
+  -webkit-border-radius: 0.1rem;
+  border-radius: 0.1rem;
+  border-bottom: 1px solid #ccc;
+}
+.change_head_box .use_wx {
+  margin-top: 0;
+  -webkit-border-bottom-left-radius: 0.1rem;
+  border-bottom-left-radius: 0.1rem;
+  -webkit-border-bottom-right-radius: 0.1rem;
+  border-bottom-right-radius: 0.1rem;
+}
+.change_head_box .cancel {
+  -webkit-border-radius: 0.1rem;
+  border-radius: 0.1rem;
+}
+.change_introduce_box {
+  width: 7.1rem;
+  height: 16%;
+  position: fixed;
+  bottom: -16%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 9;
+  padding-bottom: 0.3rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.change_introduce_box p {
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.28rem;
+  color: #0198fc;
+  background: white;
+}
+.change_introduce_box .change_introduce_btn {
+  -webkit-border-top-left-radius: 0.1rem;
+  border-top-left-radius: 0.1rem;
+  -webkit-border-top-right-radius: 0.1rem;
+  border-top-right-radius: 0.1rem;
+  border-bottom: 1px solid #ccc;
+}
+.change_introduce_box .cancel {
+  -webkit-border-bottom-left-radius: 0.1rem;
+  border-bottom-left-radius: 0.1rem;
+  -webkit-border-bottom-right-radius: 0.1rem;
+  border-bottom-right-radius: 0.1rem;
+  margin-top: 0;
+}
+.change_introduce_page {
+  border-radius: 0.05rem;
+  background: white;
+  width: 7.1rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 40%;
+  margin: 0 auto;
+  z-index: 9;
+  text-align: center;
+  padding: 0.3rem;
+  display: none;
+}
+.change_introduce_page textarea {
+  width: 100%;
+  background: gray;
+  resize: none;
+  font-size: 0.26rem;
+  background: white;
+  border: 1px solid gray;
+}
+.change_introduce_page button {
+  color: white;
+  width: 2rem;
+  height: 0.6rem;
+  border: 1px solid #0198fc;
+  background: #0198fc;
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  border-radius: 0.1rem;
+}
+.person_setting_info {
+  text-align: left;
+}
+.person_setting_info p {
+  padding: 0.25rem 0.5rem 0.3rem;
+  border-bottom: 1px solid #ddd;
+}
+.person_setting_info p span:nth-child(1) {
+  display: inline-block;
+  width: 1.55rem;
+}
+.person_setting_info p:nth-last-child(1) {
+  border-bottom: none;
+}
+.p_s_bottom {
+  text-align: left;
+  padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+  font-size: 0.26rem;
+}
+.p_s_bottom span:nth-child(2) {
+  float: right;
+}
+.p_s_bottom img {
+  width: 0.3rem;
+  vertical-align: middle;
+}
+.cancel_sign_in {
+  cursor: pointer;
+  margin-top: 0;
+  padding: 0.3rem 0;
+  font-size:0.3rem;
+}

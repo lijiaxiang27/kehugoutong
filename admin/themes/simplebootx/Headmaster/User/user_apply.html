@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的申请</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="list-application">
+			<h3>我的申请</h3>
+			<ul class="clear">
+				<li onclick="location='{:U('Headmaster/User/user_apply',array('st'=>1))}'" >
+					<div class="app-title">
+						<img src="__PUBLIC__/simpleboot/headmaster/images/application.png" alt="">
+						<span>{$count.sq}</span>
+					</div>
+					<span>申请</span>
+				</li>
+				<li  onclick="location='{:U('Headmaster/User/user_apply',array('st'=>2))}'" >
+					<div class="app-title">
+						<img src="__PUBLIC__/simpleboot/headmaster/images/evaluate.png" alt="">
+						<span>{$count.pj}</span>
+					</div>
+					<span>待评价</span>
+				</li>
+				<li  onclick="location='{:U('Headmaster/User/user_apply',array('st'=>3))}'" >
+					<div class="app-title">
+						<img src="__PUBLIC__/simpleboot/headmaster/images/finish.png" alt="">
+						<span>{$count.wc}</span>
+					</div>
+					<span>完成</span>
+				</li>
+			</ul>
+		</div>
+		<div class="application-list">
+			<!--入校支持-->
+			<foreach name="supports" item="vo">
+			<div class="cont clear" onclick="location='{:U('Headmaster/User/apply_detail',array('db'=>'support','id'=>$vo['id']))}'">
+
+				<h4>{$vo.title}</h4>
+				<div class="cation clear">
+					<span>支持时间：</span><p>{$vo.start}至{$vo.end}</p>
+					<span>支持事由：</span><p>{$vo.content}</p>
+					<span>申请时间：</span><p>{$vo.time|date="Y-m-d",###}</p>
+				</div>
+
+				<ul>
+					<li>
+						<if condition="$vo['status'] elt '1' ">
+							审批中
+							<elseif condition="$vo['status'] eq '2'"/>
+							审批通过
+							<elseif condition="$vo['status'] eq '3'"/>
+							完成
+						</if>
+					</li>
+				</ul>
+				<if condition="$vo['status'] eq '2'">
+				<div class="pj">
+					<p>待评价</p>
+				</div>
+					<elseif condition="$vo['status'] eq '3'"/>
+				<div class="pj ypj">
+					<p>已评价</p>
+				</div>
+				</if>
+			</div>
+			</foreach>
+			<!--家庭教育-->
+			<foreach name="lectures" item="vo">
+				<div class="cont clear" onclick="location='{:U('Headmaster/User/apply_detail',array('db'=>'lecture','id'=>$vo['id']))}'">
+
+					<h4>{$vo.title}</h4>
+					<div class="cation clear">
+						<span>支持时间：</span><p>{$vo.start}</p>
+						<span>支持人数：</span><p>{$vo.title}</p>
+						<span>申请时间：</span><p>{$vo.time|date="Y-m-d",###}</p>
+					</div>
+
+					<ul>
+						<li>
+							<if condition="$vo['status'] elt '1' ">
+								审批中
+								<elseif condition="$vo['status'] eq '2'"/>
+								审批通过
+								<elseif condition="$vo['status'] eq '3'"/>
+								完成
+							</if>
+						</li>
+					</ul>
+					<if condition="$vo['status'] eq '2'">
+						<div class="pj">
+							<p>待评价</p>
+						</div>
+						<elseif condition="$vo['status'] eq '3'"/>
+						<div class="pj ypj">
+							<p>已评价</p>
+						</div>
+					</if>
+				</div>
+			</foreach>
+			<!--设计申请-->
+			<foreach name="designs" item="vo">
+				<div class="cont clear" onclick="location='{:U('Headmaster/User/apply_detail',array('db'=>'design','id'=>$vo['id']))}'">
+
+					<h4>{$vo.title}</h4>
+					<div class="cation clear">
+						<span>设计内容：</span><p>{$vo.content}</p>
+						<span>申请时间：</span><p>{$vo.time|date="Y-m-d",###}</p>
+					</div>
+
+					<ul>
+						<li>
+							<if condition="$vo['status'] elt '1' ">
+								审批中
+								<elseif condition="$vo['status'] eq '2'"/>
+								审批通过
+								<elseif condition="$vo['status'] eq '3'"/>
+								完成
+							</if>
+						</li>
+					</ul>
+					<if condition="$vo['status'] eq '2'">
+						<div class="pj">
+							<p>待评价</p>
+						</div>
+						<elseif condition="$vo['status'] eq '3'"/>
+						<div class="pj ypj">
+							<p>已评价</p>
+						</div>
+					</if>
+				</div>
+			</foreach>
+			<!--其他申请-->
+			<foreach name="otherapps" item="vo">
+				<div class="cont clear" onclick="location='{:U('Headmaster/User/apply_detail',array('db'=>'other_app','id'=>$vo['id']))}'">
+
+					<h4>其它申请</h4>
+					<div class="cation clear">
+						<span>支持时间：</span><p>{$vo.starttime}至{$vo.endtime}</p>
+						<span>支持事由：</span><p>{$vo.content}</p>
+						<span>申请时间：</span><p>{$vo.time|date="Y-m-d",###}</p>
+					</div>
+
+					<ul>
+						<li>
+							<if condition="$vo['status'] elt '1' ">
+								审批中
+								<elseif condition="$vo['status'] eq '2'"/>
+								审批通过
+								<elseif condition="$vo['status'] eq '3'"/>
+								完成
+							</if>
+						</li>
+					</ul>
+					<if condition="$vo['status'] eq '2'">
+						<div class="pj">
+							<p>待评价</p>
+						</div>
+						<elseif condition="$vo['status'] eq '3'"/>
+						<div class="pj ypj">
+							<p>已评价</p>
+						</div>
+					</if>
+				</div>
+			</foreach>
+
+		</div>
+	</div>	
+</body>
+</html>

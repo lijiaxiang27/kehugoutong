@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运营经理</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+	<script src="__PUBLIC__/simpleboot/headmaster/js/clipboard.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="list-om">
+			<div class="om-img">
+				<figure><img src="{:sp_get_image_preview_url($user['avatar'])}" alt=""></figure>
+				<h3>{$user.user_nicename}</h3>
+				<p>{$rolename}</p>
+				<a href="tel:{$user['user_login']}"><span>联系他</span></a>
+			</div>
+			<div class="list-cl">
+				<ul class="clear">
+					<li>
+						<span>{$count}</span>
+						<p>校区数量</p>
+					</li>
+					<li>
+						<span>4.8</span>
+						<p>校区评价</p>
+					</li>
+					<li>
+						<span>9234</span>
+						<p>支持里程</p>
+					</li>
+				</ul>
+			</div>
+			<if condition="$user['signature'] neq '' ">
+			<div class="om-intr">
+				<h3>个人介绍</h3>
+				<p>
+					{$user.signature}
+				</p>
+			</div>
+			</if>
+			<if condition="$user['skill'] neq '' ">
+			<div class="om-firm">
+				<h3>擅长业务</h3>
+				<ul class="clear">
+					<php>
+						$skills = sp_skill($user['skill']);
+					</php>
+					<foreach name="skills" item="vo">
+					<li>{$vo}</li>
+					</foreach>
+				</ul>
+			</div>
+			</if>
+			<div class="contact">
+				<h3>联系卡</h3>
+				<ul>
+					<li class="clear">
+						<div class="contact-logo"><img src="__PUBLIC__/simpleboot/headmaster/images/weixin.png" alt=""></div>
+						<div class="contact-text">微信号：<input type="text" id="foo" value="{$user.user_wx}"></div>
+						<!--<button class="copy" onclick="copy()"><img src="__PUBLIC__/simpleboot/headmaster/images/copy.png" alt=""></button>-->
+						<button class="copy btn" data-clipboard-text="{$user.user_wx}" data-clipboard-action="copy" data-clipboard-target="#foo"><img src="__PUBLIC__/simpleboot/headmaster/images/copy.png" alt=""></button>
+					</li>
+					<li class="clear">
+						<div class="contact-logo"><img src="__PUBLIC__/simpleboot/headmaster/images/mail.png" alt=""></div>
+						<div class="contact-text">邮箱：<input type="email" value="{$user.user_email}"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+<script>
+	var clipboard = new Clipboard('.btn');
+
+	clipboard.on('success', function(e) {
+		e.clearSelection();
+	});
+
+	clipboard.on('error', function(e) {
+		e.clearSelection();
+	});
+</script>
+</body>
+</html>

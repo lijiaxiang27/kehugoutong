@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--application-management-->
+    <title>报名列表</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <include file="Manager:header" />
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content" style="height:100%;">
+    <div class="list-om" style="position:relative;height:100%;">
+        <volist name="lists" id="vo">
+        <div class="application-management-list">
+            <div class="application-management-left">
+                <h3>
+                    <span class="application-management-list-name">{$vo.master_name}</span>
+                    <span class="application-management-list-tel">{$vo.user_login}</span>
+                </h3>
+                <p>{$vo.user_nicename}</p>
+            </div>
+                <p class="application-management-right">{$vo.time|date="Y/m/d H:i",###}</p>
+        </div>
+        </volist>
+
+
+
+    </div>
+</div>
+
+</body>
+</html>

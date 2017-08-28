@@ -1,0 +1,103 @@
+<admintpl file="header" />
+<script type="text/javascript">
+	$(function(){
+		$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'open');
+		$('.tree li.parent_li > span').on('click', function (e) {
+			var children = $(this).parent('li.parent_li').find(' > ul > li');
+			if (children.is(":visible")) {
+				children.hide('fast');
+				$(this).attr('title', 'close').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+			} else {
+				children.show('fast');
+				$(this).attr('title', 'open').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+			}
+			e.stopPropagation();
+		});
+	});
+</script>
+<style>
+	.tree {
+		min-height:20px;  padding:19px;  margin-bottom:20px;  background-color:#fbfbfb;-webkit-border-radius:4px;  -moz-border-radius:4px;  border-radius:4px;  -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);  -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);  box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
+	}
+	.tree li {list-style-type:none;margin:0;padding:10px 5px 0 5px;position:relative}
+	.tree li::before,.tree li::after {content:'';left:-20px;  position:absolute;right:auto}
+	.tree li::before {border-left:1px solid #999;bottom:50px;height:100%;top:0;width:1px}
+	.tree li::after {border-top:1px solid #999;height:20px;top:25px;width:25px;}
+	.tree li span {padding:3px 8px;-moz-border-radius:5px;-webkit-border-radius:5px;border:1px solid #999;border-radius:5px;display:inline-block;text-decoration:none}
+	.tree li.parent_li>span {cursor:pointer}
+	.tree>ul>li::before, .tree>ul>li::after {border:0}
+	.tree li:last-child::before {height:30px}
+	.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {background:#eee;border:1px solid #94a0b4;color:#000}
+	.first li{
+		display:none;
+	}
+</style>
+</head>
+<body>
+<div class="wrap js-check-wrap">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="{:U('user/framework')}">组织架构</a></li>
+	</ul>
+	<div class="tree well">
+		<ul>
+			<foreach name="arr" item="vo" key="k">
+			<li>
+				<span><i class="icon-folder-open"></i>{$k|sp_get_school_name=###}</span>
+				<ul class="first">
+					<foreach name="vo" item="vv">
+					<li>
+						<span>
+							<?php if(array_key_exists('son',$vv)){ ?>
+							<i class="icon-plus-sign"></i>
+							<?php } ?>
+							{$vv.user_nicename}</span>
+						<ul>
+							<!-- 三级菜单开始-->
+							<foreach name="vv['son']" item="vvv">
+							<li>
+								<span>
+									<!--<i class="icon-plus-sign"></i> -->
+									{$vvv.user_nicename}</span>
+							</li>
+							</foreach>
+							<!-- 三级菜单结束-->
+						</ul>
+					</li>
+					</foreach>
+				</ul>
+			</li>
+			</foreach>
+
+		</ul>
+	</div>
+</div>
+</body>
+<!--<body>-->
+	<!--<div class="wrap js-check-wrap">-->
+		<!--<ul class="nav nav-tabs">-->
+			<!--<li class="active"><a href="{:U('user/framework')}">组织架构</a></li>-->
+		<!--</ul>-->
+
+		<!--<table class="table table-hover table-bordered">-->
+			<!--<ul>-->
+			<!--<foreach name="arr" item="vo" key="k">-->
+				<!--<li><a href='{:U("user/edit_xz",array("id"=>$k))}'>{$k|sp_get_school_name=###}</a>-->
+					<!--<ul>-->
+				<!--<foreach name="vo" item="vv">-->
+					  <!--<li><a href='{:U("user/edit_jg",array("id"=>$vv["id"]))}'>{$vv.user_nicename}</a></li>-->
+						<!--<ul>-->
+					<!--<foreach name="vv['son']" item="vvv">-->
+						<!--<li><a href='{:U("user/edit_xz",array("id"=>$vvv["id"]))}'>{$vvv.user_nicename}</a></li>-->
+					<!--</foreach>-->
+						<!--</ul>-->
+				<!--</foreach>-->
+				<!--</ul>-->
+				<!--</li>-->
+			<!--</foreach>-->
+			<!--</ul>-->
+		<!--</table>-->
+		<!--<div class="pagination">{$page}</div>-->
+	<!--</div>-->
+	<!--<script src="__PUBLIC__/js/common.js"></script>-->
+<!--</body>-->
+</html>

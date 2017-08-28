@@ -1,0 +1,44 @@
+<footer>
+    <ul class="clear">
+        <li onclick="location='{:leuu('Headmaster/Index/index')}'">
+            <figure>
+                <if condition="$current eq 1">
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-1-2.png" alt="">
+                    <else/>
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-01.png" alt="">
+                </if>
+            </figure>
+            <p>首页</p>
+        </li>
+        <li onclick="location='{:leuu('Headmaster/Index/support')}'">
+            <figure>
+                <if condition="$current eq 2">
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-2-2.png" alt="">
+                    <else/>
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-02.png" alt="">
+                </if>
+            </figure>
+            <p>支持</p>
+        </li>
+        <li onclick="location='{:leuu('Headmaster/Index/buy')}'">
+            <figure>
+                <if condition="$current eq 3">
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-3-2.png" alt="">
+                    <else/>
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-03.png" alt="">
+                </if>
+            </figure>
+            <p>商城</p>
+        </li>
+        <li onclick="location='{:leuu('Headmaster/User/usercenter')}'" >
+            <figure>
+                <if condition="$current eq 4">
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-4-2.png" alt="">
+                    <else/>
+                    <img src="__PUBLIC__/simpleboot/headmaster/images/footer-04.png" alt="">
+                </if>
+            </figure>
+            <p>我的</p>
+        </li>
+    </ul>
+</footer>

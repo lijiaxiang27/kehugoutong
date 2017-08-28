@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>设计申请</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="mes-info">
+			<form id="form">
+				<label>申请名称<span>*</span></label>
+				<input type="text" name="title" aria-required="true" autocomplete="off">
+				<label>联系人<span>*</span></label>
+				<input type="text" name="person" aria-required="true" autocomplete="off" placeholder="姓名">
+				<label>联系电话<span>*</span></label>
+				<input type="number" name="mobile" pattern="^[1][3587][0-9]{9}$" aria-required="true" autocomplete="off" placeholder="请填写手机号码">
+				<label>申请内容<span>*</span></label>
+				<input type="text" name="content" aria-required="true" autocomplete="off" placeholder="请填写设计内容">
+				<label>设计要求<span>*</span></label>
+				<textarea name="demand" id="" placeholder="请填写具体设计要求"></textarea>
+				<label>文案是否已经通过邮件发送？<span>*</span></label>
+				<select name="is_send" id="select">
+					<option value="0">请选择</option>
+					<option value="1">是</option>
+					<option value="2">否</option>
+				</select>
+				<p>
+					请将设计文案以附加形式发送至邮箱：<br>wangmei@52aotu.com<br />无文案或文案不全可能会影响您的设计申请。
+				</p>
+				<input type="submit" class="btn" readonlyunselectable="on" onclick="tijiao();return false;"  value="提交申请" />
+			</form>
+		</div>
+	</div>
+</body>
+<script>
+	function tijiao(){
+		$.ajax({
+			url: "{:U('admin/design/add')}",
+			type: 'post',
+			dataType:'html',
+			data: $("#form").serializeArray(),
+			success: function(msg) {
+				var msgs = eval('(' + msg + ')');
+				if(msgs.code == 0){
+					alert(msgs.info);
+				} else {
+					location.href = msgs.info;
+				}
+			}
+		});
+	}
+</script>
+</html>

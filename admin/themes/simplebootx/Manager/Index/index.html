@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申请处理</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <include file="Manager:header" />
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content">
+    <div class="list-om">
+         <div class="application-list">
+             <h3>申请列表</h3>
+             <div class="header">
+                 <div class="header-box option-left" >
+                     <a href="{:leuu('manager/index/index',array('status'=>'1'))}" class="application-option ">
+                         <img src="__PUBLIC__/simpleboot/manager/images/hourglass1.png" alt="">
+                     </a>
+                     <span>待审批</span>
+                 </div>
+                 <div class="header-box option-right">
+                     <a href="{:leuu('manager/index/index',array('status'=>'2'))}" class="application-option ">
+                         <img src="__PUBLIC__/simpleboot/manager/images/check.png" alt="">
+                     </a>
+                     <span>已处理</span>
+                 </div>
+             </div>
+         </div>
+         <div class="application-lists">
+             <!--设计申请-->
+             <volist name="designs" id="vo">
+             <div class="application-lists-detail">
+                      <img src='{:sp_get_user_avatar_url($vo["avatar"])}' alt="头像">
+                      <div class="detail-center" onclick="location='{:leuu('index/application_detail',array('id'=>$vo['id'],'type'=>'design'))}'">
+                          <p class="detail-event">{$vo.user_nicename}的设计申请需要你处理</p>
+                          <p class="detail-schoolName">校区名称：{$vo.user_nicename}</p>
+                          <p class="detail-type">申请类型：设计申请</p>
+                          <if condition="$vo['status'] elt 1 ">
+                              <span class="approval-result" style="color:rgb(248,180,44) ">待审批</span>
+                              <elseif condition="$vo['status'] elt 3 " />
+                              <span class="approval-result" style="color:rgb(0,196,109) ">已处理</span>
+                              <elseif condition="$vo['status'] eq 4 " />
+                              <span class="approval-result" style="color:rgb(255,45,67) ">已拒绝</span>
+                          </if>
+                      </div>
+                      <span class="detail-time">{$vo.time|date="Y/m/d",###}</span>
+              </div>
+             </volist>
+             <!--入校支持-->
+             <volist name="supports" id="vo">
+                 <div class="application-lists-detail">
+                     <img src='{:sp_get_user_avatar_url($vo["avatar"])}' alt="头像">
+                     <div class="detail-center" onclick="location='{:leuu('index/application_detail',array('id'=>$vo['id'],'type'=>'support'))}'">
+                         <p class="detail-event">{$vo.user_nicename}的入校支持需要你处理</p>
+                         <p class="detail-schoolName">校区名称：{$vo.user_nicename}</p>
+                         <p class="detail-type">申请类型：入校支持</p>
+                         <if condition="$vo['status'] elt 1 ">
+                             <span class="approval-result" style="color:rgb(248,180,44) ">待审批</span>
+                             <elseif condition="$vo['status'] elt 3 " />
+                             <span class="approval-result" style="color:rgb(0,196,109) ">已处理</span>
+                             <elseif condition="$vo['status'] eq 4 " />
+                             <span class="approval-result" style="color:rgb(255,45,67) ">已拒绝</span>
+                         </if>
+                     </div>
+                     <span class="detail-time">{$vo.time|date="Y/m/d",###}</span>
+                 </div>
+             </volist>
+             <!--家庭讲座-->
+             <volist name="lectures" id="vo">
+                 <div class="application-lists-detail">
+                     <img src='{:sp_get_user_avatar_url($vo["avatar"])}' alt="头像">
+                     <div class="detail-center" onclick="location='{:leuu('index/application_detail',array('id'=>$vo['id'],'type'=>'lecture'))}'">
+                         <p class="detail-event">{$vo.user_nicename}的家庭讲座需要你处理</p>
+                         <p class="detail-schoolName">校区名称：{$vo.user_nicename}</p>
+                         <p class="detail-type">申请类型：家庭讲座</p>
+                         <if condition="$vo['status'] elt 1 ">
+                             <span class="approval-result" style="color:rgb(248,180,44) ">待审批</span>
+                             <elseif condition="$vo['status'] elt 3 " />
+                             <span class="approval-result" style="color:rgb(0,196,109) ">已处理</span>
+                             <elseif condition="$vo['status'] eq 4 " />
+                             <span class="approval-result" style="color:rgb(255,45,67) ">已拒绝</span>
+                         </if>
+                     </div>
+                     <span class="detail-time">{$vo.time|date="Y/m/d",###}</span>
+                 </div>
+             </volist>
+             <!--其他申请-->
+             <volist name="others" id="vo">
+                 <div class="application-lists-detail">
+                     <img src='{:sp_get_user_avatar_url($vo["avatar"])}' alt="头像">
+                     <div class="detail-center"  onclick="location='{:leuu('index/application_detail',array('id'=>$vo['id'],'type'=>'other_app'))}'">
+                         <p class="detail-event">{$vo.user_nicename}的其它需要你处理</p>
+                         <p class="detail-schoolName">校区名称：{$vo.user_nicename}</p>
+                         <p class="detail-type">申请类型：其它申请</p>
+                         <if condition="$vo['status'] elt 1 ">
+                             <span class="approval-result" style="color:rgb(248,180,44) ">待审批</span>
+                             <elseif condition="$vo['status'] elt 3 " />
+                             <span class="approval-result" style="color:rgb(0,196,109) ">已处理</span>
+                             <elseif condition="$vo['status'] eq 4 " />
+                             <span class="approval-result" style="color:rgb(255,45,67) ">已拒绝</span>
+                         </if>
+
+                     </div>
+                     <span class="detail-time">{$vo.time|date="Y/m/d",###}</span>
+                 </div>
+             </volist>
+
+         </div>
+         <!--footer-->
+        <include file="Manager:footer" />
+
+    </div>
+</div>
+</body>
+</html>

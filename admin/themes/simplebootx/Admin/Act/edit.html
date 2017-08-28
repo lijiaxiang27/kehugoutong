@@ -1,0 +1,132 @@
+<admintpl file="header" />
+
+	
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('act/index')}">活动列表</a></li>
+			<li><a href="{:U('act/add')}">添加活动</a></li>
+			<li class="active"><a>编辑管理员</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('act/edit_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">活动名称</label>
+					<div class="controls">
+						<input type="text" name="title" value="{$act.title}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">活动内容</label>
+					<div class="controls">
+						<script type="text/plain" id="content" name="content">{$act.content|htmlspecialchars_decode=###}</script>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">活动地点</label>
+					<div class="controls">
+						<input type="text" name="area" value="{$act.area}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">活动开始时间</label>
+					<div class="controls">
+						<input type="text" class="js-date" name="starttime" value="{$act.starttime}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">活动结束时间</label>
+					<div class="controls">
+						<input type="text" class="js-date" name="endtime" value="{$act.endtime}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">活动缩略图(255*200)</label>
+					<div class="controls">
+						<div style="text-align: left;">
+							<input type="hidden" name="image" id="thumb" value="{$act.image}">
+							<a href="javascript:upload_one_image('图片上传','#thumb');">
+								<?php
+								if(strpos($act['image'],'admin') !== false){
+								$tag = 1;
+								} else {
+								$tag = 0;
+								} ?>
+								<if condition="empty($act['image'])">
+									<img src="__TMPL__Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand"/>
+									<elseif condition="$tag eq 1 " />
+									<img src="{:sp_get_image_preview_url($act['image'])}" id="thumb-preview" width="135" style="cursor: hand"/>
+									<elseif condition="$tag eq 0 " />
+									<img src="{$act['image']}" id="thumb-preview" width="135" style="cursor: hand"/>
+								</if>
+
+							</a>
+							<input type="button" class="btn btn-small" onclick="$('#thumb-preview').attr('src','__TMPL__Public/assets/images/default-thumbnail.png');$('#thumb').val('');return false;" value="取消图片">
+						</div>
+					</div>
+				</div>
+				<!--<div class="control-group">-->
+					<!--<label class="control-label">详情页首图(750*220)</label>-->
+					<!--<div class="controls">-->
+						<!--<div style="text-align: left;">-->
+							<!--<input type="hidden" name="imagein" id="thumb1" value="{$act.imagein}">-->
+							<!--<a href="javascript:upload_one_image('图片上传','#thumb1');">-->
+								<!--<if condition="empty($act['imagein'])">-->
+									<!--<img src="__TMPL__Public/assets/images/default-thumbnail.png" id="thumb1-preview" width="135" style="cursor: hand"/>-->
+									<!--<else />-->
+									<!--<img src="{:sp_get_image_preview_url($act['imagein'])}" id="thumb1-preview" width="135" style="cursor: hand"/>-->
+								<!--</if>-->
+
+							<!--</a>-->
+							<!--<input type="button" class="btn btn-small" onclick="$('#thumb1-preview').attr('src','__TMPL__Public/assets/images/default-thumbnail.png');$('#thumb1').val('');return false;" value="取消图片">-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+				<div class="control-group">
+					<label class="control-label">名额限制(默认0代表不限制)</label>
+					<div class="controls">
+						<input type="text"  name="num" value="{$act.num}">
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-actions">
+				<input type="hidden" name="id" value="{$act.id}" />
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				<a class="btn" href="javascript:history.back(-1);">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">
+		//编辑器路径定义
+		var editorURL = GV.WEB_ROOT;
+	</script>
+	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/ueditor/ueditor.all.min.js"></script>
+	<script>
+		$(function() {
+			Wind.use('ajaxForm',  function() {
+				//javascript
+
+				//编辑器
+				editorcontent = new baidu.editor.ui.Editor();
+				editorcontent.render('content');
+				try {
+					editorcontent.sync();
+				} catch (err) {
+				}
+				//增加编辑器验证规则
+				jQuery.validator.addMethod('editorcontent', function () {
+					try {
+						editorcontent.sync();
+					} catch (err) {
+					}
+					return editorcontent.hasContents();
+				});
+			});
+		});
+	</script>
+</body>
+</html>

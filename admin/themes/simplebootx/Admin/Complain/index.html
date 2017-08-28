@@ -1,0 +1,56 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Complain/index')}">投诉列表</a></li>
+		</ul>
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>问题标题</th>
+					<th>运营经理</th>
+					<th>申请校区</th>
+					<th>提交时间</th>
+					<th>状态</th>
+					<th width="120">{:L('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<php>$user_statuses=array("0"=>L('USER_STATUS_BLOCKED'),"1"=>L('USER_STATUS_ACTIVATED'),"2"=>L('USER_STATUS_UNVERIFIED'));</php>
+				<foreach name="complains" item="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.title}</td>
+					<td>{$vo.yyjl}</td>
+					<td>{$vo.user_nicename}</td>
+					<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+					<td>
+						<if condition="$vo['status'] eq '0' ">
+							<span style="color: #d41e24">未读</span>
+							<elseif condition="$vo['status'] eq '1'"/>
+							处理中
+							<elseif condition="$vo['status'] eq '2'"/>
+						待评价
+						<elseif condition="$vo['status'] eq '3'"/>
+							<span style="color: #0071ce">完成</span>
+						</if>
+					</td>
+					<td>
+
+							<a href='{:U("Complain/edit",array("id"=>$vo["id"]))}'>查看详情</a> |
+
+							<a class="js-ajax-delete" href="{:U('Complain/delete',array('id'=>$vo['id']))}">{:L('DELETE')}</a>
+
+					</td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+		<div class="pagination">{$page}</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>培训资料</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+	<link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+	<script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+	document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+
+<div class="list-content">
+	<div class="list-text">
+		<ul>
+			<foreach name="data" item="vo">
+				<li>
+					<div class="list-active clear">
+						<figure><img src="{:sp_get_image_preview_url($vo['icon'])}" alt=""></figure>
+						<div class="list-title">
+							<dt>{$vo.title}</dt>
+							<span>{$vo.time|date="Y-m-d H:i:s",###}</span>
+						</div>
+					</div>
+					<div class="list-copylink clear">
+
+						<!-- <div class="copylink clear" id="copy">
+							<input type="text" id="url" value="地址:{$vo.content} 密码:{$vo.pwd}">
+							<figure><img src="__PUBLIC__/simpleboot/headmaster/images/copylink.png" alt=""></figure>
+							<p>复制链接</p>
+						</div> -->
+						<div class="download clear" onclick="location.href='{$vo.content}'">
+							<figure><img src="__PUBLIC__/simpleboot/headmaster/images/download.png" alt=""></figure>
+							<p>直接下载(密码:{$vo.pwd})</p>
+						</div>
+					</div>
+				</li>
+			</foreach>
+
+		</ul>
+	</div>
+</div>
+</body>
+<script>
+	$('.list-text .list-active').click(function(){
+		$(this).next('.list-copylink').slideToggle().parent().siblings('li').find('.list-copylink').slideUp('slow');
+		$(this).next('.list-copylink').find('#copy').click(function(){
+			$(this).find('#url').select();
+			document.execCommand("Copy");
+			return confirm("是否复制该链接！");
+		});
+
+	});
+</script>
+</html>

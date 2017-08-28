@@ -1,0 +1,49 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>报名校区</th>
+					<th>校长</th>
+					<th>联系方式</th>
+					<th>参会人数</th>
+					<th>备注</th>
+					<th>报名时间</th>
+					<!--<th width="120">{:L('ACTIONS')}</th>-->
+				</tr>
+			</thead>
+			<tbody>
+				<php>$user_statuses=array("0"=>L('USER_STATUS_BLOCKED'),"1"=>L('USER_STATUS_ACTIVATED'),"2"=>L('USER_STATUS_UNVERIFIED'));</php>
+				<foreach name="members" item="vo" key="k">
+				<tr>
+					<td>{++$k}</td>
+
+					<td>{$vo.user_nicename}</td>
+					<td>{$vo.master_name}</td>
+					<td>{$vo.user_login}</td>
+					<td>{$vo.num}</td>
+					<td>{$vo.comments}</td>
+
+					<td>{$vo.time|date="Y-m-d H:i:s",###}</td>
+
+					<!--<td>-->
+							<!--<a href='{:U("act/edit",array("id"=>$vo["id"]))}'>{:L('EDIT')}</a> |-->
+
+							<!--<a class="js-ajax-delete" href="{:U('act/delete',array('id'=>$vo['id']))}">{:L('DELETE')}</a>-->
+
+					<!--</td>-->
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+		<div class="pagination">{$page}</div>
+		<a href="{:leuu('Admin/Act/expUser',array('id'=>$id))}" >导出excel</a>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

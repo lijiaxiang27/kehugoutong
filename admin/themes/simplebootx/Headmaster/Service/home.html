@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>家庭教育申请</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="mes-info">
+			<form id="form">
+				<label>家庭教育名称<span>*</span></label>
+				<input type="text" name="title" aria-required="true" autocomplete="off">
+				<label>联系人<span>*</span></label>
+				<input type="text" name="person" aria-required="true" autocomplete="off" placeholder="姓名">
+				<label>联系电话<span>*</span></label>
+				<input type="number" name="mobile" pattern="^[1][3587][0-9]{9}$" aria-required="true" autocomplete="off" placeholder="请填写手机号码">
+				<label>所在地区<span>*</span></label>
+				<div class="city">
+	                <select id="s_province" name="province"></select>
+	                <select id="s_city" name="city" ></select>
+	                <select id="s_county" name="county"></select>
+	            </div>
+	            <script src="__PUBLIC__/simpleboot/headmaster/js/area.js"></script>
+	            <script type="text/javascript">_init_area();</script>
+	            <script type="text/javascript">
+	                var Gid  = document.getElementById ;
+	                var showArea = function(){
+	                    Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+	                            Gid('s_city').value + " - 县/区" +
+	                            Gid('s_county').value + "</h3>"
+	                }
+	            </script>
+	            <div id="show"></div>
+	            <label>讲座时间<span>*</span></label>
+	            <input type="date" name="start" id="" aria-required="true" placeholder="请选择">
+	            <label>参会人数<span>*</span></label>
+				<input type="number" name="num" min="1" aria-required="true" autocomplete="off" placeholder="请输入参会人数">
+				<div class="agree">
+					<input style="-webkit-appearance: checkbox;"  type="checkbox" class="check" name="" checked value=""><span>我已经阅读</span>
+					<a href="javascript:void(0)" onclick="showBg();">家庭教育讲座申请须知</a>
+				</div>
+
+				<input type="submit" class="btn" readonlyunselectable="on" onclick="tijiao();return false;"  value="提交申请" />
+			</form>
+		</div>
+	</div>
+<div id="hidebg"></div>
+<div id="hidebox" >
+	<div class="close" onClick="hide();">×</div>
+	<div class="explain">
+		<h3>家庭教育讲座申请须知</h3>
+		<p>
+			本服务平台针对凹凸个性教育加盟学校投资人及校长使用。校长如需申请，请致电专属运营经理。
+		</p>
+		<a onClick="hide();" href="javascript:void(0);">知道了</a>
+	</div>
+</div>
+<script>
+	function showBg()  //显示隐藏层和弹出层
+	{
+		var hideobj=document.getElementById("hidebg");
+		hidebg.style.display="block";  //显示隐藏层
+		hidebg.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+		document.getElementById("hidebox").style.display="block";  //显示弹出层
+
+	}
+	function hide()  //去除隐藏层和弹出层
+	{
+		document.getElementById("hidebg").style.display="none";
+		document.getElementById("hidebox").style.display="none";
+	}
+</script>
+</body>
+<script>
+	function tijiao(){
+		$.ajax({
+			url: "{:U('admin/lecture/add')}",
+			type: 'post',
+			dataType:'html',
+			data: $("#form").serializeArray(),
+			success: function(msg) {
+				var msgs = eval('(' + msg + ')');
+				if(msgs.code == 0){
+					alert(msgs.info);
+				} else {
+					location.href = msgs.info;
+				}
+			}
+		});
+	}
+</script>
+</html>

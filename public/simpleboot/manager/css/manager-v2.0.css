@@ -1,0 +1,921 @@
+/*申请处理页面*/
+.application-list{
+    padding:0.35rem;
+    margin-top: 0;
+    border-bottom:1px solid rgb(220,220,220);
+}
+.application-list h3{
+    text-align: left;
+}
+.header{
+    width:42%;margin:0.3rem auto;
+}
+.header-box{
+    width:33%;
+    display:inline-block;
+}
+.header-box span{
+    font-size:0.3rem;
+    display:inline-block;
+    margin-top:0.2rem;
+    color:gray;
+}
+.header:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.application-option{
+    background:rgb(230,230,230);
+    padding:0.2rem;
+    display:block;
+    border-radius: 3px;
+
+}
+.option-left{
+    float:left;
+}
+.option-right{
+    float:right;
+}
+.application-option img{
+    width:0.48rem;
+    height:0.48rem;
+}
+.application-lists{
+    padding-bottom:1.3rem;
+    margin-top: 0.2rem;
+    border-top:1px solid rgb(220,220,220);
+}
+.application-lists-detail{
+    padding:0.35rem;
+    border-bottom:1px solid rgb(220,220,220);
+}
+.application-lists-detail:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.application-lists-detail img{
+    float:left;
+    border-radius: 50%;
+    -moz-border-radius: 50%; /* Firefox */
+    -webkit-border-radius: 50%; /* Safari 和 Chrome */
+    vertical-align: top;
+    width:15%;
+}
+.application-lists-detail .detail-center{
+    display:inline-block;
+    width:60%;
+    text-align: left;
+
+}
+.application-lists-detail .detail-time{
+    color:rgb(150,150,150);
+    font-size:0.14rem;
+    float:right;
+}
+.detail-center .detail-event{
+    margin-top:0;
+    margin-bottom:0.2rem;
+}
+.detail-center .detail-schoolName{
+    color:rgb(120,120,120);
+}
+.detail-center .detail-type{
+    color:rgb(120,120,120);
+    margin-bottom:0.1rem;
+}
+.approval-result{
+    font-size:0.26rem;
+}
+/*footer*/
+footer{
+    z-index: 99;
+    padding-top:0.2rem;
+    padding-bottom:0.16rem;
+    padding-left:0.16rem;
+    padding-right:0.16rem;
+    background:rgb(240,240,240);
+}
+.footer-nav li{
+    width:20%;
+}
+.footer-nav li a{
+    color:black;
+    display:inline-block;
+    width:100%;
+}
+.footer-nav li a p{
+    font-size:0.2rem;
+    margin-top:0.05rem
+}
+.footer-nav li a img{
+    width:40%;
+}
+/*footer end*/
+
+/*申请详情页面*/
+
+.Application-detail-header{
+    text-align:left;
+    padding:0.35rem;
+}
+.Application-detail-header:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.Application-detail-content{
+    font-size:0.26rem;
+    padding:0.35rem 0.5rem;
+    text-align:left;
+}
+.detail-header-people{
+    border-radius: 50%;
+    float:left;
+    width:24%;
+    margin-left:0.1rem;
+}
+.detail-header-right{
+    margin-left:0.2rem;
+    display:inline-block;
+    text-align: left;
+}
+.detail-header-right .school-master-name{
+    padding-top:0.1rem;
+    font-family:'微软雅黑';
+    font-size:0.3rem;
+    font-weight:900;
+    color:rgb(100,100,100)
+}
+.detail-header-right .school-name{
+    font-family:'微软雅黑';
+    font-size:0.28rem;
+    color:rgb(100,100,100);
+    margin-bottom:0.1rem;
+}
+.detail-content-name{
+    color:rgb(150,150,150);
+}
+.support-content{
+    vertical-align: top;
+
+}
+.detail-content-bottom{
+    margin-top:0.1rem;
+}
+.detail-content-bottom div{
+    display:inline-block
+}
+
+.application-status{
+    background:rgb(243,243,243);
+    border-top:1px solid rgb(220,220,220);
+    border-bottom:1px solid rgb(220,220,220);
+}
+.application-status > div{
+    float:left;
+}
+.application-status:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.application-status-left{
+    position:relative;
+    width:10%;
+    border-right:1px solid rgb(210,210,210);
+    height:2.6rem;
+}
+.application-status-left img{
+    width:0.4rem;
+    height:0.4rem;
+    position: absolute;
+}
+.z-index-box{
+    display:inline-block;
+    width:0.50rem;
+    height:0.54rem;
+    background:rgb(243,243,243);
+    position: absolute;
+    top:0.96rem;
+    right:-0.25rem;
+    z-index:1;
+}
+.success-img{
+    right:-0.2rem;top:1rem;
+    z-index:2;
+}
+.status-img{
+    right:-0.2rem;bottom:-0.43rem;
+}
+.application-status-right{
+    width:90%;
+    padding:0.5rem;
+}
+.application-status-right > .successful-application{
+    text-align:left;
+    background:white;
+    border:1px solid rgb(210,210,210);
+    border-radius:4px;
+    padding:0.3rem;
+}
+.successful-application img{
+    width:0.6rem;
+    height:0.6rem;
+    border-radius: 50%;
+    margin:0  0.24rem 0;
+
+}
+.application-status-right > .successful-application div{
+
+    display:inline-block;
+
+}
+.successful-application div p{
+    font-size:0.3rem;
+}
+.successful-application div > span{
+    display:inline-block;
+    color:#666;
+}
+.successful-application div p span{
+    font-size:0.3rem;
+}
+.status-during{
+    margin-top:0.2rem;
+}
+
+/*activity-lists begin*/
+.activity-lists-box{
+   padding:0.3rem;
+}
+/*activity-lists end*/
+
+
+/*application_detail*/
+.Application-detail-header{
+    text-align:left;
+    padding:0.35rem;
+}
+.Application-detail-header:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.Application-detail-content{
+    font-size:0.26rem;
+    padding:0.35rem 0.5rem;
+    text-align:left;
+}
+.detail-header-people{
+    border-radius: 50%;
+    float:left;
+    width:24%;
+    margin-left:0.1rem;
+}
+.detail-header-right{
+    margin-left:0.2rem;
+    display:inline-block;
+    text-align: left;
+}
+.detail-header-right .school-master-name{
+    padding-top:0.1rem;
+    font-family:'微软雅黑';
+    font-size:0.3rem;
+    font-weight:900;
+    color:rgb(100,100,100)
+}
+.detail-header-right .school-name{
+    font-family:'微软雅黑';
+    font-size:0.28rem;
+    color:rgb(100,100,100);
+    margin-bottom:0.1rem;
+}
+.detail-content-name{
+    color:rgb(150,150,150);
+}
+.support-content{
+    vertical-align: top;
+
+}
+.detail-content-bottom{
+    margin-top:0.1rem;
+}
+.detail-content-bottom div{
+    display:inline-block
+}
+
+.application-status{
+    background:rgb(243,243,243);
+    border-top:1px solid rgb(220,220,220);
+    border-bottom:1px solid rgb(220,220,220);
+    padding-bottom: 2rem;
+}
+.application-status > div{
+    float:left;
+}
+.application-status:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.application-status-left{
+    position:relative;
+    width:10%;
+    border-right:1px solid rgb(210,210,210);
+    height:2.6rem;
+}
+.application-status-left img{
+    width:0.4rem;
+    height:0.4rem;
+    position: absolute;
+}
+.z-index-box{
+    display:inline-block;
+    width:0.50rem;
+    height:0.54rem;
+    background:rgb(243,243,243);
+    position: absolute;
+    top:0.96rem;
+    right:-0.25rem;
+    z-index:1;
+}
+.success-img{
+    right:-0.2rem;top:1rem;
+    z-index:2;
+}
+.status-img{
+    right:-0.2rem;bottom:-0.43rem;
+}
+.application-status-right{
+    width:90%;
+    padding:0.5rem;
+}
+.application-status-right > .successful-application{
+    text-align:left;
+    background:white;
+    border:1px solid rgb(210,210,210);
+    border-radius:4px;
+    padding:0.3rem;
+}
+.successful-application img{
+    width:0.6rem;
+    height:0.6rem;
+    border-radius: 50%;
+    margin:0  0.24rem 0;
+
+}
+.application-status-right > .successful-application div{
+
+    display:inline-block;
+
+}
+.successful-application div p{
+    font-size:0.3rem;
+}
+.successful-application div > span{
+    display:inline-block;
+    color:#666;
+}
+.successful-application div p span{
+    font-size:0.3rem;
+}
+.status-during{
+    margin-top:0.2rem;
+}
+/*footer*/
+footer{
+    padding:0.15rem;
+}
+.footer-left{
+    width:49%;
+    border-right:1px solid #ccc;
+}
+.footer-right{
+    width:50%;
+}
+footer li a{
+    color:#007FBA;
+    display:inline-block;
+    width:100%;
+    height:100%;
+    padding:0.06rem 0.12rem;
+    font-size:0.32rem;
+}
+footer ul:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.pass{
+    width:2.4rem;
+    height:1.3rem;
+    position:fixed;
+    top:1.6rem;
+    right:1.2rem;
+    animation: a2 0.5s linear;
+}
+.refuse{
+    width:2.4rem;
+    height:1.3rem;
+    position:fixed;
+    top:1.6rem;
+    right:1.2rem;
+    animation: a2 0.5s linear;
+}
+.pass-ed{
+    width:2.4rem;
+    height:1.3rem;
+    position:fixed;
+    top:1.6rem;
+    right:1.2rem;
+}
+.refuse-ed{
+    width:2.4rem;
+    height:1.3rem;
+    position:fixed;
+    top:1.6rem;
+    right:1.2rem;
+}
+.passed{
+    display:none;
+}
+@keyframes a2 {
+    0% {transform: scale(1.6,1.6)}
+    60% {transform: scale(2,2)}
+    100% {transform: scale(1,1)}
+}
+
+/*活动列表*/
+.activity-lists-box{
+    padding:0.3rem;
+}
+.activity-list-preview{
+    border-bottom:1px solid #ddd;
+    text-align: left;
+    padding:0.3rem;
+}
+.activity-list-preview > h3 {
+    padding-bottom:0.2rem;
+    font-size:0.24rem;
+}
+.activity-list-time,.activity-list-address{
+    margin-top:0.05rem;
+    display:block;
+}
+.enrollment{
+    color:royalblue;
+}
+.activity-state{
+    display:inline-block;
+    margin-left:0.2rem;
+}
+/*活动管理*/
+.activity-management ul .activity-management-list{
+    padding:0.5rem;
+    float:left;
+    width:49.5%;
+}
+.activity-management ul{
+    padding:0.5rem 0;
+}
+.activity-management ul .activity-management-list a{
+    color:black;
+    display:block;
+
+}
+.activity-management ul .activity-management-list > a > img {
+    width:0.5rem;
+}
+.activity-management-list-left{
+    border-right:1px solid #ddd;
+}
+.activity-management ul .activity-management-list > a > p {
+    margin-top:0.2rem;
+    font-size:0.32rem;
+}
+.activity-management ul:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+
+/**/
+.stop-floor{
+    height:0.24rem;
+    width:100%;
+    background:rgb(242,242,242);
+    border-bottom:1px solid #ddd;
+    border-top:1px solid #ddd;
+}
+.newest-activity-bg{
+    text-align: left;
+    padding-bottom:1.5rem;
+}
+.newest-activity-bg > h3 {
+    margin-top:0.3rem;
+    text-indent: 0.3rem;
+}
+.newest-activity-box {
+    border-bottom:1px solid #ddd;
+    padding:0.3rem;
+}
+.newest-activity-box > img {
+    vertical-align:top;
+    width:40%;
+}
+.newest-activity-right{
+    width:53%;
+    display:inline-block;
+    margin-left:5%;
+}
+.newest-activity-right p {
+    margin-top:0;
+
+}
+.newest-activity-right .newest-activity-title{
+    font-size:0.24rem;
+}
+.newest-activity-right .newest-activity-time{
+    color:#888;
+    margin-top:0.12rem;
+    font-size:0.24rem;
+}
+.newest-activity-right .newest-activity-address{
+    color:#888;
+    margin-top:0.08rem;
+    font-size:0.24rem;
+}
+.newest-activity-right a{
+    margin-top:0.12rem;
+    display:inline-block;
+    padding:0.1rem 0.2rem;
+    border-radius:3px;
+}
+/*新增活动*/
+.list-om{
+    background:rgb(247,247,247);
+}
+
+.add-activity-box {
+    padding:0.3rem;
+    text-align:left;
+    border-bottom: 1px solid rgb(230,230,230);
+    border-top: 1px solid rgb(230,230,230);
+    margin-top:0.2rem;
+    background:white;
+}
+.add-activity-box p{
+    font-size:0.28rem;
+    margin-top:0;
+
+}
+.add-activity-box input{
+    margin-left:0.4rem;
+}
+.add-activity-theme{
+    margin-top:0;
+}
+.theme-img-box p label{
+    float: right;
+    height:0.5rem;
+    display:inline-block;
+    margin-top:-3px;
+}
+.theme-img-box p label img{
+    height:100%;
+
+}
+.add-activity-theme input{
+    font-size:0.26rem;
+}
+.theme-img-box > p span:nth-child(1) {
+    font-size:0.26rem;
+    margin-left:0.4rem;
+    color:#666;
+}
+.set-time{
+    font-size:0.26rem;
+    margin-left:0.4rem;
+    color:#666;
+    width:60%;
+    display:inline-block;
+}
+.add-activity-box ul li{
+    border-bottom:1px solid #ddd;
+}
+.add-activity-box ul li p {
+    padding-top:0.2rem;
+    padding-bottom:0.2rem;
+}
+.add-activity-box ul li p input{
+    font-size:0.26rem;
+}
+.add-activity-box ul li:nth-child(1) p{
+    padding-top:0;
+}
+.add-activity-box ul li:nth-child(3) p{
+    padding-bottom:0;
+}
+.add-activity-box ul li:nth-child(3) {
+    border-bottom:none;
+}
+.to-activity-detail:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.to-activity-detail a{
+    display:inline-block;
+    float:right;
+}
+.to-activity-detail a img{
+    width:0.36rem;
+}
+
+.add-activity-footer{
+    padding:0.3rem;
+}
+.add-activity-footer ul:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.add-activity-footer ul li{
+    float:left;
+    width:50%;
+}
+.add-activity-footer a{
+    width:84%;
+    display:block;
+    text-align: center;
+    border-radius:0.1rem;
+    margin: 0 auto;
+    padding:0.24rem 0;
+    font-size:0.3rem;
+    color:white;
+    margin-top:0.3rem;
+}
+.activity-preview{
+    background:gray;
+}
+.activity-release{
+    background:rgb(23,176,90);
+}
+
+
+
+/*改变上传图片的默认样式*/
+.control-group{
+    display:inline-block;
+    width:100%;
+    position:relative;
+}
+.btn-upload{
+    position:absolute;
+    width:0.6rem;
+    height:0.6rem;
+    top:-0.64rem;
+    right:0;
+}
+.btn-upload a{
+    display:inline-block;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+}
+.btn-upload  img{
+    width:100%;
+    height:100%;
+}
+.btn-upload input{
+    width:100%;
+    height:100%;
+    margin-left:0;
+    top:0;
+    left:0;
+    opacity:0;
+}
+.theme-img-box:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.js_showBox{
+    margin-top:0.32rem;
+    display:none;
+}
+/*修改日期默认样式*/
+.date-selector-btn-box{
+    background:rgb(23,176,90);
+}
+.date-selector-btn-box .date-selector-btn{
+    font-size:0.28rem;
+}
+
+/*活动报名分享数据详情页*/
+.detail-nav-bar{
+    padding:0.3rem 0;
+}
+.detail-nav-bar > li {
+    width:33.2%;
+    border-right:1px solid #ddd;
+    float:left;
+    padding:0.3rem;
+}
+.detail-nav-bar > li > span,.activity-config > li a span{
+    color:#666;
+    font-size:0.28rem;
+}
+.detail-nav-bar > li:nth-child(3){
+    border-right:none;
+}
+.detail-nav-bar > li > span:nth-child(2),.activity-config > li > a>span{
+    display:block;
+    margin-top:0.1rem;
+}
+.activity-config > li:nth-child(3){
+    border-right:none;
+}
+.detail-nav-bar:after {
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.activity-config > li{
+    width:33.2%;
+    border-right:1px solid #ddd;
+    padding:0.3rem;
+    float:left;
+}
+.activity-config > li > a{
+    display:inline-block;
+    padding:0.3rem;
+}
+.activity-config > li > a > img{
+    width:0.5rem;
+}
+.activity-config:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.activity-management-detail{
+    height:0.24rem;
+    border-top:1px solid rgb(230,230,230);
+    border-bottom:1px solid rgb(230,230,230);
+    background:rgb(246,246,246);
+}
+.create-another-activity{
+    color:#555;
+    padding:0.24rem 0.4rem 0.28rem;
+    text-align:left;
+}
+.create-another-activity p a{
+    float:right;
+    width:0.32rem;
+}
+
+
+/*分享*/
+.share-box{
+    width:96%;
+    height:50%;
+    position:fixed;
+    bottom:-50%;
+    left:2%;
+    z-index:9;
+    background:white;
+    border-radius:4px;
+    padding-left:0.6rem;
+    padding-right:0.6rem;
+    padding-bottom:0.3rem;
+}
+.mask-bg{
+    width:100%;
+    height:100%;
+    background:rgba(50,50,50,0.6);
+    position:fixed;
+    top:0;
+    left:0;
+    display:none;
+}
+.share-box-lists{
+    border-top:1px solid #ccc;
+}
+.share-box-lists li:nth-child(1),.share-box-lists li:nth-child(2),.share-box-lists li:nth-child(3){
+    width:33.3%;
+    float:left;
+    margin-top:0.5rem;
+}
+.share-box-lists li:nth-child(4),.share-box-lists li:nth-child(5),.share-box-lists li:nth-child(6){
+    width:33.3%;
+    float:right;
+    margin-top:0.5rem;
+}
+.share-box-lists:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.share-box h3{
+    padding:0.5rem;
+    font-weight:400;
+    font-size:0.3rem;
+}
+.share-box-lists li a{
+    display:inline-block;
+    text-align: center;
+    color:black;
+}
+.share-box-lists li a img{
+    width:0.9rem;
+    padding:0.1rem;
+    border-radius: 50%;
+    border:1px solid #ccc;
+
+}
+.share-box-lists li a span{
+    display:inline-block;
+    margin-top:0.9rem;
+    font-size:0.24rem;
+    width: 1rem;
+    margin-left: -0.05rem;
+}
+
+body{
+    padding-bottom:0;
+}
+.copy-suc{
+    font-size:0.28rem;
+    text-align:center;
+    padding-top:0.2rem;
+    padding-bottom:0.2rem;
+    position:fixed;
+    width:40%;
+    left:30%;
+    top:0;
+    background:white;
+    color:black;
+    border-radius:5px;
+    opacity:0;
+    z-index:-1;
+    transition:0.5s;
+}
+/*已报名校区列表*/
+.application-management-list{
+    color:#666;
+    padding:0.36rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.application-management-list:after{
+    content:'';
+    height:0;
+    display:block;
+    clear: both;
+    visibility: hidden;
+}
+.application-management-left{
+    display:inline-block;
+    width:62%;
+}
+.application-management-left h3{
+    font-weight:400;
+}
+.application-management-right{
+    vertical-align: top;
+    float:right;
+}

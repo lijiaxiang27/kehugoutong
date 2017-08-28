@@ -1,0 +1,80 @@
+.add-new-campus {
+  text-align: left;
+  padding: 0.3rem 0.6rem;
+}
+.add-new-campus a {
+  height: 0.5rem;
+  line-height: 0.5rem;
+  display: inline-block;
+}
+.add-new-campus a img {
+  width: 0.5rem;
+  vertical-align: middle;
+}
+.add-new-campus span {
+  vertical-align: middle;
+  margin-left: 0.24rem;
+  display: inline-block;
+  font-size: 0.27rem;
+}
+.add-new-campus .add-span {
+  margin-left: 0;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 0.27rem;
+  width: 1.5rem;
+  color: black;
+}
+.add-new-campus input {
+  vertical-align: middle;
+  margin-left: 0.2rem;
+  font-size: 0.32rem;
+}
+.add-new-campus p {
+  display: inline-block;
+  font-size: 0.32rem;
+  margin-left: 0.2rem;
+  width: 4rem;
+  margin-top: 0;
+  vertical-align: middle;
+  color: #888;
+}
+.area-div {
+  height: 0.24rem;
+  background: #f3f3f3;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.campus-lists-box {
+  padding: 0 0.5rem;
+  text-align: left;
+}
+.campus-lists-box .campus-list {
+  padding: 0.2rem 0;
+  border-bottom: 1px solid #ccc;
+  color: #666;
+}
+.campus-lists-box .campus-list h3 {
+  font-weight: 400;
+  font-size: 0.26rem;
+}
+.campus-lists-box .campus-list p {
+  margin-top: 0.15rem;
+  color: #999;
+}
+.date-selector-btn-box {
+  background: #17b05a !important;
+}
+.add_campus {
+  display: block;
+  width: 60%;
+  margin: 0.6rem auto 0;
+  height: 0.8rem;
+  border-radius: 4px;
+  color: white;
+  background: #17b05a;
+  font-size: 0.36rem;
+}
+.date-selector-btn-box .date-selector-btn {
+  font-size: 0.36rem!important;
+}

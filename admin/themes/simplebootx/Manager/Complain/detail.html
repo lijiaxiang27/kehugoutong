@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>入校支持申请详情</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="js/rootfont.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    <script src="js/jquery-1.10.1.min.js"></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/manager.css">
+    <style>
+        .Application-detail-header{
+            text-align:left;
+            padding:0.35rem;
+        }
+        .Application-detail-header:after{
+            content:'';
+            height:0;
+            display:block;
+            clear: both;
+            visibility: hidden;
+        }
+        .Application-detail-content{
+            font-size:0.26rem;
+            padding:0.35rem 0.4rem;
+            text-align:left;
+        }
+        .detail-header-people{
+            border-radius: 50%;
+            float:left;
+            width:24%;
+            margin-left:0.1rem;
+        }
+        .detail-header-right{
+            margin-left:0.2rem;
+            display:inline-block;
+            text-align: left;
+        }
+
+        .detail-header-right .school-name{
+            font-family:'微软雅黑';
+            font-size:0.28rem;
+            color:rgb(100,100,100);
+            margin-bottom:0.1rem;
+        }
+
+        .detail-content-name{
+            color:rgb(150,150,150);
+            display:inline-block;
+            width:2rem;
+            text-align: right;
+            vertical-align: top;
+        }
+        .d-c-n-2{
+            width:4.6rem;
+            display:inline-block;
+            margin-left:0.1rem;
+        }
+        .support-content{
+            vertical-align: top;
+
+        }
+        .detail-content-bottom{
+            margin-top:0.1rem;
+        }
+        .detail-content-bottom div{
+            display:inline-block
+        }
+
+        .application-status{
+            background:rgb(243,243,243);
+            border-top:1px solid rgb(220,220,220);
+            border-bottom:1px solid rgb(220,220,220);
+        }
+        .application-status > div{
+            float:left;
+        }
+        .application-status:after{
+            content:'';
+            height:0;
+            display:block;
+            clear: both;
+            visibility: hidden;
+        }
+        .application-status-left{
+            position:relative;
+            width:10%;
+            border-right:1px solid rgb(210,210,210);
+            height:2.6rem;
+        }
+        .application-status-left img{
+            width:0.4rem;
+            height:0.4rem;
+            position: absolute;
+        }
+        .z-index-box{
+            display:inline-block;
+            width:0.50rem;
+            height:0.54rem;
+            background:rgb(243,243,243);
+            position: absolute;
+            top:0.96rem;
+            right:-0.25rem;
+            z-index:1;
+        }
+        .success-img{
+            right:-0.2rem;top:1rem;
+            z-index:2;
+        }
+        .status-img{
+            right:-0.2rem;bottom:-0.43rem;
+        }
+        .application-status-right{
+            width:90%;
+            padding:0.5rem;
+        }
+        .application-status-right > .successful-application{
+            text-align:left;
+            background:white;
+            border:1px solid rgb(210,210,210);
+            border-radius:4px;
+            padding:0.3rem;
+        }
+        .successful-application img{
+            width:0.6rem;
+            height:0.6rem;
+            border-radius: 50%;
+            margin:0  0.24rem 0;
+
+        }
+        .application-status-right > .successful-application div{
+
+            display:inline-block;
+
+        }
+        .successful-application div p{
+            font-size:0.3rem;
+        }
+        .successful-application div > span{
+            display:inline-block;
+            color:#666;
+        }
+        .successful-application div p span{
+            font-size:0.3rem;
+        }
+        .status-during{
+            margin-top:0.2rem;
+        }
+        /*footer*/
+        footer{
+            padding:0.15rem;
+        }
+        .footer-left{
+            width:49%;
+            border-right:1px solid #ccc;
+        }
+        .footer-right{
+            width:50%;
+        }
+        footer li a{
+            color:#007FBA;
+            display:inline-block;
+            width:100%;
+            height:100%;
+            padding:0.12rem;
+            font-size:0.32rem;
+        }
+        footer ul:after{
+            content:'';
+            height:0;
+            display:block;
+            clear: both;
+            visibility: hidden;
+        }
+        .pass{
+            width:2.4rem;
+            position:fixed;
+            top:1rem;
+            right:0.6rem;
+            animation: a2 0.5s linear;
+        }
+        .pass-ed{
+            width:2.4rem;
+            position:fixed;
+            top:1rem;
+            right:0.6rem;
+        }
+        .refuse-ed{
+            width:2.4rem;
+            position:fixed;
+            top:1rem;
+            right:0.6rem;
+        }
+        .refuse{
+            width:2.4rem;
+            position:fixed;
+            top:1rem;
+            right:0.6rem;
+            animation: a2 0.5s linear;
+        }
+        .passed{
+            display:none;
+        }
+        @keyframes a2 {
+            0% {transform: scale(1.6,1.6)}
+            60% {transform: scale(2,2)}
+            100% {transform: scale(1,1)}
+        }
+        .c_and_s_enclosure{
+            width:4.4rem;
+            height:2.5rem;
+            vertical-align: top;
+        }
+        .c_and_s_enclosure img{
+            width:4.4rem;
+            height:2.5rem;
+        }
+    </style>
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content">
+    <div class="list-om">
+        <div class="Application-detail-header">
+            <div class="detail-header-right">
+                <p class="school-name">河北沧州凹凸学习中心投诉运营服务</p>
+                <span class="approval-result approval-result-detail" id="approvalResult">待处理</span>
+            </div>
+        </div>
+        <hr/>
+        <div class="Application-detail-content">
+            <p><span class="detail-content-name">投诉时间： </span><span class="d-c-n-2">2017-6-30 9:00</span></p>
+            <p><span class="detail-content-name">投诉人： </span><span class="d-c-n-2">刘校长</span></p>
+            <p><span class="detail-content-name">投诉内容： </span><span class="d-c-n-2">帮助校区构建标准化的运营服务体系，帮助校区建立师资库并配合进行兼职教师面试和培训。</span></p>
+            <p><span class="detail-content-name">期望解决方案： </span ><span class="d-c-n-2">帮助校区构建标准化的运营服务体系，帮助校区建立师资库并配合进行兼职教师面试和培训。</span></p>
+            <div class="detail-content-bottom">
+                <span class="detail-content-name  support-content">附件：</span>
+                <div class="c_and_s_enclosure">
+
+                </div>
+            </div>
+        </div>
+        <div  class="application-status">
+            <div class="application-status-left">
+                <img class="success-img" src="images/success.png" alt="申请成功">
+                <img class="status-img" id="status-img" src="images/clock-2.png" alt="审批中">
+                <span class="z-index-box"></span>
+            </div>
+            <div class="application-status-right">
+                <div class="successful-application">
+                    <img src="images/people.jpg" alt="校长头像" title="校长头像">
+                    <div>
+                        <p><span>吕洞宾</span> 提交申请成功</p>
+                        <span>2017-03-24</span>
+                    </div>
+                </div>
+                <div class="successful-application status-during">
+                    <img src="images/people.jpg" alt="经理头像" title="经理头像">
+                    <div>
+                        <p>李兆强 <span class="approval-result" id="approvalResult2">审批中</span></p>
+                        <span>2017-03-24</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <ul>
+                <li class="footer-left" id="agree"><a href="#1">同意</a></li>
+                <li class="footer-right" id="refuse"><a href="#1">拒绝</a></li>
+            </ul>
+        </footer>
+
+        <img class="passed" src="images/pass.png" alt="">
+    </div>
+</div>
+<script>
+    var spans = document.getElementsByClassName('approval-result');
+    var agree = document.getElementById('agree');
+    var refuse = document.getElementById('refuse');
+    var span1 = document.getElementById('approvalResult');
+    var span2 = document.getElementById('approvalResult2');
+    var img = document.getElementById('status-img');
+    var ani = document.querySelector('.passed');
+
+
+    if(span1.innerHTML == "已同意"){
+        span1.style.color = "#F8B42C";
+        img.src='images/success.png';
+        span2.innerHTML='已同意';
+        span2.style.color = "rgb(0,196,109)";
+        ani.style.display ='block';
+        ani.src="images/pass.png";
+        ani.setAttribute('class','pass-ed');
+    }
+
+    if(span1.innerHTML == "已拒绝"){
+        span1.style.color = "red";
+        img.src='images/error.png';
+        span2.innerHTML='已拒绝';
+        span2.style.color = "red";
+        ani.style.display ='block';
+        ani.src="images/refuse.png";
+        ani.setAttribute('class','refuse-ed');
+    }
+
+
+
+    for(var i = 0,len = spans.length;i < len;i++){
+        if(spans[i].innerHTML == "已完成" || spans[i].innerHTML == "已同意"){
+            spans[i].style.color = "rgb(0,196,109)"
+        }
+        if(spans[i].innerHTML == "待处理" || spans[i].innerHTML == "审批中"){
+            spans[i].style.color = "#F8B42C"
+        }
+    }
+
+    agree.addEventListener('click',function () {
+        var br = confirm("同意？");
+        if(br){
+            span1.innerHTML = span2.innerHTML = '已同意';
+            span1.style.color = span2.style.color = "rgb(0,196,109)";
+            img.src='images/success.png';
+            img.alt='已同意';
+            if(ani){
+                ani.src= 'images/pass.png';
+                ani.setAttribute('class','pass');
+                ani.setAttribute('style','display:block');
+            }
+        }
+    });
+    refuse.addEventListener('click',function () {
+        var br = confirm("拒绝？");
+        if(br){
+            span1.innerHTML = span2.innerHTML ='已拒绝';
+            span1.style.color = span2.style.color = "red";
+            img.src='images/error.png';
+            img.alt='已拒绝';
+            if(ani){
+                ani.src= 'images/refuse.png';
+                ani.setAttribute('class','refuse');
+                ani.setAttribute('style','display:block');
+            }
+        }
+    })
+</script>
+</body>
+</html>

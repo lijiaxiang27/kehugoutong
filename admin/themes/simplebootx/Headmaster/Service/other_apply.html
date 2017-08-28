@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>其它申请</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+	<script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content" style="height:100%">
+		<div class="mes-info" style="height:100%">
+			<form id="form">
+				<label>开始时间<span>*</span></label>
+	            <input type="date" name="starttime" id="startDate" aria-required="true">
+	            <label>结束时间<span>*</span></label>
+	            <input type="date" name="endtime" id="endDate" aria-required="true">
+	            <label>申请支持内容<span>*</span></label>
+				<textarea name="content" id="" placeholder="请填写具体要支持的内容"></textarea>
+				<input style="margin-top:0.6rem" type="submit" class="btn" readonlyunselectable="on" onclick="tijiao();return false;"  value="提交申请" />
+			</form>
+		</div>		
+	</div>
+</body>
+<script>
+	function tijiao(){
+		$.ajax({
+			url: "{:U('admin/otherapp/add')}",
+			type: 'post',
+			dataType:'html',
+			data: $("#form").serializeArray(),
+			success: function(msg) {
+				var msgs = eval('(' + msg + ')');
+				if(msgs.code == 0){
+					alert(msgs.info);
+				} else {
+					location.href = msgs.info;
+				}
+
+			}
+		});
+	}
+</script>
+</html>

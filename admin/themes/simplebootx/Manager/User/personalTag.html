@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设置擅长业务</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <include file="Manager:header" />
+    <style>
+      .label_box{
+          padding:0.3rem;
+          border-bottom:1px solid rgb(23,176,90);
+          text-align: left;
+      }
+      .container_to_be_selected{
+          padding:0.3rem;
+          text-align: left;
+      }
+      .to_be_selected{
+            position:relative;
+            display:inline-block;
+            padding:0.15rem 0.3rem;
+            border-radius: 0.4rem;
+            border: 1px solid #ccc;
+            margin-top:0.3rem;
+            margin-left:0.3rem;
+            font-size:0.24rem;
+
+      }
+      .selected{
+          position:relative;
+          display:inline-block;
+          padding:0.15rem 0.3rem;
+          border-radius: 0.4rem;
+          margin-top:0.3rem;
+          margin-left:0.3rem;
+          border: 1px solid rgb(23,176,90);
+          color:rgb(23,176,90);
+          font-size:0.24rem;
+      }
+      .create_new_sign{
+          padding:0.15rem 0.3rem;
+          border-radius: 0.1rem;
+          margin:0.3rem 0.2rem 0;
+          border: 1px solid rgb(23,176,90);
+          background:rgb(23,176,90);
+          color:white;
+          font-size:0.24rem;
+      }
+        .finish{
+          padding:0.15rem 0.3rem;
+          border-radius: 0.1rem;
+          margin:0.3rem 0.2rem 0;
+          border: 1px solid rgb(23,176,90);
+          background:rgb(23,176,90);
+          color:white;
+          font-size:0.24rem;
+        }
+        .cancel{
+            padding:0.15rem 0.3rem;
+            border-radius: 0.1rem;
+            margin:0.3rem 0.2rem 0;
+            border: 1px solid rgb(23,176,90);
+            background:rgb(23,176,90);
+            color:white;
+            font-size:0.24rem;
+        }
+        .submit{
+            padding:0.15rem 0.3rem;
+            border-radius: 0.1rem;
+            margin:0.3rem 0.2rem 0;
+            border: 1px solid rgb(23,176,90);
+            background:rgb(23,176,90);
+            color:white;
+            font-size:0.24rem;
+        }
+        body,html{
+            width:100%;
+            height:100%;
+        }
+        .list-content{
+            max-width:7.5rem;
+            height:100%;
+        }
+        .list-om {
+            width:100%;
+            height:100%;
+            position:relative;
+        }
+        .mask{
+
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            left:0;
+            background:rgba(30,30,30,0.8);
+            display:none;
+        }
+        .create_mask{
+            width:90%;
+            margin-left:5%;
+            box-sizing: border-box;
+            padding:0.4rem;
+            margin-top:5rem;background:white;
+            border-radius: 5px;
+        }
+        .mask input{
+            width:100%;
+            height:0.7rem;
+            line-height: 0.7rem;
+            font-size:0.3rem;
+            color:rgb(23,176,90);
+            border:1px solid rgb(23,176,90);
+            border-radius: 8px;
+            text-align: center;
+        }
+      /* webkit 浏览器*/
+      #input::-webkit-input-placeholder {color:rgb(23,176,90);}
+      /* 火狐浏览器 */
+      #input::-moz-placeholder {color:rgb(23,176,90);}
+      .img{
+          width:0.5rem;height:0.5rem;position:absolute;top:-0.2rem;right:-0.2rem;
+      }
+    </style>
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content">
+    <div class="list-om">
+       <div class="label_box" id="label_box">
+          <volist name="tags" id="vo">
+           <a href="#1" class="selected" style="font-size:0.24rem">
+               {$vo}
+               <img src="__PUBLIC__/simpleboot/manager/images/close-fill.png" class="img">
+           </a>
+           </volist>
+           
+       </div>
+       <div class="container_to_be_selected" id="container_to_be_selected">
+          <volist name="tags" id="vo">
+           <button class="to_be_selected">{$vo}</button>
+           </volist>
+           
+       </div>
+
+       <div class="create_new">
+           <button class="create_new_sign" id="create_new_sign">创建新标签</button>
+           <button class="submit">提交修改</button>
+       </div>
+        <!--遮罩层-->
+       <div class="mask">
+           <div class="create_mask">
+               <input type="text" placeholder="输入新标签的内容" id="input"><br/>
+               <button class="finish">创建</button>
+               <button class="cancel" id="cancel">取消</button>
+           </div>
+       </div>
+    </div>
+</div>
+<script src="__PUBLIC__/simpleboot/manager/js/Zepto.js"></script>
+<script>
+
+          var arr1 = [];//用来保存上边信息，判断去重
+          var arr2 = [];//用来保存下边信息，判断去重
+          var arr3 = [];//页面加载用来保存下边信息，判断去重
+          var label_box = $('#label_box');//上边标签容器box
+          var box = document.getElementById('label_box');//原生获取上边标签容器box
+          var container = document.getElementById('container_to_be_selected');//原生获取下边容器container
+          var container_z = $('#container_to_be_selected');
+          var btns = $('#container_to_be_selected button');//获取所有下边的button
+          var createSign = $('#create_new_sign');
+          var mask = $('.mask');
+          var finish = $('.finish');//创建新标签
+          var input = $('#input');//获取输入框
+
+          var children_c = container.children;
+          for(var k = 0; k < children_c.length;k++){
+              arr3.push(children_c[k].innerText);
+
+          }
+          //页面加载创建两个数组分别保存上边和下边的数据，判断上边的内容是否在下边，给下边添加边框
+          window.onload = function(){
+              var children_1 = box.querySelectorAll('.selected');
+              var children_2 =container.querySelectorAll('.to_be_selected');
+              for(var i = 0; i < children_1.length;i++){
+                  arr1.push(children_1[i].innerText.trim());
+              }
+              for(var j = 0; j < children_2.length;j++){
+                  arr2.push(children_2[j].innerText.trim());
+              }
+
+              for(var k = 0; k < arr2.length;k++){
+                  if(arr1.indexOf(arr2[k]) != -1){
+                      children_2[k].setAttribute('class','selected');
+                  }
+              }
+          };
+          //点击创建新标签。传递数据到上边
+          container_z.on('click','.to_be_selected',function(argument) {
+                  var children = box.querySelectorAll('.selected');
+                      for(var i of children){
+                          if(i.innerText == $(this).text()){
+                              return false;
+                          }
+                      }
+                  $(this).addClass('selected');
+                  var a = $('<a href="#1" class="selected" style="font-size:0.24rem">'+$(this).html()+'</a>');
+                  var img = $('<img src="__PUBLIC__/simpleboot/manager/images/close-fill.png" class="img">');
+                  label_box.append(a.append(img));
+          });
+
+          label_box.on('click','.img',function(argument) {
+              var arr4 = [];
+              var children = container.querySelectorAll('.to_be_selected');
+              var children_pre = container.querySelectorAll('.selected'); 
+
+              for(var j of children){
+                  if($(this).parent().text()== j.innerText){
+                     j.setAttribute('class','to_be_selected');
+                  }
+              }
+              var text = $(this).parent().text().trim();
+              arr4.push(text);
+              for(var k = 0;k < arr2.length;k++){
+                  if(arr4.indexOf(arr2[k]) != -1){
+                      btns[k].setAttribute('class','to_be_selected');
+                  }
+              }
+               $(this).parent().remove();
+          });
+
+
+          //创建标签弹出mask
+          createSign.on('click',function(){
+               input.val('');
+               mask.show();
+          });
+          //mask中点击创建完成标签，获取input中值创建新标签
+          finish.on('click',function(){
+              var value = input.val();
+              if(value == ''){
+                  alert('内容为空，请填写');
+                  return false;
+              }
+              var new_btn = $('<button class="to_be_selected">'+value+'</button>');
+              container_z.append(new_btn);
+              mask.hide();
+          });
+          $('#cancel').on('click',function(){
+              mask.hide();
+          })
+
+          //提交
+          $('.submit').click(function(){
+              var selectedtag = box.querySelectorAll('.selected');
+              var arr = [];
+              for(var i = 0; i < selectedtag.length;i++){
+                  arr.push(selectedtag[i].innerText.trim());
+              }
+              var str = arr.join('|');
+              $.ajax({
+                type:'post',
+                url:"{:leuu('Manager/User/updateTag')}",
+                data:{
+                  skill:str
+                },
+                success:function(data){
+                    if(data.code == 200){
+                      self.location=document.referrer;
+                    }
+                    else{
+                      alert(data.info);
+                    }
+                }
+              })
+          });
+</script>
+</body>
+</html>

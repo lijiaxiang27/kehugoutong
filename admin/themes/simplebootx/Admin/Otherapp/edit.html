@@ -1,0 +1,61 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<!--<li><a href="{:U('support/index')}">入校支持申请列表</a></li>-->
+			<li class="active">详情</li>
+		</ul>
+        <form method="post" class="form-horizontal js-ajax-form" action="{:U('otherapp/edit_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">申请时间区间</label>
+					<div class="controls">
+						<input type="text" name="titile" value="{$starttime}~{$endtime}" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">申请内容</label>
+					<div class="controls">
+						<input type="text" name="content" value="{$content}" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">申请学校</label>
+					<div class="controls">
+						<input type="text" name="user_nicename" value="{$user_nicename}" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">申请时间</label>
+					<div class="controls">
+						<input type="text" name="time" value="{$time|date='Y-m-d H:i:s',###}" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">评价</label>
+					<div class="controls">
+						<if condition="$judge neq '' ">
+							<input type="text" name="continue" value="处理结果-{$tips[0]}-{$tip2s[0]}" readonly="true">
+							<input type="text" name="continue" value="处理速度-{$tips[1]}-{$tip2s[1]}" readonly="true">
+							<input type="text" name="continue" value="服务态度-{$tips[2]}-{$tip2s[2]}" readonly="true">
+							<else/>
+							待评价
+						</if>
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-actions">
+                <input type="hidden" name="id" value="{$id}" />
+				<if condition="$status gt 1">
+					<a class="btn" href="javascript:void(0)">已通过</a>
+					<else/>
+					<button type="submit" class="btn btn-primary js-ajax-submit">通过</button>
+				</if>
+				<a class="btn" href="javascript:history.back(-1);">{:L('BACK')}</a>
+			</div>
+        </form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--campus_management-->
+    <title>校区管理</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <include file="Manager:header" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/campus.css">
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content" style="height:100%;">
+    <div class="list-om" style="position:relative;height:100%;">
+        <div class="add-new-campus" onclick="location='{:leuu('school/add_school')}'">
+            <a href="#"><img src="__PUBLIC__/simpleboot/manager/images/add-list.png" alt=""></a><span>新增校区</span>
+        </div>
+        <div class="area-div"></div>
+        <div class="campus-lists-box">
+            <volist name="schools" id="vo">
+             <div class="campus-list">
+                  <h3>{$vo.user_nicename}</h3>
+                  <p><span>{$vo.master_name}</span>&nbsp; |&nbsp; <span>{$vo.user_login}</span></p>
+             </div>
+            </volist>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

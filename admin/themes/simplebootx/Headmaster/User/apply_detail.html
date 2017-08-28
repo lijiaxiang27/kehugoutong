@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>投诉</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+
+		<div class="details">
+			<h3>申请详情</h3>
+			<ul>
+				<notempty name="title"><li class="clear"><span>申请标题：</span><p>{$title}</p></li></notempty>
+				<notempty name="province"><li class="clear"><span>地址：</span><p>{$province}-{$city}-{$county}</p></li></notempty>
+				<notempty name="end"><li class="clear"><span>起始时间：</span><p>{$start}~{$end}</p></li></notempty>
+				<notempty name="person"><li class="clear"><span>申请人：</span><p>{$person}</p></li></notempty>
+				<notempty name="mobile"><li class="clear"><span>联系电话：</span><p>{$mobile}</p></li></notempty>
+				<notempty name="continue"><li class="clear"><span>支持天数：</span><p>{$continue}</p></li></notempty>
+				<notempty name="num"><li class="clear"><span>参会人数：</span><p>{$num}</p></li></notempty>
+				<notempty name="content"><li class="clear"><span>支持详情：</span><p>{$content}</p></li></notempty>
+				<notempty name="demand"><li class="clear"><span>设计要求：</span><p>{$demand}</p></li></notempty>
+				<notempty name="is_send"><li class="clear"><span>是否发送附件：</span><p><if condition="$is_send eq 1">已发送<else/>未发送</if></p></li></notempty>
+				<notempty name="time"><li class="clear"><span>申请时间：</span><p>{$time|date="Y-m-d",###}</p></li></notempty>
+				<notempty name="passtime"><li class="clear"><span>审批时间：</span><p>{$passtime|date="Y-m-d",###}</p></li></notempty>
+				<notempty name="solvetime"><li class="clear"><span>解决时间：</span><p>{$solvetime|date="Y-m-d",###}</p></li></notempty>
+				<notempty name="judge_time"><li class="clear"><span>评价时间：</span><p>{$judge_time|date="Y-m-d",###}</p></li></notempty>
+			</ul>
+
+		</div>
+		<if condition="$status gt 1">
+		<div class="evaluate clear">
+			<h3>评价</h3>
+			<form action="">
+				<input type="hidden" name="id" value="{$id}">
+				<input type="hidden" name="db" value="{$db}">
+				<if condition="$status eq 2 ">
+				<ul class="pf">
+					<li class="clear" data-rh-score="3">
+						<span class="title" id="star1">处理结果</span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="tip"></span>
+						<span class="tip2"></span>
+					</li>
+					<li class="clear" data-rh-score="4">
+						<span class="title" id="star2">处理速度</span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="tip"></span>
+						<span class="tip2"></span>
+					</li>
+					<li class="clear" data-rh-score="5">
+						<span class="title" id="star3">服务态度</span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="glyphicon glyphicon-star-empty"></span>
+						<span class="tip"></span>
+						<span class="tip2"></span>
+					</li>
+				</ul>
+					<input type="text" readonly onclick="pingjia()" value="发布">
+					<else/>
+					<php>
+						$arr = unserialize($judge);
+						$tip=array('','1.0','2.0','3.0','4.0','5.0');
+						$tip2=array('','差','一般','中等','良','优秀');
+						foreach($arr as $k=>$v){
+							$tips[$k] = $tip[$v];
+							$tip2s1[$k] = $tip2[$v];
+							$arr1[] = 5-$v;
+						}
+					</php>
+					<ul class="pf">
+						<li class="clear" data-rh-score="3">
+							<span class="title" id="star1">处理结果</span>
+							<for start="0" end="$arr['0']">
+							<span style="pointer-events: none" class="glyphicon glyphicon-star"></span>
+							</for>
+							<for start="0" end="$arr1['0']">
+							<span style="pointer-events: none" class="glyphicon glyphicon-star-empty"></span>
+							</for>
+							<span class="tip">{$tips[0]}</span>
+							<span class="tip2">{$tip2s1[0]}</span>
+						</li>
+						<li class="clear" data-rh-score="4">
+							<span class="title" id="star2">处理速度</span>
+							<for start="0" end="$arr['1']">
+								<span style="pointer-events: none" class="glyphicon glyphicon-star"></span>
+							</for>
+							<for start="0" end="$arr1['1']">
+								<span style="pointer-events: none" class="glyphicon glyphicon-star-empty"></span>
+							</for>
+							<span class="tip">{$tips[1]}</span>
+							<span class="tip2">{$tip2s1[1]}</span>
+						</li>
+						<li class="clear" data-rh-score="5">
+							<span class="title" id="star3">服务态度</span>
+							<for start="0" end="$arr['2']">
+								<span style="pointer-events: none" class="glyphicon glyphicon-star"></span>
+							</for>
+							<for start="0" end="$arr1['2']">
+								<span style="pointer-events: none" class="glyphicon glyphicon-star-empty"></span>
+							</for>
+							<span class="tip">{$tips[2]}</span>
+							<span class="tip2">{$tip2s1[2]}</span>
+						</li>
+					</ul>
+				</if>
+			</form>
+		</div>
+		</if>
+	</div>
+<script>
+	var tip=['','1.0','2.0','3.0','4.0','5.0'];
+	var tip2=['','差','一般','中等','良','优秀'];
+	$('.pf').on('mousedown','.glyphicon',function(){
+		if($(this).hasClass('glyphicon-star')){
+			var score = 0;
+			$(this).parent().attr('data-rh-score' ,score);
+			$(this).addClass('glyphicon-star-empty').removeClass('glyphicon-star').siblings('.glyphicon').addClass('glyphicon-star-empty').removeClass('glyphicon-star');
+			$(this).nextAll('.tip').text(tip[0]);
+			$(this).nextAll('.tip2').text(tip2[0]);
+		}else{
+			var score = $(this).index();
+			$(this).parent().attr('data-rh-score' ,score);
+			$(this).addClass('glyphicon-star').removeClass('glyphicon-star-empty').prevAll('.glyphicon').addClass('glyphicon-star').removeClass('glyphicon-star-empty');
+			$(this).nextAll('.tip').text(tip[score]);
+			$(this).nextAll('.tip2').text(tip2[score]);
+		}
+	});
+	function pingjia(){
+		var score=[];
+		score[0] = $('.pf li:eq(0)').attr('data-rh-score');
+		score[1] = $('.pf li:eq(1)').attr('data-rh-score');
+		score[2] = $('.pf li:eq(2)').attr('data-rh-score');
+		var id = $("[name='id']").val();
+		var db = $("[name='db']").val();
+		$.ajax({
+			url: "{:U('Headmaster/User/pingjia')}",
+			type: 'post',
+			dataType:'html',
+			data: {"score":score,"id":id,"db":db},
+			success: function() {
+				location.href = location.href;
+			}
+		});
+
+	}
+</script>
+</body>
+</html>

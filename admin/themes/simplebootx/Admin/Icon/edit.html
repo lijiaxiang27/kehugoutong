@@ -1,0 +1,44 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('icon/index')}">资料类型</a></li>
+			<li><a href="{:U('icon/add')}">添加资料类型</a></li>
+			<li class="active"><a>编辑管理员</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('icon/edit_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">资料类型</label>
+					<div class="controls">
+						<input type="text" name="document" value="{$document}">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">资料图标</label>
+					<div class="controls">
+						<div style="text-align: left;">
+							<input type="hidden" name="icon" id="thumb" value="{$icon}">
+							<a href="javascript:upload_one_headimage('图片上传','#thumb');">
+								<if condition="empty($avatar)">
+									<img src="__TMPL__Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand"/>
+									<else />
+									<img src="{:sp_get_image_preview_url($icon)}" id="thumb-preview" width="135" style="cursor: hand"/>
+								</if>
+							</a>
+							<input type="button" class="btn btn-small" onclick="$('#thumb-preview').attr('src','__TMPL__Public/assets/images/default-thumbnail.png');$('#thumb').val('');return false;" value="取消图片">
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-actions">
+				<input type="hidden" name="id" value="{$id}" />
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('SAVE')}</button>
+				<a class="btn" href="javascript:history.back(-1);">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

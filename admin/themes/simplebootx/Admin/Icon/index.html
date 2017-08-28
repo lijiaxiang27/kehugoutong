@@ -1,0 +1,43 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Icon/index')}">资料类型</a></li>
+			<li><a href="{:U('Icon/add')}">添加资料类型</a></li>
+		</ul>
+
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th width="50">ID</th>
+					<th>类型</th>
+					<th>图标</th>
+					<th width="120">{:L('ACTIONS')}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<php>$user_statuses=array("0"=>L('USER_STATUS_BLOCKED'),"1"=>L('USER_STATUS_ACTIVATED'),"2"=>L('USER_STATUS_UNVERIFIED'));</php>
+				<foreach name="icons" item="vo">
+				<tr>
+					<td>{$vo.id}</td>
+
+					<td>{$vo.document}</td>
+
+					<td><img width="20px"  src="{:sp_get_image_preview_url($vo['icon'])}" alt=""></td>
+
+					<td>
+							<a href='{:U("icon/edit",array("id"=>$vo["id"]))}'>{:L('EDIT')}</a> |
+
+							<a class="js-ajax-delete" href="{:U('icon/delete',array('id'=>$vo['id']))}">{:L('DELETE')}</a>
+
+					</td>
+				</tr>
+				</foreach>
+			</tbody>
+		</table>
+		<div class="pagination">{$page}</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+</body>
+</html>

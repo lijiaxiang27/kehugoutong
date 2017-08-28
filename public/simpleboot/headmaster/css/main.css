@@ -1,0 +1,37 @@
+@import 'rest.css';
+@import 'list.css';
+/*banner*/
+.banner , .at-list , .at-yyjl , .at-zxhd , .atsh , footer{max-width: 7.5rem;text-align: center;height: auto;margin:0 auto;background: #fff;}
+/*资料下载*/
+.at-list{padding:0.35rem;margin-bottom: 0.2rem;}
+.at-list h3 , .at-zxhd h3 , .atsh h3{font-size: 0.32rem;text-align: left;}
+.at-list li{width: 25%;float: left;text-align: center;}
+.at-list li figure{width: 30%;height: 1.5rem;margin:0 auto;line-height: 1.5rem;}
+.at-list li img{margin:0 auto;vertical-align: middle;}
+.at-list li p{font-size: 0.26rem;color: #000;}
+/*运营经理*/
+.at-yyjl{padding:0.4rem 0.15rem;}
+.at-yyjl li{width: 28%;height: 2.8rem;background: #F9F9F9;padding:0 0.2rem;float: left;margin-left: 4%;}
+.at-yyjl li p{font-size: 0.24rem;padding:0.3rem 0;}
+/*最新活动*/
+.at-zxhd{margin-top: 0.2rem;}
+.at-zxhd h3{padding-top: 0.35rem;padding-left: 0.4rem;}
+.at-zxhd li{width: 100%;height: 2.65rem;padding:0.325rem 0.4rem;border-bottom: 1px solid #EEEEEE}
+.zxhd-img{float: left;width:2.55rem;height: 2rem;}
+.zxhd-cont{float: left;margin-left: 0.3rem;position: relative;width: 3.85rem;height: 2rem;text-align: left;}
+.zxhd-cont h4{font-size: 0.24rem;padding-bottom: 0.1rem;}
+.zxhd-cont p{font-size: 0.22rem;line-height: 0.35rem}
+.zxhd-cont span{width: 1.3rem;height: 0.45rem;display: inline-block;color: #fff;background: #16B05A;border-radius: 2px;font-size: 0.24rem;position: absolute;text-align: center;line-height: 0.45rem;bottom: 0;}
+/*凹凸生活*/
+/*.atsh{padding:0.4rem;margin-top: 0.2rem;margin-bottom: 1.05rem;}*/
+.atsh{padding:0.4rem;margin-top: 0.2rem;padding-bottom: 1.5rem;}
+.atsh .atsh-img{width: 100%;margin-top: 0.4rem;}
+.atsh h4 , .atsh p{font-size: 0.22rem;text-align: left;}
+.atsh h4{padding:0.35rem 0 0.2rem 0;}
+/*底部*/
+footer{position: fixed;bottom: 0;background: #F9F9F9;padding:0.15rem 0;height: auto;width: 100%;left: 50%;margin-left: -3.75rem;}
+footer li{width: 25%;text-align: center;float: left;}
+footer li figure{width: 18.67%;margin:0 auto;height: 0.55rem;line-height: 0.55rem;}
+footer li figure img{vertical-align: middle;}
+footer li p{font-size: 0.18rem;}
+

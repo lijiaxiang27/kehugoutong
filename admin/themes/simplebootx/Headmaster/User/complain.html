@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>投诉与建议</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="list-complaint">
+			<ul class="clear">
+				<li><h3>我的投诉</h3></li>
+				<li><span onclick="location='{:U('Complain/index')}'">我要投诉</span></li>
+			</ul>
+			<foreach name="complains" item="vo">
+			<section onclick="location='{:U('Complain/complain_detail', array('id'=>$vo['id']))}'">
+				<hgroup>{$vo.title}</hgroup>
+				<ul class="clear">
+					<li><strong>投诉时间：</strong><p>{$vo.time|date="Y-m-d H:i:s",###}</p></li>
+					<li><strong>投诉内容：</strong><p>{$vo.descript}</p></li>
+				</ul>
+				<if condition="$vo['status'] eq 1 ">
+				<span class="clz">处理中</span>
+					<elseif condition="$vo['status'] eq 2 " />
+				<span class="clz">待评价</span>
+					<elseif condition="$vo['status'] eq 3" />
+				<span class="ywc">已完成</span>
+				</if>
+			</section>
+			</foreach>
+		</div>
+		<div class="list-complaint list-proposal">
+			<ul class="clear">
+				<li><h3>我的建议</h3></li>
+				<li onclick="location='{:U('Adv/index')}'"><span>提建议</span></li>
+			</ul>
+			<foreach name="advs" item="vo">
+			<section onclick="location='{:U('Adv/adv_detail', array('id'=>$vo['id']))}'">
+				<!--<hgroup>河北沧州凹凸学习中心入校支持申请</hgroup>-->
+				<ul class="clear">
+					<li><strong>提交时间：</strong><p>{$vo.time|date="Y-m-d H:i:s",###}</p></li>
+					<li><strong>建议内容：</strong><p>{$vo.content}</p></li>
+				</ul>
+				<if condition="$vo['status'] eq 1 ">
+					<span class="clz">处理中</span>
+					<elseif condition="$vo['status'] eq 2 " />
+					<span class="clz">待评价</span>
+					<elseif condition="$vo['status'] eq 3" />
+					<span class="ywc">已完成</span>
+				</if>
+			</section>
+			</foreach>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>入校支持申请</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<script>
+document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+	<div class="list-content">
+		<div class="mes-info">
+			<form id="form">
+				<label>入校名称<span>*</span></label>
+				<input type="text" name="title" aria-required="true" autocomplete="off">
+				<label>所在地区<span>*</span></label>
+				<div class="city">
+	                <select id="s_province" name="province"></select>
+	                <select id="s_city" name="city" ></select>
+	                <select id="s_county" name="county"></select>
+	            </div>
+	            <script src="__PUBLIC__/simpleboot/headmaster/js/area.js"></script>
+	            <script type="text/javascript">_init_area();</script>
+	            <script type="text/javascript">
+	                var Gid  = document.getElementById ;
+	                var showArea = function(){
+	                    Gid('show').innerHTML = "<h3>省" + Gid('s_province').value + " - 市" +
+	                            Gid('s_city').value + " - 县/区" +
+	                            Gid('s_county').value + "</h3>"
+	                }
+	            </script>
+	            <div id="show"></div>
+	            <label>开始时间<span>*</span></label>
+	            <input type="date" name="start" id="startDate" required aria-required="true">
+	            <label>结束时间<span>*</span></label>
+	            <input type="date" name="end" id="endDate" aria-required="true">
+	            <label>支持天数<span>*</span></label>
+	            <!--<input type="text" name="continue" id="date-num" aria-required="true" onclick="btnCount_Click();">-->
+	            <input type="number" name="continue" id="date-num" aria-required="true">
+	            <label>申请支持内容<span>*</span></label>
+				<textarea name="content" id="" placeholder="请填写具体要支持的内容"></textarea>
+				<div class="agree">
+					<input style="-webkit-appearance: checkbox;" type="checkbox" class="check" name="" checked value="" /><span>我已经阅读入校</span>
+					<a href="javascript:void(0)" onclick="showBg();">支持申请相关规定</a>
+				</div>
+				
+				<input type="submit" class="btn" readonlyunselectable="on" onclick="tijiao();return false;"  value="提交申请" />
+			</form>
+		</div>
+	</div>
+	<div id="hidebg"></div>
+	<div id="hidebox" >
+		<div class="close" onClick="hide();">×</div>
+		<div class="explain">
+			<h3>支持申请相关规定</h3>
+			<p>
+				本服务平台针对凹凸个性教育加盟学校投资人及校长使用。校长如需申请，请致电专属运营经理。
+			</p>
+			<a onClick="hide();" href="javascript:void(0);">知道了</a>
+		</div>
+	</div>
+<script>
+	function showBg()  //显示隐藏层和弹出层
+	{
+		var hideobj=document.getElementById("hidebg");
+		hidebg.style.display="block";  //显示隐藏层
+		hidebg.style.height=document.body.clientHeight+"px";  //设置隐藏层的高度为当前页面高度
+		document.getElementById("hidebox").style.display="block";  //显示弹出层
+
+	}
+	function hide()  //去除隐藏层和弹出层
+	{
+		document.getElementById("hidebg").style.display="none";
+		document.getElementById("hidebox").style.display="none";
+	}
+</script>
+<script type="text/JavaScript">
+	function tijiao(){
+		$.ajax({
+			url: "{:U('admin/support/add')}",
+			type: 'post',
+			dataType:'html',
+			data: $("#form").serializeArray(),
+			success: function(msg) {
+				var msgs = eval('(' + msg + ')');
+				if(msgs.code == 0){
+					alert(msgs.info);
+				} else {
+					location.href = msgs.info;
+				}
+
+			}
+		});
+	}
+  function  btnCount_Click(){
+  		var s1 = document.getElementById('startDate').value;  
+  		var s2 = document.getElementById('endDate').value;    
+       // alert(DateDiff(s1,s2));
+       document.getElementById('date-num').value=DateDiff(s1,s2)+"天";  
+   }  
+		
+   //计算天数差的函数，通用  
+   function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式
+   	     
+       var  aDate,  oDate1,  oDate2,  iDays  
+       aDate  =  sDate1.split("-")  
+       oDate1  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0])    //转换为12-18-2006格式  
+       aDate  =  sDate2.split("-")  
+       oDate2  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0])  
+       iDays  =  parseInt(Math.abs(oDate1  -  oDate2)  /  1000  /  60  /  60  /24)    //把相差的毫秒数转换为天数
+	   iDays += 1;
+       return  iDays  
+   }
+</script>
+</body>
+</html>

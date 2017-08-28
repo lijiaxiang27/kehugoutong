@@ -1,0 +1,287 @@
+
+body{
+    padding-bottom:0.2rem;
+}
+html{
+
+    font-family:"微软雅黑";
+}
+*{
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration: none;
+}
+header img{
+    width:100%;
+    font-size:0
+}
+.list{
+    padding-top:0.5rem;
+    padding-bottom:0.6rem;
+    padding-left:0.7rem;
+    padding-right:0.7rem;
+}
+.hr{
+    display:block;
+    width:90%;
+    margin:0 auto;
+    border:0;
+    background-color:rgb(220,220,220);
+    height:1px;
+}
+h3{
+    font-size:0.32rem;
+}
+p{
+    font-size:0.26rem;
+    margin-top:0.1rem;
+
+}
+.list-om .list h3{
+    text-align: left;
+}
+.list-om .list p{
+    text-align: left;
+}
+/*图标背景图*/
+
+.list-group{
+    width:auto;
+    padding:0.4rem;
+
+}
+.list-group:after{
+    content:'';
+    height:0;
+    display:block;
+    visibility: hidden;
+    clear: both;
+}
+.list1 .list-group li{
+
+    width:11.66%;
+    font-size:0.12rem;
+    list-style: none;
+    margin-left:2.5%;
+    margin-right:2.5%;
+}
+.list-top{
+    float:left;
+    vertical-align: bottom
+}
+.list-bottom{
+    float:right;
+    vertical-align: bottom;
+}
+.list1 .list-group li img{
+    width:100%;
+
+}
+.list1 .list-group li span{
+    display:inline-block;
+    width:100%;
+    text-align: center;
+}
+.list1 a{
+    color:black;
+    font-size:0.16rem;
+}
+.list-bottom{
+    margin-top:0.2rem;
+}
+/*图标背景图-end*/
+
+/*list-detail-start*/
+.list-detail{
+    background:rgba(240,240,240,0.5);
+    border-top:1px solid rgb(220,220,220);
+    border-bottom:1px solid rgb(220,220,220)9;
+}
+.sub-list-detail{
+    text-align: left;
+    position:relative;
+    padding-top:0.3rem;
+    padding-left:0.5rem;
+    padding-right:0.3rem;
+    padding-bottom:0.3rem;
+}
+.sub-list-detail:after{
+    content:'';
+    height:0;
+    display:block;
+    visibility: hidden;
+    clear: both;
+}
+.sub-list-detail-img{
+    overflow:hidden;
+    display:inline-block;
+    width:1.3rem;
+    height:1.3rem;
+    border-radius: 50%;
+    background:darkgreen;
+    vertical-align:middle;
+    border:0.1rem solid white;
+}
+.sub-list-detail-left{
+    float:left;
+    width:50%;
+}
+.sub-list-detail-text{
+    margin-left:0.3rem;
+    vertical-align:middle;
+    display:inline-block;
+}
+.sub-list-detail-left:after{
+    content:'';
+    height:0;
+    display:block;
+    visibility: hidden;
+    clear: both;
+}
+
+.sub-list-detail .sub-list-detail-right{
+    color:rgb(2,168,196);
+    display:inline-block;
+    padding:0.08rem;
+    font-size:0.24rem;
+    position:absolute;
+    right:0.25rem;
+    top:35%;
+
+}
+.list-detail > hr{
+    display:block;
+    width:92%;
+    margin:0 auto;
+    border:0;
+    background-color:rgb(220,220,220);
+    height:1px;
+}
+@media screen and ( max-width: 330px ) {
+    .sub-list-detail-text{
+        margin-left:0.2rem;
+        vertical-align:middle;
+        display:inline-block;
+    }
+}
+/*list-detail-end*/
+
+
+
+
+
+
+
+
+
+
+
+
+/*manager-two*/
+.list-om .evaluate h4{
+    text-align: right;
+    font-size:0.24rem;
+    color:#888;
+    font-weight: 400;
+
+}
+.list-om .evaluate h4 span{
+    color:black;
+}
+.list-om .evaluate h3 a{
+    color:rgb(19 ,196,231);
+    font-weight:400;
+    float:right;
+}
+.list-om .evaluate p{
+    font-size:0.24rem;
+}
+
+
+/*校区评价的css*/
+.campu-evaluation{
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    border-top: 1px solid #E7E7E7;
+    border-bottom: 1px solid #E7E7E7;
+    text-align: left;
+    background: #fff;
+}
+.campu-evaluation h3{
+    font-size: 0.3rem;
+    padding-bottom: 0.45rem;
+    text-align:left;
+}
+.campu-evaluation h4{
+    text-align: center;
+}
+.campu-evaluation h4 img{
+    vertical-align: middle;
+}
+.campu-evaluation h4 span{
+    font-weight: 400;
+    display: inline-block;
+    font-size:0.24rem;
+    vertical-align: middle;
+    color:#888;
+}
+/*校区评价的css*/
+/*manager-two*/
+
+
+
+/*manager-three*/
+.campu-evaluation{
+    padding:0.4rem;
+}
+.campu-evaluation .evaluation-start{
+    text-align: center;
+    margin-top:0.4rem;
+}
+.campu-evaluation .evaluation-start span{
+    color:#555;
+    margin-left:0.15rem;
+}
+.campu-evaluation .evaluation-title{
+    font-size:0.32rem;
+    text-align: left;
+}
+.campu-evaluation h3 span{
+    font-size:0.24rem;
+    vertical-align: middle;
+}
+.campu-evaluation h3 img{
+    width:0.4rem;
+    height:0.4rem;
+    vertical-align: middle;
+}
+.evaluation-detail{
+    padding:0.4rem;
+}
+.evaluation-detail h4{
+    text-align: left;
+}
+.evaluation-detail h4 span{
+    color:#888;
+}
+hr{
+    display:block;
+    width:90%;
+    margin:0 auto;
+    border:0;
+    background-color:rgb(220,220,220);
+    height:1px;
+}
+.evaluation-detail p{
+    text-align: left;
+    margin-top:0.2rem;
+    font-size:0.2rem;
+}
+.no-more{
+    padding-top:0.2rem;
+    padding-bottom:0.2rem;
+}
+/*manager-three*/

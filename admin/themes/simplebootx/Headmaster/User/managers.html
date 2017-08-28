@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运营支持</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="js/rootfont.js"></script>
+	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+	<script src="__PUBLIC__/simpleboot/headmaster/js/clipboard.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+	<link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/manager.css">
+</head>
+<body>
+<script>
+	document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content">
+	<div class="list-om">
+		<header>
+			<img src="__PUBLIC__/simpleboot/headmaster/images/managerbanner.jpg" alt="banner">
+		</header>
+		<div class="list">
+			<h3>全国学校管理中心</h3>
+			<p>{$area}</p>
+		</div>
+		<hr class="hr"/>
+		<div class="list1">
+			<ul class="list-group">
+				<li id="first" class="list-top"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s1.png" alt=""></a></li>
+				<li class="list-top"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s2.png" alt=""></a></li>
+				<li class="list-top"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s3.png" alt=""></a></li>
+				<li class="list-top"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s4.png" alt=""></a></li>
+				<li class="list-top"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s5.png" alt=""></a></li>
+				<li class="list-top"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s6.png" alt=""></a></li>
+				<li class="list-bottom"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s12.png" alt=""></a></li>
+				<li class="list-bottom"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s11.png" alt=""></a></li>
+				<li class="list-bottom"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s10.png" alt=""></a></li>
+				<li class="list-bottom"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s9.png" alt=""></a></li>
+				<li class="list-bottom"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s8.png" alt=""></a></li>
+				<li class="list-bottom"><a href=""><img src="__PUBLIC__/simpleboot/headmaster/images/s7.png" alt=""></a></li>
+			</ul>
+			<ul class="list-detail">
+                <notempty name="gj_rolename">
+				<li class="sub-list-detail">
+					<div class="sub-list-detail-left">
+						<div class="sub-list-detail-img">
+							<!--这里放头像-->
+							<img src="{:sp_get_image_preview_url($gjjl['avatar'])}" alt="">
+						</div>
+						<div class="sub-list-detail-text">
+							<p>{$gjjl.user_nicename}</p>
+							<p style="font-size:0.24rem">{$gj_rolename}</p>
+						</div>
+					</div>
+					<a href="{:U('User/manager',array('pid_gj'=>$gjjl['id']))}" class="sub-list-detail-right">详细 &gt;</a>
+				</li>
+                </notempty>
+                <notempty name="jg_rolename">
+				<hr/>
+				<li class="sub-list-detail">
+					<div class="sub-list-detail-left">
+						<div class="sub-list-detail-img">
+							<!--这里放头像-->
+							<img src="{:sp_get_image_preview_url($jgjl['avatar'])}" alt="">
+						</div>
+						<div class="sub-list-detail-text">
+							<p>{$jgjl.user_nicename}</p>
+							<p style="font-size:0.24rem">{$jg_rolename}</p>
+						</div>
+					</div>
+					<a href="{:U('User/manager',array('pid_jg'=>$jgjl['id']))}" class="sub-list-detail-right">详细 &gt;</a>
+				</li>
+
+                </notempty>
+                <notempty name="zx_rolename">
+				<hr/>
+				<li class="sub-list-detail">
+					<div class="sub-list-detail-left">
+						<div class="sub-list-detail-img">
+							<!--这里放头像-->
+							<img src="{:sp_get_image_preview_url($zxjl['avatar'])}" alt="">
+						</div>
+						<div class="sub-list-detail-text">
+							<p>{$zxjl.user_nicename}</p>
+							<p style="font-size:0.24rem">{$zx_rolename}</p>
+						</div>
+					</div>
+					<a href="{:U('User/manager',array('pid_zx'=>$zxjl['id']))}" class="sub-list-detail-right">详细 &gt;</a>
+				</li>
+
+                </notempty>
+                <notempty name="sc_rolename">
+				<hr/>
+				<li class="sub-list-detail">
+					<div class="sub-list-detail-left">
+						<div class="sub-list-detail-img">
+							<!--这里放头像-->
+							<img src="{:sp_get_image_preview_url($scjl['avatar'])}" alt="">
+						</div>
+						<div class="sub-list-detail-text">
+							<p>{$scjl.user_nicename}</p>
+							<p style="font-size:0.24rem">{$sc_rolename}</p>
+						</div>
+					</div>
+					<a href="{:U('User/manager',array('pid_sc'=>$scjl['id']))}" class="sub-list-detail-right">详细 &gt;</a>
+				</li>
+
+                </notempty>
+			</ul>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

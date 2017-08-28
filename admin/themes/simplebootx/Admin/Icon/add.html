@@ -1,0 +1,40 @@
+<admintpl file="header" />
+
+</head>
+<body>
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('Icon/index')}">资料类型</a></li>
+			<li class="active"><a href="{:U('Icon/add')}">添加资料类型</a></li>
+		</ul>
+		<form method="post" class="form-horizontal js-ajax-form" action="{:U('Icon/add_post')}">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label">资料类型</label>
+					<div class="controls">
+						<input type="text" name="document">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">资料图标</label>
+					<div class="controls">
+						<div style="text-align: left;">
+							<input type="hidden" name="icon" id="thumb" value="">
+							<a href="javascript:upload_one_headimage('图片上传','#thumb');">
+								<img src="__TMPL__Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand" />
+							</a>
+							<input type="button" class="btn btn-small" onclick="$('#thumb-preview').attr('src','__TMPL__Public/assets/images/default-thumbnail.png');$('#thumb').val('');return false;" value="取消图片">
+						</div>
+					</div>
+				</div>
+			</fieldset>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary js-ajax-submit">{:L('ADD')}</button>
+				<a class="btn" href="javascript:history.back(-1);">{:L('BACK')}</a>
+			</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+
+</body>
+</html>
