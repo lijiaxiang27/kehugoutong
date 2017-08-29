@@ -1,13 +1,18 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <!--add_campus-->
     <title>新增校区</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <include file="Manager:header" />
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/campus.css">
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/DateSelector.css">
+    <script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+<script src="/public/simpleboot/headmaster/js/clipboard.min.js"></script>
+<script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/manager.css">
+<link rel="stylesheet" href="/public/simpleboot/manager/css/manager-v2.0.css">
+    <link rel="stylesheet" href="/public/simpleboot/manager/css/campus.css">
+    <link rel="stylesheet" href="/public/simpleboot/manager/css/DateSelector.css">
 </head>
 <body>
 <script>
@@ -40,9 +45,7 @@
              <span class="add-span">高级经理</span>
              <select name="pid_gj" id="add_campus_select" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="gjjls" id="vo">
-                    <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($gjjls)): $i = 0; $__LIST__ = $gjjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
          </div>
          <div class="area-div"></div>
@@ -50,9 +53,7 @@
              <span class="add-span">教管经理</span>
              <select name="pid_jg" id="add_campus_select_2" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="jgjls" id="vo">
-                     <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($jgjls)): $i = 0; $__LIST__ = $jgjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
          </div>
          <div class="area-div"></div>
@@ -60,9 +61,7 @@
              <span class="add-span">咨询经理</span>
              <select name="pid_zx" id="add_campus_select_3" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="zxjls" id="vo">
-                     <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($zxjls)): $i = 0; $__LIST__ = $zxjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
          </div>
          <div class="area-div"></div>
@@ -70,9 +69,7 @@
              <span class="add-span">市场经理</span>
              <select name="pid_sc" id="add_campus_select_4" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="scjls" id="vo">
-                     <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($scjls)): $i = 0; $__LIST__ = $scjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
          </div>
          <div class="area-div"></div>
@@ -81,7 +78,7 @@
 </div>
 <div id="allow_time_box"></div>
 
-<script src="__PUBLIC__/simpleboot/manager/js/DateSelector.js"></script>
+<script src="/public/simpleboot/manager/js/DateSelector.js"></script>
 <script>
 
    new DateSelector({
