@@ -55,7 +55,6 @@
 			font-size:0.26rem;
 		}
 		.app-btn{
-			display:block;
 			width:40%;
 		    background:rgb(23,176,90);
 			color:white;
@@ -64,6 +63,9 @@
 			font-size:0.26rem;
 			border-radius:3px;
 			margin-top:0.2rem;
+		}
+		.btn_box{
+			text-align: center;
 		}
 	</style>
 </head>
@@ -115,14 +117,18 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 			<elseif condition="$vo['isfull'] eq 1"/>
 				<div class="footer"><span style="background-color: #7b8a8b">人数已满</span></div>
 			<else/>
-				<div class="footer"><span style="background-color: #7b8a8b">活动结束</span></div>
+				<div class="footer" "><span style="background-color: #7b8a8b">活动结束</span></div>
 		</if>
 		<div class="application_box">
 			<div class="application">
 				<p><label for="">人数:</label><input type="number"  placeholder="请输入参加活动的人数..."><br></p>
 				<p style="margin-top:0.3rem;"><label for="" style="vertical-align: top;">备注:</label>
 					<textarea name="" id="comments" cols="30" rows="10"></textarea></p>
-				<button class="bm app-btn">报名</button>
+
+				<div class="btn_box">
+					<button class="app-btn" id="cancel">取消</button>
+					<button class="bm app-btn">报名</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -167,6 +173,9 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 	$('#application_btn').click(function () {
          mask.fadeIn();
 
+    });
+	$('#cancel').click(function () {
+         mask.fadeOut();
     })
 </script>
 </html>
