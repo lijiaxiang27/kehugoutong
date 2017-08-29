@@ -1,3 +1,0 @@
-[ 2017-08-25T14:53:48+08:00 ] 111.200.255.67 /index.php?g=manager&m=active&a=act_manage&id=3
-ERR: 模板不存在:admin/themes/simplebootx/Manager/Active/act_manage.html
-

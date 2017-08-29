@@ -28,11 +28,11 @@
 .add-new-campus input {
   vertical-align: middle;
   margin-left: 0.2rem;
-  font-size: 0.32rem;
+  font-size: 0.3rem;
 }
 .add-new-campus p {
   display: inline-block;
-  font-size: 0.32rem;
+  font-size: 0.3rem;
   margin-left: 0.2rem;
   width: 4rem;
   margin-top: 0;
@@ -73,8 +73,16 @@
   border-radius: 4px;
   color: white;
   background: #17b05a;
-  font-size: 0.36rem;
+  font-size: 0.32rem;
 }
 .date-selector-btn-box .date-selector-btn {
-  font-size: 0.36rem!important;
+  font-size: 0.32rem!important;
+}
+.add-new-campus-select {
+  font-size: 0.3rem;
+  width: auto;
+  padding: 0 1.2rem;
+}
+.add-new-campus-select option {
+  text-align: center;
 }
