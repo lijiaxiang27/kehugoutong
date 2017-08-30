@@ -16,6 +16,7 @@ return array (
   'MANAGER_INDEX_INDEX' => '申请支持列表',
   'MANAGER_MATERIAL_DEFAULT' => '资料更新',
   'MANAGER_SCHOOL_ADD_SCHOOL' => '新增校区',
+  'MANAGER_SCHOOL_ADD_SCHOOL_POST' => '提交校区',
   'MANAGER_SCHOOL_DEFAULT' => '校区管理',
   'MANAGER_SCHOOL_INDEX' => '校区列表',
   'MANAGER_USER_ADD_IMG' => '更新头像',
