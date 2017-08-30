@@ -58,6 +58,7 @@ class SchoolController extends AdminbaseController
 
         $user = $this -> _get_user();
         $schools = M('users')->field('id,master_name,user_nicename,user_login')->order('id desc')->where(array( $user['role']=>$user['uid']))->select();
+
         $this->assign('schools', $schools);
         $this->display();
     }
@@ -66,7 +67,7 @@ class SchoolController extends AdminbaseController
     /**
      * Effect   : 添加校区视图
      * @assign  : role  当前用户角色
-     * @display :
+     * @display : defalut
      */
     public function add_school(){
         $user_model = A("Admin/User");
@@ -129,5 +130,83 @@ class SchoolController extends AdminbaseController
         }
     }
 
+    /**
+     * Effect   :  修改校区
+     * IS_GET   :  View
+     * @assign  : $data => 当前校区数据   $mng => 当前用户信息
+     * @display :  default
+     * IS_POST  ： Do
+     * @return  : json
+     */
+    public function save_school()
+    {
+        $mng = $this -> _get_user();
+        if(IS_GET){
+            $id  = I('get.id');
+            //获取当前校区数据
+            $db   = M('users');
+            $data = $db -> field('id,user_login,user_nicename,master_name,user_area,date_limit,pid_gj,pid_jg,pid_zx,pid_sc') -> where('id = '.$id)-> find();
+            $user_model = A("Admin/User");
+            if ($mng['role']!='pid_gj'){
+                //高级运营经理列表
+                $gj = $user_model->get_gjjl();
+                $this->assign('gjjls', $gj);
+            }
+            if ($mng['role']!='pid_jg'){
+                //学管经理列表
+                $jg = $user_model->get_jgjl();
+                $this->assign('jgjls', $jg);
+            }
+            if ($mng['role']!='pid_zx'){
+                //咨询经理列表
+                $zx = $user_model->get_zxjl();
+                $this->assign('zxjls', $zx);
+            }
+            if ($mng['role']!='pid_sc'){
+                //市场经理列表
+                $sc = $user_model->get_scjl();
+                $this->assign('scjls', $sc);
+            }
+
+            //渲染&&输出模板
+            $this -> assign('data',$data);
+            $this -> assign('user',$mng);
+
+            $this -> display();
+        }
+
+        if(IS_POST){
+            //填充数据
+            $data = I('post.');
+            $data['user_pass']='123456';
+            $data[$mng['role']] = $mng['uid'];
+            $user = D('Common/Users');
+
+            if ($user->where('id = '.$data['id'])->save($data)!==false) {
+                $msg = array('code'=>200,'info'=>'修改成功');
+            }else{
+                $info = $user -> getError();
+                $msg = array('code'=>400,'info'=>$info);
+            }
+
+            $this -> ajaxReturn($msg);
+        }
+
+    }
+
+    public function del_school()
+    {
+        $id  = I('get.id');
+        $user = D('Common/Users');
+
+        if ($user->delete($id)!==false) {
+            $msg = array('code'=>200,'info'=>'删除成功');
+        }else{
+            $info = $user -> getError();
+            $msg = array('code'=>400,'info'=>$info);
+        }
+
+        $this -> ajaxReturn($msg);
+    }
 
 }
