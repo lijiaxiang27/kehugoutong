@@ -73,10 +73,12 @@ class IndexController extends AdminbaseController {
                             ->find();
         //得到当前用户信息
         $now_user = $this->get_user_now();
+        $framework = $this->get_framework();
 
         $this->assign('now_user', $now_user);
         $this->assign('data', $data);
         $this->assign('type', $type);
+        $this->assign('framework', $framework);
         $this->display();
     }
     //改变支持申请的状态
@@ -138,6 +140,68 @@ class IndexController extends AdminbaseController {
         $uid=sp_get_current_admin_id();
         $data = M('users')->field('user_nicename,avatar')->where(array('id'=>$uid))->find();
         return $data;
+    }
+    /**
+     *9	管理资料
+     *8	咨询经理
+     *7	市场经理
+     *6	高级运营经理
+     *5	区域经理
+     *4	校长
+     *3	教管经理
+     *2	总部
+     *1	超级管理员
+     */
+//    得到大区经理，运营经理的架构
+    public function get_framework(){
+        $arr[] = [];
+        $data = M('users')->alias('a')->join('__ROLE_USER__ as b on a.id=b.user_id')->field('a.id,a.user_nicename as value,a.pid_gj,b.role_id')->select();
+        foreach ($data as $k=>$v){
+            if($v['role_id'] == 2) {
+                $root[] = $v;
+            }
+            if ($v['role_id'] == 5) {
+                $qy[] = $v;
+            }
+            if (in_array($v['role_id'],array(3,6,7,8))){
+                $jl[] = $v;
+            }
+            if ($v['role_id'] == 4) {
+                $xz[] = $v;
+            }
+        }
+        $arr = $qy;
+        foreach($qy as $m=>$n){
+            foreach ($jl as $mm=>$nn){
+                if ($nn['pid_gj'] == $n['id']){
+                    $arr[$m]['child'][] = $nn;
+                }
+            }
+        }
+        foreach ($arr as $k=>$v){
+            foreach ($v as $kk=>$vv){
+                if ($kk == "pid_gj"){
+                    unset($arr[$k][$kk]);
+                }
+                if ($kk == "role_id"){
+                    unset($arr[$k][$kk]);
+                }
+                if ($kk == "child"){
+                    foreach($vv as $kkk=>$vvv){
+                        foreach($vvv as $kkkk=>$vvvv){
+                            if ($kkkk == "pid_gj"){
+                                unset($arr[$k]['child'][$kkk][$kkkk]);
+                            }
+                            if ($kkkk == "role_id"){
+                                unset($arr[$k]['child'][$kkk][$kkkk]);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        return json_encode($arr);
     }
 }
 

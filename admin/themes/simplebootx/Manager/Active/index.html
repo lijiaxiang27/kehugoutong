@@ -39,7 +39,7 @@
                      <p class="newest-activity-title">{$vo.title}</p>
                      <p class="newest-activity-time">时间：<span>{$vo.starttime|strtotime=###|date="m月d日",###}—{$vo.endtime|strtotime=###|date="m月d日",###}</span></p>
                      <p class="newest-activity-address">地点：<span>{$vo.area}</span></p>
-                     <a href="{:leuu('active/act_manage',array('id'=>$vo['id']))}">管理活动</a>
+                     <a href="{:leuu('active/act_manage_detail',array('id'=>$vo['id']))}">管理活动</a>
                  </div>
              </div>
             </volist>

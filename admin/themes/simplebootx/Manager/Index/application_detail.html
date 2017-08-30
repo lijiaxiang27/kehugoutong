@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>入校支持申请详情</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/js/multi-picker-master/MultiPicker/MultiPicker.css">
     <include file="Manager:header" />
 
 
@@ -79,35 +80,27 @@
             <include file="Manager:footer" />
         </if>
         <img class="passed" src="__PUBLIC__/simpleboot/manager/images/pass.png" alt="">
+        <!--同意弹出容器-->
+        <div class="app_alert_page_box" id="alert_box">
+            <div class="app_alert_page">
+                <p>选派运营经理：</p>
+                <div class="send_managers_box" id="send_managers_box">
 
+                </div>
+                <p class="app_alert_add_btn" id="add_btn">添加+</p>
+                <p class="send_managers_btns">
+                    <!--<button class="send_managers_btn" id="add_manager_no">取消</button>-->
+                    <button class="send_managers_btn" id="add_manager_yes">确定</button>
+                </p>
+            </div>
+        </div>
 
+        <div id="targetContainer"></div>
     </div>
 </div>
+<script src="__PUBLIC__/simpleboot/manager/js/multi-picker-master/MultiPicker/MultiPicker.js"></script>
 <script>
-    window.onload=function(){
 
-        function hasClass(obj, cls) {
-            return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
-        }
-
-        function addClass(obj, cls) {
-            if (!this.hasClass(obj, cls)) obj.className += " " + cls;
-        }
-
-        function removeClass(obj, cls) {
-            if (hasClass(obj, cls)) {
-                var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-                obj.className = obj.className.replace(reg, ' ');
-            }
-        }
-
-        function toggleClass(obj,cls){
-            if(hasClass(obj,cls)){
-                removeClass(obj, cls);
-            }else{
-                addClass(obj, cls);
-            }
-        }
 
         var spans = document.getElementsByClassName('approval-result');
         var agree = document.getElementById('agree');
@@ -117,6 +110,7 @@
         var img = document.getElementById('status-img');
         var ani = document.querySelector('.passed');
         var footer = document.getElementById('footer');
+        var alert_box = $('#alert_box');
 
         if(span1.innerHTML == "已同意"){
             span1.style.color = "#F8B42C";
@@ -153,9 +147,10 @@
         agree.addEventListener('click',function () {
             var br = confirm("同意？");
             if(br){
-                $.ajax({
+                alert_box.fadeIn();
+                /*$.ajax({
                     type:'post',
-                    url : "{:leuu('index/apply_status')}",
+                    url : "{:leuu('index/apply_status1')}",
                     data :{
                         'id':"{$data['id']}",'type':"{$type}",'status':'2'
                     },
@@ -179,9 +174,7 @@
                         }
 
                     }
-                });
-
-
+                });*/
             }
         });
         refuse.addEventListener('click',function () {
@@ -189,7 +182,7 @@
             if(br){
                 $.ajax({
                     type:'post',
-                    url : "{:leuu('index/apply_status')}",
+                    url : "{:leuu('index/apply_status1')}",
                     data :{
                         'id':"{$data['id']}",'type':"{$type}",'status':'4'
                     },
@@ -216,8 +209,82 @@
                 });
 
             }
-        })
-    }
+        });
+
+        //8.25
+        var $data = {$framework};
+        var str = [];
+        var person_box = [];
+        var send_box = $('#send_managers_box');
+        var send_box_js = document.getElementById('send_managers_box');
+        new MultiPicker({
+            input: 'add_btn',
+            container: 'targetContainer',
+            jsonData: $data,
+            success:function(arr){
+                str.push(arr[1].value);
+                person_box.push(arr[1].value);
+                var s = str.join('>');
+                var p = $('<p class="manager_css">'+s+'<a href="#1" onclick="delete_this(this)" class="add_manager_box"><img src="__PUBLIC__/simpleboot/manager/images/close-fill.png" alt=""></a></p>');
+                send_box.append(p);
+                str = [];
+            }
+        });
+
+        var yes = $('#add_manager_yes');//点击派遣经理
+
+        yes.click(function () {
+            var box = [];
+            if(!send_box_js.innerText){
+                alert('请点击 "添加+" 按钮选择支持的经理！');
+                return false;
+            }
+            var persons = $('.manager_css');
+            $.each(persons,function (i,ele) {
+                console.log(ele.innerText);
+                box.push(ele.innerText);
+            });
+            box = box.join('、');
+            var br = confirm('您将委派: '+box);
+            if(br === true){
+                $.ajax({
+                    type:'post',
+                    url : "{:leuu('index/apply_status1')}",
+                    data :{
+                        'id':"{$data['id']}",'type':"{$type}",'status':'2'
+                    },
+                    dataType :'json',
+                    success : function(msg){
+                        if (msg.code == 200) {
+                            span1.innerHTML = '已同意';
+                            span1.style.color = "rgb(0,196,109)";
+                            span2.innerHTML = '已同意';
+                            span2.style.color = "rgb(0,196,109)";
+                            img.src="__PUBLIC__/simpleboot/manager/images/success.png";
+                            img.alt='已同意';
+                            if(ani){
+                                ani.src= "__PUBLIC__/simpleboot/manager/images/pass.png";
+                                ani.setAttribute('class','pass');
+                                ani.setAttribute('style','display:block');
+                                footer.setAttribute('style','display:none');
+                            }
+                        }else {
+                            alert('提交失败！');
+                        }
+
+                    }
+                });
+            }
+            else{
+                return false;
+            }
+        });
+        function delete_this(ele){
+            var element = ele;
+            element.parentNode.parentNode.removeChild(element.parentNode);//点击x移除this的父级。
+        }
+
+        //2.遍历防止重复添加#
 
 </script>
 </body>

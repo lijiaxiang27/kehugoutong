@@ -25,8 +25,9 @@ return array (
   'HEADMASTER_INDEX_CSSUPPORT' => '长沙支持中心',
   'HEADMASTER_INDEX_DEFAULT' => '支持',
   'HEADMASTER_INDEX_HELP' => '获得帮助',
-  'HEADMASTER_INDEX_INDEX' => '平台首页(校长)',
   'HEADMASTER_INDEX_SUPPORT' => '支持首页',
+  'HEADMASTER_PRODUCT_AOTUPAD' => 'aotupad',
+  'HEADMASTER_PRODUCT_DEFAULT' => '产品服务',
   'HEADMASTER_PUBLIC_SUCCESS' => '申请成功',
   'HEADMASTER_SERVICE_DEFAULT' => '运营服务',
   'HEADMASTER_SERVICE_DEFAULT1' => '入校支持模块',
@@ -50,4 +51,5 @@ return array (
   'HEADMASTER_USER_PINGJIA' => '申请评价',
   'HEADMASTER_USER_USERCENTER' => '校区个人中心',
   'HEADMASTER_USER_USER_APPLY' => '申请列表',
+  'HEADMASTER_INDEX_INDEX' => '平台首页(校长)',
 );

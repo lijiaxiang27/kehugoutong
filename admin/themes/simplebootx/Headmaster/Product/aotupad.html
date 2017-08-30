@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--campus_management-->
+    <title>校区管理</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
+    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+    <style>
+
+        body{
+            background: white;
+            font-family: "楷体";
+        }
+        .aotu_pad{
+            padding:0.5rem;
+        }
+        .aotu_pad h3{
+            font-size:0.45rem;
+            font-weight: 400;
+        }
+        .aotu_pad p{
+            padding:0 0.05rem;
+            text-indent: 0.48rem;
+            text-align:left;
+            margin-top: 0.2rem;
+            font-size: 0.26rem;
+            line-height: 0.4rem;
+        }
+        .aotu_padimg{
+            padding:0.5rem;
+        }
+        .aotu_padimg img{
+            max-width: 100%;
+            height:auto;
+        }
+        .pad_text_box{
+            background: #ddd;
+            padding:0.2rem;
+            border-radius: 2px;
+        }
+        .pad_text_box span{
+            font-size: 0.25rem;
+            line-height: 0.37rem;
+            color:white;
+        }
+        .buy_pad{
+            text-align: center;
+        }
+        .buy_pad p{
+            text-align: center;
+        }
+        .contact_manager{
+            background:#F05462;;
+            padding:0.15rem 0.4rem;
+            border-radius: 0.1rem;
+            color:white;
+            margin-top:0.2rem;
+            border:none;
+        }
+        .managers_page{
+            position:fixed;
+            background: rgb(230,230,230);
+            left:0;
+            bottom:-36%;
+            width:100%;
+            padding:0.36rem 0.5rem;
+
+        }
+        .managers_page a{
+
+            color:black;
+            display:block;
+            border-radius: 3px;
+            width:60%;
+            margin:0.2rem auto;
+            padding:0.12rem 0.2rem 0.12rem 0.3rem;
+            background:white;
+            text-align: left;
+            box-sizing: border-box;
+            font-size: 0.26rem;
+        }
+        .managers_page a:after{
+            content:'';
+            display: block;
+             visibility: hidden;
+            height:0;
+            clear: both;
+        }
+        .managers_page a img{
+            width:0.26rem;
+            vertical-align: baseline;
+            float:right;
+        }
+        .close_tel{
+            position:absolute;
+             width:0.5rem;
+            top:0;
+            right:0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content">
+    <div class="list-om">
+        <header class="aotu_pad">
+            <h3>全新的AotuPad学习平板</h3>
+            <p>全新的AotuPad学习平板，不只是硬件的升级。我们致力于通软件和服务，为你带来全新的移动学习体验。使用实时答疑功能，让数干优秀老师及北大、清华等重点学校学生帮你在线答疑解惑。</p>
+            <p style="margin-top: 0;">不仅如此，AotuPad还新增近十万节优质师资录播课程和北京教育出版社数百本正版教辅。</p>
+            <div class="aotu_padimg">
+                <img src="__PUBLIC__/simpleboot/headmaster/images/aotuPad.jpg" alt="">
+            </div>
+            <div class="pad_text_box">
+                <span>AotuPad内置了大量的学习工具，无论是使用的英汉词典，还是分学科的错题记录，还是随时可以进行问题在线答疑的拍照提问，都将极大地帮助你进行学习,提高你的学习效率。</span>
+            </div>
+            <div class="buy_pad">
+                <p>请联系您校区的运营经理进行购买。</p>
+            </div>
+            <button class="contact_manager" id="contact_manager">联系运营经理</button>
+        </header>
+        <div class="managers_page" id="manager_page">
+              <notempty name="gj_rolename"><a href="tel:{$gjjl.user_login}">{$gj_rolename}：{$gjjl.user_nicename}<img src="__PUBLIC__/simpleboot/headmaster/images/telephone.png" alt=""></a></notempty>
+              <notempty name="jg_rolename"><a href="tel:{$jgjl.user_login}">{$jg_rolename}：{$jgjl.user_nicename}<img src="__PUBLIC__/simpleboot/headmaster/images/telephone.png" alt=""></a></notempty>
+              <notempty name="zx_rolename"><a href="tel:{$zxjl.user_login}">{$zx_rolename}：{$zxjl.user_nicename}<img src="__PUBLIC__/simpleboot/headmaster/images/telephone.png" alt=""></a></notempty>
+              <notempty name="sc_rolename"><a href="tel:{$scjl.user_login}">{$sc_rolename}：{$scjl.user_nicename}<img src="__PUBLIC__/simpleboot/headmaster/images/telephone.png" alt=""></a></notempty>
+              <img class="close_tel" src="__PUBLIC__/simpleboot/headmaster/images/close-fill.png" alt="">
+        </div>
+    </div>
+</div>
+<script>
+    var btn = $('#contact_manager');
+    var page = $('#manager_page');
+    btn.click(function () {
+        page.animate({bottom:"0"},600);
+    });
+    $('.close_tel').click(function(){
+        page.animate({bottom:"-36%"},600);
+    })
+</script>
+</body>
+</html>

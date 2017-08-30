@@ -132,4 +132,11 @@ class ActiveController extends AdminbaseController
         $this->assign('lists', $lists);
         $this->display();
     }
+    //活动修改页面
+    public function act_manage_edit(){
+        $id = I('get.id');
+        $act_model = M('act')->where(array('id'=>$id))->find();
+        $this->assign('act', $act_model);
+        $this->display();
+    }
 }

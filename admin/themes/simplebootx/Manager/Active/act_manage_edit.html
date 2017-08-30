@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑活动</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <include file="Manager:header" />
+    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/DateSelector.css">
+    <script src="__PUBLIC__/simpleboot/manager/js/Eleditor.min.js"></script>
+    <!--  &lt;!&ndash; 如果需要图片上传 &ndash;&gt;
+      <script src="js/webuploader.min.js"></script>
+      <link rel="stylesheet" href="js/layout/base.css">-->
+
+
+    <!--plan_C-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <link href="__PUBLIC__/simpleboot/manager/css/summernote.css" rel="stylesheet">
+    <script src="__PUBLIC__/simpleboot/manager/js/summernote.js"></script>
+    <script src="__PUBLIC__/simpleboot/manager/js/lang/summernote-zh-CN.js"></script>
+    <style>
+        .list-om{  background:rgb(247,247,247);  overflow: hidden;  }
+        .add-activity-box {
+            overflow: hidden;
+            padding:0.3rem;
+            text-align:left;
+            border-bottom: 1px solid rgb(230,230,230);
+            border-top: 1px solid rgb(230,230,230);
+            margin-top:0.2rem;
+            background:white;
+        }
+        .add-activity-box p{  font-size:0.28rem;  margin:0; }
+        .add-activity-box input{  margin-left:0.4rem;  }
+        .add-activity-theme{  margin-top:0;  }
+        .theme-img-box p label{
+            float: right;
+            height:0.5rem;
+            display:inline-block;
+            margin-top:-3px;
+        }
+        .theme-img-box p label img{  height:100%;  }
+        .add-activity-theme input{  font-size:0.26rem;  }
+        .theme-img-box > p span:nth-child(1) {
+            font-size:0.26rem;
+            margin-left:0.4rem;
+            color:#666;
+        }
+        .set-time{
+            font-size:0.26rem;
+            margin-left:0.4rem;
+            color:#666;
+            width:60%;
+            display:inline-block;
+        }
+        .add-activity-box ul li{
+            border-bottom:1px solid #ddd;
+        }
+        .add-activity-box ul li p {
+            padding-top:0.2rem;
+            padding-bottom:0.2rem;
+        }
+        .add-activity-box ul li p input{
+            font-size:0.26rem;
+        }
+        .add-activity-box ul li:nth-child(1) p{
+            padding-top:0;
+        }
+        .add-activity-box ul li:nth-child(3) p{
+            padding-bottom:0;
+        }
+        .add-activity-box ul li:nth-child(3) {
+            border-bottom:none;
+        }
+        .editor_box{
+            padding:0;
+        }
+        .ql-container {
+            font-size: 0.3rem;
+            height: 4rem;
+        }
+        .ql-toolbar.ql-snow .ql-formats {
+            margin-right: 1px;
+        }
+        .to-activity-detail:after{  content:'';  height:0;  display:block;  clear: both;  visibility: hidden;  }
+        .to-activity-detail a{  display:inline-block;float:right;color:black;}
+
+        .to-activity-detail>a>.input_count{
+            -webkit-appearance: none;
+            width:1.3rem;
+            height:0.5rem;
+            border:1px solid #ddd;
+            border-radius:0.05rem;
+            -webkit-border-radius: 0.05rem;
+            vertical-align: middle;
+            margin-right:0.1rem;
+            text-align:center;
+            font-size:0.3rem;
+        }
+
+        .to-activity-detail a img{  width:0.36rem;  }
+        .add-activity-footer{  padding:0.3rem;  }
+        .add-activity-footer ul:after{  content:'';  height:0;  display:block;  clear: both;  visibility: hidden;  }
+        .add-activity-footer ul li{  float:left;  width:50%;  }
+        .add-activity-footer a{
+            width:84%;
+            display:block;
+            text-align: center;
+            border-radius:0.1rem;
+            margin: 0 auto;
+            padding:0.24rem 0;
+            font-size:0.3rem;
+            color:white;
+            margin-top:0.3rem;
+        }
+        .activity-preview{  background:gray;  }  .activity-release{  background:rgb(23,176,90);
+                                                 }
+        /*改变上传图片的默认样式*/
+        .control-group{
+            display:inline-block;
+            width:100%;
+            position:relative;
+        }
+        .btn-upload{
+            position:absolute;
+            width:0.6rem;
+            height:0.6rem;
+            top:-0.72rem;
+            right:0;
+        }
+        .btn-upload a{
+            display:inline-block;
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            right:0;
+        }
+        .btn-upload  img{
+            width:100%;
+            height:100%;
+        }
+        .btn-upload input{
+            width:100%;
+            height:100%;
+            margin-left:0;
+            top:0;
+            left:0;
+            opacity:0;
+        }
+        .theme-img-box:after{
+            content:'';
+            height:0;
+            display:block;
+            clear: both;
+            visibility: hidden;
+        }
+        .theme-img-box{
+            padding-bottom:0;
+        }
+        .js_showBox{
+            margin-top:0.32rem;
+            display:none;
+        }
+        /*修改日期默认样式*/
+        .date-selector-btn-box{
+            background:rgb(23,176,90);
+        }
+        .date-selector-btn-box .date-selector-btn{
+            font-size:0.28rem;
+        }
+        .act_address{
+            width:5rem;
+        }
+
+        .money_box label{
+            display:inline-block;
+            width:1.5rem;
+            text-align: center;
+        }
+        .money_standard input{
+            width:1.3rem;
+            margin-right:0.1rem;
+            margin-left:0.7rem;
+            -webkit-appearance: none;
+            height:0.5rem;
+            border:1px solid #ddd;
+            border-radius:0.05rem;
+            -webkit-border-radius: 0.05rem;
+            vertical-align: middle;
+            text-align:center;
+            font-size:0.3rem;
+        }
+        .money_url input{
+            width:4rem;
+            margin-left:0.7rem;
+            -webkit-appearance: none;
+            height:0.5rem;
+            border:1px solid #ddd;
+            border-radius:0.05rem;
+            -webkit-border-radius: 0.05rem;
+            vertical-align: middle;
+            text-align:center;
+            font-size:0.3rem;
+        }
+        .money_url input::placeholder{
+            text-align:center;
+            font-size:0.24rem;
+            color:#bbb;
+        }
+        .money_standard,.money_url {
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content">
+    <div class="list-om">
+        <div class="add-activity-box add-activity-theme">
+            <p>活动主题<input type="text" name="title" value="{$act.title}" placeholder="请输入活动的主题" onfocus="this.placeholder='' " onblur="this.placeholder='请输入活动的主题'"></p>
+        </div>
+        <div class="add-activity-box theme-img-box" >
+            <p>主题图片<span>750×400像素，jpg或png格式</span></p>
+            <div class="control-group js_uploadBox">
+                <div class="btn-upload">
+                    <a href="javascript:void(0);">
+                        <img src="__PUBLIC__/simpleboot/manager/images/image.png" alt="">
+                    </a>
+                    <input class="js_upFile" type="file" name="cover">
+                </div>
+                <!--预览容器-->
+                <div class="js_showBox">
+                    <img class="js_logoBox" name="image" src="{$act.image}" width="100px" >
+                </div>
+            </div>
+        </div>
+        <div class="add-activity-box">
+            <p>主办方 <input type="text" name="sponsor" value="{$act.sponsor}" placeholder="请输入举办方" onfocus="this.placeholder='' " onblur="this.placeholder='请输入举办方'"></p>
+        </div>
+        <div class="add-activity-box">
+            <ul>
+                <li><p>开始时间<span class="set-time set-activity-start-time" name="starttime" id="start-time">{$act.starttime}</span></p></li>
+                <li><p>结束时间<span class="set-time set-activity-end-time" name="endtime" id="end-time">{$act.endtime}</span></p></li>
+                <li><p>活动地点<input class="act_address" name="area" value="area" type="text" placeholder="请输入准确的活动举办地点" onfocus="this.placeholder='' " onblur="this.placeholder='请输入准确的活动举办地点'" ></p></li>
+            </ul>
+        </div>
+        <div class="add-activity-box editor_box">
+            <!--富文本编辑器c-->
+            <div id="summernote">{$act.content|htmlspecialchars_decode=###}</div>
+        </div>
+        <div class="add-activity-box">
+            <p class="to-activity-detail">人数限制<a href="javascript:void(0);"><input class="input_count" name="num" value="{$act.num}" placeholder="默认0不限制" type="number">人</a></p>
+        </div>
+        <div class="add-activity-box">
+            <p class="to-activity-detail">报名信息<a href=""><img src="__PUBLIC__/simpleboot/manager/images/arrow.png" alt="报名信息"></a></p>
+        </div>
+        <div class="add-activity-box money_box">
+            <p>
+                <span>活动收费</span>
+                <label><input type="radio" name="money" value="yes" <if condition="$act['price'] neq 0 ">checked</if>>是</label>
+                <label><input type="radio" name="money" value="no" <if condition="$act['price'] eq 0 ">checked</if>>否</label>
+            </p>
+        </div>
+        <div class="add-activity-box money_standard" id="money_standard">
+            <p>收费标准 <input name="price" value="{$act.price}" type="text">元/人</p>
+        </div>
+        <div class="add-activity-box money_url" id="money_url">
+            <p>收费链接 <input type="text" name="price_url" value="{$act.price_url}" placeholder="http://..." onfocus="this.placeholder='' " onblur="this.placeholder='http://...'"></p>
+        </div>
+        <div class="add-activity-footer">
+            <ul><!--预览按钮，跳转到activity-details-preview页面-->
+                <li><a class="activity-preview" href="javascript:void(0);" onclick="BtnPost(0)">保存</a></li>
+                <li><a class="activity-release" id="activity-release" href="javascript:void(0);" onclick="BtnPost(1)">发布</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="startContainer"></div>
+<div id="endContainer"></div>
+<script src="__PUBLIC__/simpleboot/manager/js/DateSelector.js"></script>
+<script src="__PUBLIC__/simpleboot/manager/js/uploadView.js"></script>
+
+<script>
+    $(".js_upFile").uploadView({
+        uploadBox: '.js_uploadBox',//设置上传框容器
+        showBox : '.js_showBox',//设置显示预览图片的容器
+        width : '100%', //预览图片的宽度，单位px
+        // height : (0.7 * this.width), //预览图片的高度，单位px
+        allowType: ["gif", "jpeg", "jpg", "bmp", "png"], //允许上传图片的类型
+        maxSize :1, //允许上传图片的最大尺寸，单位M
+        success:function(e){
+            alert('图片上传成功');
+            $('.js_showBox').show();
+            $('.btn-upload').css('top','-0.46rem');
+        }
+    });
+</script>
+<!--开始时间和结束时间-->
+<script>
+
+
+    new DateSelector({
+        input:'start-time',
+        container:'startContainer',
+        type:0,
+        param:[1, 1, 1, 0, 0],
+        beginTime:[],
+        endTime:[],
+        recentTime:[],
+        success:function(arr){
+            var data = arr[0]+'-'+arr[1]+'-'+arr[2];
+            $('#start-time').html(data);
+        }
+    });
+    new DateSelector({
+        input:'end-time',
+        container:'endContainer',
+        type:0,
+        param:[1, 1, 1, 0, 0],
+        beginTime:[],
+        endTime:[],
+        recentTime:[],
+        success:function(arr){
+            var data = arr[0]+'-'+arr[1]+'-'+arr[2];
+            $('#end-time').html(data);
+        }
+    });
+
+    //收费开关
+
+    var radios = $('input[name="money"]');
+    var standard = $('#money_standard');
+    var url = $('#money_url');
+    $.each(radios,function (i) {
+        (function (j) {
+            radios.eq(j).click(function () {
+                if ($(this).val() === 'yes') {
+                    standard.fadeIn(200);
+                    url.fadeIn(200);
+                }
+                else {
+                    standard.fadeOut(200);
+                    url.fadeOut(200);
+                }
+            })
+        })(i);
+    });
+    var yes = document.querySelector('input[value="yes"]');
+    console.log(yes);
+    if(yes.checked){
+        standard.fadeIn(200);
+        url.fadeIn(200);
+    }
+    /*plan_C*/
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            // height:'3rem',
+            lang: 'zh-CN',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['picture',['picture']],
+                ['fullscreen',['fullscreen']]
+            ],
+
+        });
+        var fabuBtn = $('#activity-release');
+
+    })
+    function BtnPost(status) {
+        var content = $('#summernote').summernote('code');
+        var title = $("input[name=title]").val();
+        var image = $(".js_showBox img").eq(0).attr('src');
+        var sponsor = $("input[name=sponsor]").val();
+        var starttime = $("#start-time").html();
+        var endtime = $("#end-time").html();
+        var area = $("input[name=area]").val();
+        var num = $("input[name=num]").val();
+        var price = $("input[name=price]").val();
+        var price_url = $("input[name=price_url]").val();
+        if (content == ''){
+            alert('内容不能为空');
+            return false;
+        }
+        if (title == ''){
+            alert('主题不能为空');
+            return false;
+        }
+        if (image == ''){
+            alert('请上传主题图片');
+            return false;
+        }
+        if (sponsor == ''){
+            alert('请输入主办方');
+            return false;
+        }
+        if (starttime == ''){
+            alert('请输入开始时间');
+            return false;;
+        }
+        if (endtime == ''){
+            alert('请输入结束时间');
+            return false;
+        }
+        if (area == ''){
+            alert('请输入活动地点');
+            return false;
+        }
+        $.ajax({
+            url: "{:U('Manager/Active/act_add_post')}" +"&status=" + status,
+            type: 'post',
+            dataType:'json',
+            data: {"content":content,"title":title,"image":image,"sponsor":sponsor,"starttime":starttime,"endtime":endtime,"area":area,"num":num,"price":price,"price_url":price_url},
+            success: function(data) {
+                if(data.code == 200){
+                    alert(data.info);
+                    location.href = "{:U('Manager/Active/index')}";
+                } else {
+                    alert(data.info);
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
