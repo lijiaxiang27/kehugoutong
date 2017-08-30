@@ -1,13 +1,18 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <!--add_campus-->
     <title>新增校区</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <include file="Manager:header" />
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/campus.css">
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/DateSelector.css">
+    <script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+<script src="/public/simpleboot/headmaster/js/clipboard.min.js"></script>
+<script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/manager.css">
+<link rel="stylesheet" href="/public/simpleboot/manager/css/manager-v2.0.css">
+    <link rel="stylesheet" href="/public/simpleboot/manager/css/campus.css">
+    <link rel="stylesheet" href="/public/simpleboot/manager/css/DateSelector.css">
 </head>
 
 <script>
@@ -36,56 +41,40 @@
              <span class="add-span">登录账号</span><input id="campus_account" type="text" placeholder="请填写投资人常用手机号">
          </div>
 
-         <if condition="$role neq 'pid_gj'">
-         <div class="area-div"></div>
+         <?php if($role != 'pid_gj'): ?><div class="area-div"></div>
          <div class="add-new-campus">
              <span class="add-span">高级经理</span>
              <select name="pid_gj" id="add_campus_select_1" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="gjjls" id="vo">
-                    <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($gjjls)): $i = 0; $__LIST__ = $gjjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
-         </div>
-         </if>
+         </div><?php endif; ?>
 
-         <if condition="$role neq 'pid_jg'">
-         <div class="area-div"></div>
+         <?php if($role != 'pid_jg'): ?><div class="area-div"></div>
          <div class="add-new-campus">
              <span class="add-span">教管经理</span>
              <select name="pid_jg" id="add_campus_select_2" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="jgjls" id="vo">
-                     <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($jgjls)): $i = 0; $__LIST__ = $jgjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
-         </div>
-         </if>
+         </div><?php endif; ?>
          
-         <if condition="$role neq 'pid_zx'">
-         <div class="area-div"></div>
+         <?php if($role != 'pid_zx'): ?><div class="area-div"></div>
          <div class="add-new-campus">
              <span class="add-span">咨询经理</span>
              <select name="pid_zx" id="add_campus_select_3" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="zxjls" id="vo">
-                     <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($zxjls)): $i = 0; $__LIST__ = $zxjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
-         </div>
-         </if>
-         <if condition="$role neq 'pid_sz'">
-         <div class="area-div"></div>
+         </div><?php endif; ?>
+         <?php if($role != 'pid_sz'): ?><div class="area-div"></div>
          <div class="add-new-campus">
              <span class="add-span">市场经理</span>
              <select name="pid_sc" id="add_campus_select_4" class="add-new-campus-select">
                  <option value="0">--请选择--</option>
-                 <volist name="scjls" id="vo">
-                     <option value="{$vo.user_id}">{$vo.user_nicename}</option>
-                 </volist>
+                 <?php if(is_array($scjls)): $i = 0; $__LIST__ = $scjls;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["user_id"]); ?>"><?php echo ($vo["user_nicename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
              </select>
-         </div>
-         </if>
+         </div><?php endif; ?>
          <div class="area-div"></div>
          <button class="add_campus" id="add_campus_btn">添加校区</button>
      </div>
@@ -93,7 +82,7 @@
 
 <div id="allow_time_box"></div>
 
-<script src="__PUBLIC__/simpleboot/manager/js/DateSelector.js"></script>
+<script src="/public/simpleboot/manager/js/DateSelector.js"></script>
 <script>
 
     new DateSelector({
@@ -150,14 +139,14 @@
 
 //        console.log('名字：'+name+',\n校长名字：'+master_name+',\n地址：'+address+',\n授权时间： '+time+',\n登录账号：'+tel);
         $.ajax({
-            url:"{:U('School/add_school_post')}",
+            url:"<?php echo U('School/add_school_post');?>",
             type:'post',
             dataType:'json',
             data:{'user_nicename':name,'master_name':master_name,'user_area':address,'date_limit':time,'user_login':tel,'pid_gj':manager_1,'pid_jg':manager_2,'pid_zx':manager_3,'pid_sc':manager_4},
             success:function(msg){
                 if(msg.code==200){
                     alert(msg.info);
-                    window.location.href="{:U('School/index')}";
+                    window.location.href="<?php echo U('School/index');?>";
                 }else{
                     alert(msg.info);
                 }

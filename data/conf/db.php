@@ -5,7 +5,7 @@
 return array(
     'DB_TYPE' => 'mysql',
     'DB_HOST' => 'localhost',
-    'DB_NAME' => 'kehuonline',
+    'DB_NAME' => 'kehugoutong',
     'DB_USER' => 'root',
     'DB_PWD' => 'root',
     'DB_PORT' => '3306',

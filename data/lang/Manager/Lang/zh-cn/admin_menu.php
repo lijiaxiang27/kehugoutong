@@ -24,6 +24,7 @@ return array (
   'MANAGER_MATERIAL_EDIT_MATERIAL_POST' => '资料编辑提交',
   'MANAGER_MATERIAL_INDEX' => '资料更新首页',
   'MANAGER_SCHOOL_ADD_SCHOOL' => '新增校区',
+  'MANAGER_SCHOOL_ADD_SCHOOL_POST' => '提交校区',
   'MANAGER_SCHOOL_DEFAULT' => '校区管理',
   'MANAGER_SCHOOL_INDEX' => '校区列表',
   'MANAGER_USER_DEFAULT' => '个人中心',
