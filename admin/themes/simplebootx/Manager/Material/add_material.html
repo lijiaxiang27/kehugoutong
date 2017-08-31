@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--add_campus-->
+    <title>上传资料</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <include file="Manager:header" />
+    <style>
+         /*8.30上传资料*/
+
+        .upload_container{
+            padding:0.3rem;
+            text-align: left;
+        }
+        .upload_data_header{
+             border-bottom: 1px solid rgb(200,200,200);
+             padding:0.2rem 0;
+        }
+        .upload_dada_form > p{
+            font-size: 0.32rem;
+            margin-top:0.4rem;
+        }
+         .upload_dada_form > p > span{
+             font-weight: bold;
+             display:inline-block;
+             width:1.6rem;
+         }
+         .upload_dada_form > p > input{
+             -webkit-appearance: none;
+         }
+         .upload_dada_form > p > input,.upload_dada_form > p > select{
+             text-indent: 0.36rem;
+             width:5rem;
+             border:1px solid rgb(200,200,200);
+             font-size:0.36rem;
+             height:0.6rem;
+         }
+         .upload_btn_box{
+             text-align: center;
+             margin-top:2rem;
+         }
+        .upload_btn{
+            display:inline-block;
+            width:2.6rem;
+            border-radius: 0.1rem;
+            margin:0 0.2rem;
+            padding: 0.2rem 0;
+            font-size: 0.3rem;
+            color: white;
+            background: rgb(23,176,90);
+        }
+    </style>
+
+</head>
+<body>
+<script>
+    document.body.style.height=document.documentElement.clientHeight+"px";
+</script>
+<div class="list-content" style="">
+    <div class="list-om" style="">
+         <div class="upload_container">
+             <h3 class="upload_data_header">上传资料</h3>
+             <div class="upload_dada_form">
+                 <p>
+                     <span>资料类型</span>
+                     <select name="" id="data_type">
+                         <option value="">请选择</option>
+                         <option value="1">运营资料</option>
+                         <option value="2">市场方案</option>
+                         <option value="3">培训资料</option>
+                         <option value="4">其他资料</option>
+                     </select>
+                 </p>
+                 <p>
+                     <span>资料标题</span>
+                     <input id="data_title" type="text" placeholder="请输入资料标题..." onfocus="this.placeholder='' " onblur="this.placeholder='请输入资料标题...'">
+                 </p>
+                 <p>
+                     <span>资料地址</span>
+                     <input id="data_url" type="text" placeholder="请输入资料的地址链接..." onfocus="this.placeholder='' " onblur="this.placeholder='请输入资料的地址链接...'">
+                 </p>
+                 <p>
+                     <span>加密密码</span>
+                     <input id="data_password" type="text" placeholder="请输入加密密码..." onfocus="this.placeholder='' " onblur="this.placeholder='请输入加密密码...'">
+                 </p>
+                 <p>
+                     <span>文件类型</span>
+                     <select name="" id="file_type">
+                         <option value="">请选择</option>
+                         <volist name="file_type" id="vo">
+                         <option value="{$vo.id}">{$vo.document}</option>
+                         </volist>
+                     </select>
+                 </p>
+             </div>
+             <div class="upload_btn_box">
+                 <a class="upload_btn" href="#1" id="data_save_btn">保存</a>
+                 <a class="upload_btn" href="data_management.html">返回</a>
+             </div>
+         </div>
+    </div>
+</div>
+<script>
+
+
+      $('#data_save_btn').click(function () {
+           var data_type = $('#data_type').val(),//资料类型
+               data_title = $('#data_title').val(),//资料标题
+               data_url = $('#data_url').val(),//资料链接
+               data_password = $('#data_password').val(),//加密密码
+               file_type = $('#file_type').val();//文件类型
+
+           if(data_type  === ''){alert('请选择资料类型');return false;}
+           if(file_type  === ''){alert('请选择文件类型');return false;}
+           if(data_title === ''){alert('请输入资料标题');return false;}
+           if(data_url === ''){alert('请输入资料链接');return false;}
+           if(data_password === ''){alert('请输入加密密码');return false;}
+
+          $.ajax({
+              url:"{:U('Material/add_material_post')}",
+              type:'post',
+              data:{'title':data_title,'content':data_url,'pwd':data_password,'typeid':data_type,'doctype':file_type},
+              dataType:'',
+              success:function(msg){
+                  if (msg.code==200){
+                      alert(msg.info);
+                      window.location.href="{:U('Material/index')}";
+                  }else{
+                      alert(msg.code,msg.info);
+                  }
+              }
+
+          })
+       })
+</script>
+</body>
+</html>

@@ -133,85 +133,102 @@
     <div class="list-om" style="">
         <div class="data_box">
             <h3>资料列表</h3>
+
             <div class="data_lists">
                 <h4 class="data_header clear">
                     <span class="data_text">运营资料</span>
                     <a href="" class="find_more">查看更多></a>
                 </h4>
                 <div class="data_list_box">
+                    <volist name="yy_data" id="v">
                     <div class="data_list clear">
-                        <img class="data_left" src="__PUBLIC__/simpleboot/manager/images/people.jpg" alt="">
                         <div class="data_right">
                             <p>
-                                <span class="data_title">招生策划</span>
-                                <span class="download_count">下载次数: 135</span></p>
+                                <span class="data_title">{$v.title}</span>
                             <p class="clear">
-                                <span class="data_time">2017-05-30</span>
-                                <span class="data_time">15:27:10</span>
+                                <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
                                 <a class="data_btn" href="">下载</a>
-                                <a class="data_btn" href="">编辑</a>
-                                <a class="data_btn delete_data" href="#1">删除</a>
+                                <a class="data_btn" href="{:leuu('Material/edit_material',array('id'=>$v['id']))}">编辑</a>
+                                <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
                             </p>
                         </div>
                     </div>
-                    <div class="data_list clear">
-                        <img class="data_left" src="__PUBLIC__/simpleboot/manager/images/people.jpg" alt="">
-                        <div class="data_right">
-                            <p>
-                                <span class="data_title">员工培训</span>
-                                <span class="download_count">下载次数: 255</span></p>
-                            <p class="clear">
-                                <span class="data_time">2017-05-30</span>
-                                <span class="data_time">15:27:10</span>
-                                <a class="data_btn" href="https://nodejs.org/dist/v6.11.2/node-v6.11.2-x64.msi">下载</a>
-                                <a class="data_btn" href="">编辑</a>
-                                <a class="data_btn delete_data" href="#1">删除</a>
-                            </p>
-                        </div>
-                    </div>
+            </volist>
                 </div>
             </div>
+
             <div class="data_lists">
                 <h4 class="data_header clear">
                     <span class="data_text">市场方案</span>
                     <a href="" class="find_more">查看更多></a>
                 </h4>
                 <div class="data_list_box">
-                    <div class="data_list clear">
-                        <img class="data_left" src="__PUBLIC__/simpleboot/manager/images/people.jpg" alt="">
-                        <div class="data_right">
-                            <p>
-                                <span class="data_title">招生策划</span>
-                                <span class="download_count">下载次数: 198</span></p>
-                            <p class="clear">
-                                <span class="data_time">2017-05-30</span>
-                                <span class="data_time">15:27:10</span>
-                                <a class="data_btn" href="">下载</a>
-                                <a class="data_btn" href="">编辑</a>
-                                <a class="data_btn delete_data" href="#1">删除</a>
-                            </p>
+                    <volist name="sc_data" id="v">
+                        <div class="data_list clear">
+                            <div class="data_right">
+                                <p>
+                                    <span class="data_title">{$v.title}</span>
+                                <p class="clear">
+                                    <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
+                                    <a class="data_btn" href="">下载</a>
+                                    <a class="data_btn" href="">编辑</a>
+                                    <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="data_list clear">
-                        <img class="data_left" src="__PUBLIC__/simpleboot/manager/images/people.jpg" alt="">
-                        <div class="data_right">
-                            <p>
-                                <span class="data_title">员工培训</span>
-                                <span class="download_count">下载次数: 166</span></p>
-                            <p class="clear">
-                                <span class="data_time">2017-05-30</span>
-                                <span class="data_time">15:27:10</span>
-                                <a class="data_btn" href="https://nodejs.org/dist/v6.11.2/node-v6.11.2-x64.msi">下载</a>
-                                <a class="data_btn" href="">编辑</a>
-                                <a class="data_btn delete_data" href="#1">删除</a>
-                            </p>
-                        </div>
-                    </div>
+                    </volist>
                 </div>
             </div>
+
+            <div class="data_lists">
+                <h4 class="data_header clear">
+                    <span class="data_text">培训资料</span>
+                    <a href="" class="find_more">查看更多></a>
+                </h4>
+                <div class="data_list_box">
+                    <volist name="px_data" id="v">
+                        <div class="data_list clear">
+                            <div class="data_right">
+                                <p>
+                                    <span class="data_title">{$v.title}</span>
+                                <p class="clear">
+                                    <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
+                                    <a class="data_btn" href="">下载</a>
+                                    <a class="data_btn" href="">编辑</a>
+                                    <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                </p>
+                            </div>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+
+            <div class="data_lists">
+                <h4 class="data_header clear">
+                    <span class="data_text">其他资料</span>
+                    <a href="" class="find_more">查看更多></a>
+                </h4>
+                <div class="data_list_box">
+                    <volist name="qt_data" id="v">
+                        <div class="data_list clear">
+                            <div class="data_right">
+                                <p>
+                                    <span class="data_title">{$v.title}</span>
+                                <p class="clear">
+                                    <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
+                                    <a class="data_btn" href="">下载</a>
+                                    <a class="data_btn" href="">编辑</a>
+                                    <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                </p>
+                            </div>
+                        </div>
+                    </volist>
+                </div>
+            </div>
+
         </div>
         <div class="upload_container block" id="block">
-            <a class="upload_data_btn" href="upload_data.html">
+            <a class="upload_data_btn" href="{:leuu('Material/add_material')}">
                 <img src="__PUBLIC__/simpleboot/manager/images/upload_cloud.svg" alt=""><br>
                 上传资料
             </a>
@@ -260,7 +277,24 @@
             delete_btn.eq(j).click(function(){
                 var br = confirm("确认删除此选项？");
                 if(br){
-                    $(this).parent().parent().parent().remove();
+                    var obj = $(this);
+                    var id  = obj.attr('god');
+
+                    $.ajax({
+                        url:"{:U('Material/delete_material')}",
+                        type:'get',
+                        data:{'id':id},
+                        dataType:'',
+                        success:function(msg){
+                            if (msg.code==200){
+                                alert(msg.info);
+                                obj.parent().parent().parent().remove();
+                            }else{
+                                alert(msg.info);
+                            }
+                        }
+                    })
+
                 }
             })
         })(i);
