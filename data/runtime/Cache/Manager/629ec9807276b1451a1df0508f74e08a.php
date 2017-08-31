@@ -1,10 +1,15 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>投诉与建议</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <include file="Manager:header" />
+    <script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+<script src="/public/simpleboot/headmaster/js/clipboard.min.js"></script>
+<script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/manager.css">
+<link rel="stylesheet" href="/public/simpleboot/manager/css/manager-v2.0.css">
     <style>
         .c_and_s_box ul .c_and_s{
             padding:0.5rem;
@@ -105,15 +110,15 @@
         <div class="c_and_s_box">
             <ul>
                 <li class="c_and_s activity-management-list-left">
-                    <a href="{:leuu('Manager/Complain/index',array('status'=>1))}">
-                        <img src="__PUBLIC__/simpleboot/manager/images/wait_application.png" alt="">
+                    <a href="<?php echo leuu('Manager/Complain/index',array('status'=>1));?>">
+                        <img src="/public/simpleboot/manager/images/wait_application.png" alt="">
                         <p>待处理</p>
-                        <if condition="$num eq 0 "> <elseif condition="$num gt 0"/><span>{$num}</span></if>
+                        <?php if($num == 0 ): elseif($num > 0): ?><span><?php echo ($num); ?></span><?php endif; ?>
                     </a>
                 </li>
                 <li class="c_and_s">
-                    <a href="{:leuu('Manager/Complain/index',array('status'=>2))}">
-                        <img src="__PUBLIC__/simpleboot/manager/images/success.png" alt="">
+                    <a href="<?php echo leuu('Manager/Complain/index',array('status'=>2));?>">
+                        <img src="/public/simpleboot/manager/images/success.png" alt="">
                         <p>已完成</p>
                     </a>
                 </li>
@@ -121,42 +126,36 @@
         </div>
         <div class="area-div"></div>
         <div class="c_and_s_lists">
-            <volist name="arr" id="vo">
-            <div class="c_and_s_list" onclick="location='{:leuu('Manager/Complain/detail',array('id'=>$vo['id']))}'">
+            <?php if(is_array($arr)): $i = 0; $__LIST__ = $arr;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="c_and_s_list" onclick="location='<?php echo leuu('Manager/Complain/detail',array('id'=>$vo['id']));?>'">
                <?php $length = count($vo);if($length>8)$type='投诉';else $type='建议'; ?>
                <h3>
-                   <if condition="$length gt 8">
-                       <img class="c_and_s_img" src="__PUBLIC__/simpleboot/manager/images/su.png" alt="">{$vo.userid|sp_get_school_name}{$type}
-                       <else/>
-                       <img class="c_and_s_img" src="__PUBLIC__/simpleboot/manager/images/su.png" alt="">{$vo.userid|sp_get_school_name}{$type}
-                   </if>
+                   <?php if($length > 8): ?><img class="c_and_s_img" src="/public/simpleboot/manager/images/su.png" alt=""><?php echo (sp_get_school_name($vo["userid"])); echo ($type); ?>
+                       <?php else: ?>
+                       <img class="c_and_s_img" src="/public/simpleboot/manager/images/su.png" alt=""><?php echo (sp_get_school_name($vo["userid"])); echo ($type); endif; ?>
                </h3>
                <p>
-                   <span class="c_and_s_time">{$type}时间:</span>
-                   <span>{$time|date="Y-m-d H:i:s",###}</span>
+                   <span class="c_and_s_time"><?php echo ($type); ?>时间:</span>
+                   <span><?php echo (date("Y-m-d H:i:s",$time)); ?></span>
                </p>
                <p>
-                   <span>{$type}人:</span>
-                   <span>{$vo.userid|sp_get_master_name}</span>
+                   <span><?php echo ($type); ?>人:</span>
+                   <span><?php echo (sp_get_master_name($vo["userid"])); ?></span>
                </p>
                <p>
-                   <span>{$type}内容:</span>
-                   <span>{$vo.content}{$vo.descript}</span>
+                   <span><?php echo ($type); ?>内容:</span>
+                   <span><?php echo ($vo["content"]); echo ($vo["descript"]); ?></span>
                </p>
                <p>
                    <span></span>
                    <span class="c_and_s_color">
-                       <if condition="$vo['status'] elt 1 ">
-                        待处理
-                            <elseif condition="$vo['status'] eq 2 " />
+                       <?php if($vo['status'] <= 1 ): ?>待处理
+                            <?php elseif($vo['status'] == 2 ): ?>
                         待评价
-                            <elseif condition="$vo['status'] eq 3" />
-                        已完成
-                        </if>
+                            <?php elseif($vo['status'] == 3): ?>
+                        已完成<?php endif; ?>
                    </span>
                </p>
-            </div>
-            </volist>
+            </div><?php endforeach; endif; else: echo "" ;endif; ?>
 
         </div>
     </div>
@@ -169,7 +168,7 @@
     var colors = $('.c_and_s_color');
 //根据建议时间or投诉时间 判断列表类型改变样式和图片路径
     $.each(spans,function(i,n){
-        n.innerHTML == '建议时间:' ? imgs.eq(i).attr('src',"__PUBLIC__/simpleboot/manager/images/su2.png") : false;
+        n.innerHTML == '建议时间:' ? imgs.eq(i).attr('src',"/public/simpleboot/manager/images/su2.png") : false;
         if(colors.eq(i).html() == '待处理'){
             colors.eq(i).css('color','rgb(0,186,109)');
         } else if(colors.eq(i).html() == '待评价'){

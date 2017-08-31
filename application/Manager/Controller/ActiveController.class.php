@@ -89,6 +89,34 @@ class ActiveController extends AdminbaseController
         }
         $this->ajaxReturn($info);
     }
+    //活动编辑提交
+    public function act_edit_post(){
+        $post = I('post.');
+        $post['status'] = I('get.status', 1, 'intval');
+        $post['userid'] = sp_get_current_admin_id();
+        $post['time'] = time();
+        $model = M('act');
+        if ($model->create($post) !== false){
+            $result=$model->save($post);
+            if ($result){
+                $info = array(
+                    'code' => 200,
+                    'info' => '保存成功！'
+                );
+            } else {
+                $info = array(
+                    'code' => 400,
+                    'info' => '保存失败！'
+                );
+            }
+        } else {
+            $info = array(
+                'code' => 500,
+                'info' => $model->getError()
+            );
+        }
+        $this->ajaxReturn($info);
+    }
     //活动报名分享数据详情页
     public function act_manage_detail(){
         $id = I('get.id');
@@ -137,6 +165,21 @@ class ActiveController extends AdminbaseController
         $id = I('get.id');
         $act_model = M('act')->where(array('id'=>$id))->find();
         $this->assign('act', $act_model);
+        $this->display();
+    }
+    //活动预览页
+    public function act_detail() {
+        $id = I('get.id');
+        $act = M('act')->where(array('id'=>$id))->find();
+
+        $enter = M('act_user')->where(array('act_id'=>$id))->select();
+        $already_bm = 0;
+        foreach($enter as $k=>$v){
+            $already_bm += $v['num'];
+        }
+
+        $this->assign('enter', $already_bm);
+        $this->assign('act', $act);
         $this->display();
     }
 }

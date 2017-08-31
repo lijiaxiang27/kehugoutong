@@ -1,12 +1,12 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>活动详情</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
-	<script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+	<script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+	<script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
 	<style>
 		.application_box{
 			width:7.5rem;
@@ -73,15 +73,15 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 </script>
 	<div class="activity-list">
 		<div class="activity-banner">
-			<img src="{:sp_get_asset_upload_path($act['imagein'])}" alt="">
+			<img src="<?php echo sp_get_asset_upload_path($act['imagein']);?>" alt="">
 		</div>
 		<div class="activity-content">
 			<div class="activity">
-				<h2>{$act.title}</h2>
+				<h2><?php echo ($act["title"]); ?></h2>
 				<div class="activity-title-info clear">
 					<div class="activity-title-time">
-						<img src="__PUBLIC__/simpleboot/headmaster/images/time-img.png" alt="">
-						<span>{$act.time|date="Y-m-d", ###}</span>
+						<img src="/public/simpleboot/headmaster/images/time-img.png" alt="">
+						<span><?php echo (date("Y-m-d", $act["time"])); ?></span>
 					</div>
 					<div class="activity-title-content">全国学校管理中心</div>
 				</div>
@@ -90,33 +90,24 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 				<ul>
 					<li class="clear">
 						<dd>活动时间</dd>
-						<dd>{$act.starttime}~{$act.endtime}</dd>
+						<dd><?php echo ($act["starttime"]); ?>~<?php echo ($act["endtime"]); ?></dd>
 					</li>
 					<li class="clear">
 						<dd>活动地点</dd>
-						<dd>{$act.area}</dd>
+						<dd><?php echo ($act["area"]); ?></dd>
 					</li>
 					<li class="clear">
 						<dd>报名人数</dd>
-						<dd>{$enter|default=0}人已报名/限额{$act.num}人</dd>
+						<dd><?php echo ((isset($enter) && ($enter !== ""))?($enter):0); ?>人已报名/限额<?php echo ($act["num"]); ?>人</dd>
 					</li>
 				</ul>
 			</div>
 			<div class="activity-text">
-				{$act.content|htmlspecialchars_decode=###}
+				<?php echo (htmlspecialchars_decode($act["content"])); ?>
 			</div>
 		</div>
-		<if condition="$act['isover'] eq 0 ">
-				<if condition="$act['isbm'] eq 0">
-				<div class="footer"><span  id="application_btn">我要报名</span></div>
-					<else/>
-				<div class="footer"><span style="background-color: #7b8a8b" >您已报名</span></div>
-				</if>
-			<elseif condition="$vo['isfull'] eq 1"/>
-				<div class="footer"><span style="background-color: #7b8a8b">人数已满</span></div>
-			<else/>
-				<div class="footer"><span style="background-color: #7b8a8b">活动结束</span></div>
-		</if>
+
+				<div class="footer"><span style="background-color: #0c8b4e" onclick="location='<?php echo leuu('Manager/Active/index');?>'">返回</span></div>
 		<div class="application_box">
 			<div class="application">
 				<p><label for="">人数:</label><input type="number"  placeholder="请输入参加活动的人数..."><br></p>
@@ -128,45 +119,5 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 	</div>
 
 </body>
-<script>
-	/*function baoming(id) {
-		$.ajax({
-			url: "{:U('headmaster/act/attend')}",
-			type: 'post',
-			dataType:'html',
-			data: {"id":id},
-			success: function(msg) {
-				var msgs = eval('(' + msg + ')');
-				alert(msgs.info);
-				location.href=location.href;
-			}
-		});
-	}*/
-	var mask = $('.application_box');
-	var bm = $('.bm');
-	var id = {$act['id']};
-	bm.click(function () {
-        var comments = $('#comments').val();
-		var value = $('input[type = number]').val();
-		if(value == ''){
-		    alert('请填写人数！');
-		    return false;
-		}
-        $.ajax({
-            url: "{:U('headmaster/act/attend')}",
-            type: 'post',
-            dataType:'html',
-            data: {"act_id":id,'num':value,'comments':comments},
-            success: function(msg) {
-                var msgs = eval('(' + msg + ')');
-                alert(msgs.info);
-                location.href=location.href;
-            }
-        });
-    });
-	$('#application_btn').click(function () {
-         mask.fadeIn();
 
-    })
-</script>
 </html>

@@ -1,15 +1,15 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>投诉</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<script src="__PUBLIC__/simpleboot/headmaster/js/rootfont.js"></script>
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/main.css" />
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/swiper.css" />
-    <script src="__PUBLIC__/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+	<script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+    <link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+    <link rel="stylesheet" href="/public/simpleboot/headmaster/css/swiper.css" />
+    <script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
 	<!--五星评论的css-->
-	<link rel="stylesheet" href="__PUBLIC__/simpleboot/headmaster/css/star-rating-svg.css">
+	<link rel="stylesheet" href="/public/simpleboot/headmaster/css/star-rating-svg.css">
 	<style>
 		.my-rating-left{
 			float:left;
@@ -91,29 +91,27 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 		<div class="details">
 			<h3>申请详情</h3>
 			<ul>
-				<notempty name="title"><li class="clear"><span>申请标题：</span><p>{$title}</p></li></notempty>
-				<notempty name="province"><li class="clear"><span>地址：</span><p>{$province}-{$city}-{$county}</p></li></notempty>
-				<notempty name="end"><li class="clear"><span>起始时间：</span><p>{$start}~{$end}</p></li></notempty>
-				<notempty name="person"><li class="clear"><span>申请人：</span><p>{$person}</p></li></notempty>
-				<notempty name="mobile"><li class="clear"><span>联系电话：</span><p>{$mobile}</p></li></notempty>
-				<notempty name="continue"><li class="clear"><span>支持天数：</span><p>{$continue}</p></li></notempty>
-				<notempty name="num"><li class="clear"><span>参会人数：</span><p>{$num}</p></li></notempty>
-				<notempty name="content"><li class="clear"><span>支持详情：</span><p>{$content}</p></li></notempty>
-				<notempty name="demand"><li class="clear"><span>设计要求：</span><p>{$demand}</p></li></notempty>
-				<notempty name="is_send"><li class="clear"><span>是否发送附件：</span><p><if condition="$is_send eq 1">已发送<else/>未发送</if></p></li></notempty>
-				<notempty name="time"><li class="clear"><span>申请时间：</span><p>{$time|date="Y-m-d",###}</p></li></notempty>
-				<notempty name="passtime"><li class="clear"><span>审批时间：</span><p>{$passtime|date="Y-m-d",###}</p></li></notempty>
-				<notempty name="solvetime"><li class="clear"><span>解决时间：</span><p>{$solvetime|date="Y-m-d",###}</p></li></notempty>
-				<notempty name="judge_time"><li class="clear"><span>评价时间：</span><p>{$judge_time|date="Y-m-d",###}</p></li></notempty>
+				<?php if(!empty($title)): ?><li class="clear"><span>申请标题：</span><p><?php echo ($title); ?></p></li><?php endif; ?>
+				<?php if(!empty($province)): ?><li class="clear"><span>地址：</span><p><?php echo ($province); ?>-<?php echo ($city); ?>-<?php echo ($county); ?></p></li><?php endif; ?>
+				<?php if(!empty($end)): ?><li class="clear"><span>起始时间：</span><p><?php echo ($start); ?>~<?php echo ($end); ?></p></li><?php endif; ?>
+				<?php if(!empty($person)): ?><li class="clear"><span>申请人：</span><p><?php echo ($person); ?></p></li><?php endif; ?>
+				<?php if(!empty($mobile)): ?><li class="clear"><span>联系电话：</span><p><?php echo ($mobile); ?></p></li><?php endif; ?>
+				<?php if(!empty($continue)): ?><li class="clear"><span>支持天数：</span><p><?php echo ($continue); ?></p></li><?php endif; ?>
+				<?php if(!empty($num)): ?><li class="clear"><span>参会人数：</span><p><?php echo ($num); ?></p></li><?php endif; ?>
+				<?php if(!empty($content)): ?><li class="clear"><span>支持详情：</span><p><?php echo ($content); ?></p></li><?php endif; ?>
+				<?php if(!empty($demand)): ?><li class="clear"><span>设计要求：</span><p><?php echo ($demand); ?></p></li><?php endif; ?>
+				<?php if(!empty($is_send)): ?><li class="clear"><span>是否发送附件：</span><p><?php if($is_send == 1): ?>已发送<?php else: ?>未发送<?php endif; ?></p></li><?php endif; ?>
+				<?php if(!empty($time)): ?><li class="clear"><span>申请时间：</span><p><?php echo (date("Y-m-d",$time)); ?></p></li><?php endif; ?>
+				<?php if(!empty($passtime)): ?><li class="clear"><span>审批时间：</span><p><?php echo (date("Y-m-d",$passtime)); ?></p></li><?php endif; ?>
+				<?php if(!empty($solvetime)): ?><li class="clear"><span>解决时间：</span><p><?php echo (date("Y-m-d",$solvetime)); ?></p></li><?php endif; ?>
+				<?php if(!empty($judge_time)): ?><li class="clear"><span>评价时间：</span><p><?php echo (date("Y-m-d",$judge_time)); ?></p></li><?php endif; ?>
 			</ul>
 
 		</div>
-		<if condition="$status gt 1">
-			<div class="c_m_r_block"></div>
+		<?php if($status > 1): ?><div class="c_m_r_block"></div>
 			<div class="c_m_r_text">
 				<h3>评价</h3>
-				<volist name="send_users" id="vo">
-					<h4>{$vo.user_nicename}</h4>
+				<?php if(is_array($send_users)): $i = 0; $__LIST__ = $send_users;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><h4><?php echo ($vo["user_nicename"]); ?></h4>
 					<div class="my-rating-box">
 						<span class="my-rating-left">满意程度</span>
 						<div class="my-rating"></div>
@@ -121,16 +119,12 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 					<div class="my-rating-box">
 						<span class="my-rating-left">评价内容</span>
 						<textarea name="" id="" cols="30" rows="10"></textarea>
-					</div>
-				</volist>
+					</div><?php endforeach; endif; else: echo "" ;endif; ?>
 			</div>
-			<button class="open-rating-btn">发布评论</button>
-
-
-		</if>
+			<button class="open-rating-btn">发布评论</button><?php endif; ?>
 	</div>
 <!--五星评论的js-->
-<script src="__PUBLIC__/simpleboot/headmaster/js/star-rating-svg.js"></script>
+<script src="/public/simpleboot/headmaster/js/star-rating-svg.js"></script>
 <script>
 	var star_width = 0;
 	var star_arr = [];
@@ -184,7 +178,7 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 		var id = $("[name='id']").val();
 		var db = $("[name='db']").val();
 		$.ajax({
-			url: "{:U('Headmaster/User/pingjia')}",
+			url: "<?php echo U('Headmaster/User/pingjia');?>",
 			type: 'post',
 			dataType:'html',
 			data: {"score":score,"id":id,"db":db},

@@ -1,12 +1,17 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>编辑活动</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <include file="Manager:header" />
-    <link rel="stylesheet" href="__PUBLIC__/simpleboot/manager/css/DateSelector.css">
-    <script src="__PUBLIC__/simpleboot/manager/js/Eleditor.min.js"></script>
+    <script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+<script src="/public/simpleboot/headmaster/js/clipboard.min.js"></script>
+<script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/manager.css">
+<link rel="stylesheet" href="/public/simpleboot/manager/css/manager-v2.0.css">
+    <link rel="stylesheet" href="/public/simpleboot/manager/css/DateSelector.css">
+    <script src="/public/simpleboot/manager/js/Eleditor.min.js"></script>
     <!--  &lt;!&ndash; 如果需要图片上传 &ndash;&gt;
       <script src="js/webuploader.min.js"></script>
       <link rel="stylesheet" href="js/layout/base.css">-->
@@ -15,9 +20,9 @@
     <!--plan_C-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-    <link href="__PUBLIC__/simpleboot/manager/css/summernote.css" rel="stylesheet">
-    <script src="__PUBLIC__/simpleboot/manager/js/summernote.js"></script>
-    <script src="__PUBLIC__/simpleboot/manager/js/lang/summernote-zh-CN.js"></script>
+    <link href="/public/simpleboot/manager/css/summernote.css" rel="stylesheet">
+    <script src="/public/simpleboot/manager/js/summernote.js"></script>
+    <script src="/public/simpleboot/manager/js/lang/summernote-zh-CN.js"></script>
     <style>
         .list-om{  background:rgb(247,247,247);  overflow: hidden;  }
         .add-activity-box {
@@ -219,55 +224,55 @@
 <div class="list-content">
     <div class="list-om">
         <div class="add-activity-box add-activity-theme">
-            <p>活动主题<input type="text" name="title" value="{$act.title}" placeholder="请输入活动的主题" onfocus="this.placeholder='' " onblur="this.placeholder='请输入活动的主题'"></p>
+            <p>活动主题<input type="text" name="title" value="<?php echo ($act["title"]); ?>" placeholder="请输入活动的主题" onfocus="this.placeholder='' " onblur="this.placeholder='请输入活动的主题'"></p>
         </div>
         <div class="add-activity-box theme-img-box" >
             <p>主题图片<span>750×400像素，jpg或png格式</span></p>
             <div class="control-group js_uploadBox">
                 <div class="btn-upload">
                     <a href="javascript:void(0);">
-                        <img src="__PUBLIC__/simpleboot/manager/images/image.png" alt="">
+                        <img src="/public/simpleboot/manager/images/image.png" alt="">
                     </a>
                     <input class="js_upFile" type="file" name="cover">
                 </div>
                 <!--预览容器-->
                 <div class="js_showBox">
-                    <img class="js_logoBox" name="image" src="{$act.image}" width="100%" >
+                    <img class="js_logoBox" name="image" src="<?php echo ($act["image"]); ?>" width="100%" >
                 </div>
             </div>
         </div>
         <div class="add-activity-box">
-            <p>主办方 <input type="text" name="sponsor" value="{$act.sponsor}" placeholder="请输入举办方" onfocus="this.placeholder='' " onblur="this.placeholder='请输入举办方'"></p>
+            <p>主办方 <input type="text" name="sponsor" value="<?php echo ($act["sponsor"]); ?>" placeholder="请输入举办方" onfocus="this.placeholder='' " onblur="this.placeholder='请输入举办方'"></p>
         </div>
         <div class="add-activity-box">
             <ul>
-                <li><p>开始时间<span class="set-time set-activity-start-time" name="starttime" id="start-time">{$act.starttime}</span></p></li>
-                <li><p>结束时间<span class="set-time set-activity-end-time" name="endtime" id="end-time">{$act.endtime}</span></p></li>
+                <li><p>开始时间<span class="set-time set-activity-start-time" name="starttime" id="start-time"><?php echo ($act["starttime"]); ?></span></p></li>
+                <li><p>结束时间<span class="set-time set-activity-end-time" name="endtime" id="end-time"><?php echo ($act["endtime"]); ?></span></p></li>
                 <li><p>活动地点<input class="act_address" name="area" value="area" type="text" placeholder="请输入准确的活动举办地点" onfocus="this.placeholder='' " onblur="this.placeholder='请输入准确的活动举办地点'" ></p></li>
             </ul>
         </div>
         <div class="add-activity-box editor_box">
             <!--富文本编辑器c-->
-            <div id="summernote">{$act.content|htmlspecialchars_decode=###}</div>
+            <div id="summernote"><?php echo (htmlspecialchars_decode($act["content"])); ?></div>
         </div>
         <div class="add-activity-box">
-            <p class="to-activity-detail">人数限制<a href="javascript:void(0);"><input class="input_count" name="num" value="{$act.num}" placeholder="默认0不限制" type="number">人</a></p>
+            <p class="to-activity-detail">人数限制<a href="javascript:void(0);"><input class="input_count" name="num" value="<?php echo ($act["num"]); ?>" placeholder="默认0不限制" type="number">人</a></p>
         </div>
         <div class="add-activity-box">
-            <p class="to-activity-detail">报名信息<a href=""><img src="__PUBLIC__/simpleboot/manager/images/arrow.png" alt="报名信息"></a></p>
+            <p class="to-activity-detail">报名信息<a href=""><img src="/public/simpleboot/manager/images/arrow.png" alt="报名信息"></a></p>
         </div>
         <div class="add-activity-box money_box">
             <p>
                 <span>活动收费</span>
-                <label><input type="radio" name="money" value="yes" <if condition="$act['price'] neq 0 ">checked</if>>是</label>
-                <label><input type="radio" name="money" value="no" <if condition="$act['price'] eq 0 ">checked</if>>否</label>
+                <label><input type="radio" name="money" value="yes" <?php if($act['price'] != 0 ): ?>checked<?php endif; ?>>是</label>
+                <label><input type="radio" name="money" value="no" <?php if($act['price'] == 0 ): ?>checked<?php endif; ?>>否</label>
             </p>
         </div>
         <div class="add-activity-box money_standard" id="money_standard">
-            <p>收费标准 <input name="price" value="{$act.price}" type="text">元/人</p>
+            <p>收费标准 <input name="price" value="<?php echo ($act["price"]); ?>" type="text">元/人</p>
         </div>
         <div class="add-activity-box money_url" id="money_url">
-            <p>收费链接 <input type="text" name="price_url" value="{$act.price_url}" placeholder="http://..." onfocus="this.placeholder='' " onblur="this.placeholder='http://...'"></p>
+            <p>收费链接 <input type="text" name="price_url" value="<?php echo ($act["price_url"]); ?>" placeholder="http://..." onfocus="this.placeholder='' " onblur="this.placeholder='http://...'"></p>
         </div>
         <div class="add-activity-footer">
             <!--预览按钮，跳转到activity-details-preview页面-->
@@ -278,8 +283,8 @@
 </div>
 <div id="startContainer"></div>
 <div id="endContainer"></div>
-<script src="__PUBLIC__/simpleboot/manager/js/DateSelector.js"></script>
-<script src="__PUBLIC__/simpleboot/manager/js/uploadView.js"></script>
+<script src="/public/simpleboot/manager/js/DateSelector.js"></script>
+<script src="/public/simpleboot/manager/js/uploadView.js"></script>
 
 <script>
     $(".js_upFile").uploadView({
@@ -382,7 +387,7 @@
         var num = $("input[name=num]").val();
         var price = $("input[name=price]").val();
         var price_url = $("input[name=price_url]").val();
-        var actid = {$act['id']};
+        var actid = <?php echo ($act['id']); ?>;
         if (content == ''){
             alert('内容不能为空');
             return false;
@@ -412,14 +417,14 @@
             return false;
         }
         $.ajax({
-            url: "{:U('Manager/Active/act_edit_post')}" +"&status=" + status,
+            url: "<?php echo U('Manager/Active/act_edit_post');?>" +"&status=" + status,
             type: 'post',
             dataType:'json',
             data: {"id":actid,"content":content,"title":title,"image":image,"sponsor":sponsor,"starttime":starttime,"endtime":endtime,"area":area,"num":num,"price":price,"price_url":price_url},
             success: function(data) {
                 if(data.code == 200){
                     alert(data.info);
-                    location.href = "{:U('Manager/Active/index')}";
+                    location.href = "<?php echo U('Manager/Active/index');?>";
                 } else {
                     alert(data.info);
                 }

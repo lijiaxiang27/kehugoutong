@@ -93,6 +93,30 @@
 .approval-result{
     font-size:0.26rem;
 }
+
+
+/************** 8.31 start *************/
+.send-img{
+    right:-0.2rem;bottom:-0.15rem;
+}
+.status-img{
+    right:-0.2rem;top:2.6rem;
+}
+.application-status-left{
+    position:relative;
+    width:10%;
+    border-right:1px solid rgb(210,210,210);
+    height:2.6rem;
+}
+.application-status-right > .successful-application{
+    text-align:left;
+    background:white;
+    border:1px solid rgb(210,210,210);
+    border-radius:4px;
+    padding:0.2rem 0.3rem;
+}
+/************** 8.31 end *************/
+
 /*footer*/
 footer{
     z-index: 99;
@@ -881,10 +905,10 @@ footer ul:after{
     clear: both;
     visibility: hidden;
 }
-.js_showBox{
+/*.js_showBox{
     margin-top:0.32rem;
     display:none;
-}
+}*/
 /*修改日期默认样式*/
 .date-selector-btn-box{
     background:rgb(23,176,90);

@@ -27,8 +27,6 @@ class ComplainController extends AdminbaseController
             $where['status'] = array('elt', 1);
         } elseif($post == 2) {
             $where['status'] = array('gt', 1);
-        } else {
-
         }
         $user_model = A('Index','Controller');
         $sub_ids = $user_model->get_schools();
@@ -45,6 +43,10 @@ class ComplainController extends AdminbaseController
         }
         $this->assign('num', $i);
         $this->assign('arr', $arr);
+        $this->display();
+    }
+//    投诉建议详情页
+    public function detail(){
         $this->display();
     }
 }

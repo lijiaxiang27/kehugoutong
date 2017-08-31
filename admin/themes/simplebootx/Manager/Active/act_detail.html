@@ -106,17 +106,8 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 				{$act.content|htmlspecialchars_decode=###}
 			</div>
 		</div>
-		<if condition="$act['isover'] eq 0 ">
-				<if condition="$act['isbm'] eq 0">
-				<div class="footer"><span  id="application_btn">我要报名</span></div>
-					<else/>
-				<div class="footer"><span style="background-color: #7b8a8b" >您已报名</span></div>
-				</if>
-			<elseif condition="$vo['isfull'] eq 1"/>
-				<div class="footer"><span style="background-color: #7b8a8b">人数已满</span></div>
-			<else/>
-				<div class="footer"><span style="background-color: #7b8a8b">活动结束</span></div>
-		</if>
+
+				<div class="footer"><span style="background-color: #0c8b4e" onclick="location='{:leuu('Manager/Active/index')}'">返回</span></div>
 		<div class="application_box">
 			<div class="application">
 				<p><label for="">人数:</label><input type="number"  placeholder="请输入参加活动的人数..."><br></p>
@@ -128,45 +119,5 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 	</div>
 
 </body>
-<script>
-	/*function baoming(id) {
-		$.ajax({
-			url: "{:U('headmaster/act/attend')}",
-			type: 'post',
-			dataType:'html',
-			data: {"id":id},
-			success: function(msg) {
-				var msgs = eval('(' + msg + ')');
-				alert(msgs.info);
-				location.href=location.href;
-			}
-		});
-	}*/
-	var mask = $('.application_box');
-	var bm = $('.bm');
-	var id = {$act['id']};
-	bm.click(function () {
-        var comments = $('#comments').val();
-		var value = $('input[type = number]').val();
-		if(value == ''){
-		    alert('请填写人数！');
-		    return false;
-		}
-        $.ajax({
-            url: "{:U('headmaster/act/attend')}",
-            type: 'post',
-            dataType:'html',
-            data: {"act_id":id,'num':value,'comments':comments},
-            success: function(msg) {
-                var msgs = eval('(' + msg + ')');
-                alert(msgs.info);
-                location.href=location.href;
-            }
-        });
-    });
-	$('#application_btn').click(function () {
-         mask.fadeIn();
 
-    })
-</script>
 </html>

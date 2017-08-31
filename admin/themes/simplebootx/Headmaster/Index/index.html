@@ -109,8 +109,20 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 		<h3>最新活动</h3>
 		<ul>
 			<foreach name="acts" item="vo">
+				<?php
+					if(strpos($vo['image'],'admin') !== false){
+					$tag = 1;
+					} else {
+					$tag = 0;
+				} ?>
 			<li  onclick="location='{:U('Act/detail',array('id'=>$vo['id']))}'" class="clear">
-				<div class="zxhd-img"><img src="{:sp_get_asset_upload_path($vo['image'])}" alt=""></div>
+				<div class="zxhd-img">
+					<if condition="$tag eq 1 ">
+						<img src="{:sp_get_image_preview_url($vo['image'])}"  />
+						<elseif condition="$tag eq 0 " />
+						<img src="{$vo['image']}"  />
+					</if>
+				</div>
 				<div class="zxhd-cont">
 					<h4>{$vo.title}</h4>
 					<p>时间：{$vo.starttime}~{$vo.endtime}</p>

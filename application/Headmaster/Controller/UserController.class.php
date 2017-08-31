@@ -159,6 +159,15 @@ class UserController extends AdminbaseController{
         $id = I('get.id');
         $db = I('get.db');
         $data = M("$db")->where(array('id'=>$id))->find();
+        $db_user = $db."_user";
+        $db_user_model = M("$db_user");
+        $send_users = $db_user_model->where(array('app_id'=>$id))->select();
+        $users_model = M('users');
+        foreach ($send_users as $k=>$v){
+            $name = $users_model->field('user_nicename')->where(array('id'=>$v['user_id']))->find();
+            $send_users[$k]['user_nicename'] = $name['user_nicename'];
+        }
+        $this->assign('send_users', $send_users);
         $this->assign($data);
         $this->assign("db", $db);
         $this->display();

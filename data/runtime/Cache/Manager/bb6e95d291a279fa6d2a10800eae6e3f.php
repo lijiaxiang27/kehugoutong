@@ -1,10 +1,15 @@
-<!doctype html>
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>入校支持申请详情</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <include file="Manager:header" />
+    <script src="/public/simpleboot/headmaster/js/rootfont.js"></script>
+<script src="/public/simpleboot/headmaster/js/clipboard.min.js"></script>
+<script src="/public/simpleboot/headmaster/js/jquery-1.10.1.min.js"></script>
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/main.css" />
+<link rel="stylesheet" href="/public/simpleboot/headmaster/css/manager.css">
+<link rel="stylesheet" href="/public/simpleboot/manager/css/manager-v2.0.css">
 
     <style>
         .Application-detail-header{
@@ -184,7 +189,7 @@
 </head>
 <body>
 <script>
-    document.body.style.height=document.documentElement.clientHeight+"px";
+    //document.body.style.height=document.documentElement.clientHeight+"px";
 </script>
 <div class="list-content">
     <div class="list-om">

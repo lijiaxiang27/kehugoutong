@@ -36,7 +36,7 @@
              <div class="newest-activity-box">
                  <img src='{:sp_get_image_url($vo["image"])}' alt="">
                  <div class="newest-activity-right">
-                     <p class="newest-activity-title">{$vo.title}</p>
+                     <p class="newest-activity-title" onclick="location='{:leuu('Manager/Active/act_detail',array('id'=>$vo['id']))}'">{$vo.title}</p>
                      <p class="newest-activity-time">时间：<span>{$vo.starttime|strtotime=###|date="m月d日",###}—{$vo.endtime|strtotime=###|date="m月d日",###}</span></p>
                      <p class="newest-activity-address">地点：<span>{$vo.area}</span></p>
                      <a href="{:leuu('active/act_manage_detail',array('id'=>$vo['id']))}">管理活动</a>
@@ -61,7 +61,7 @@
     var btns = $('.newest-activity-bg a');
 
     for(var i = 0,len = btns.length;i < len;i++){
-        console.log(i);
+
         if(btns[i].innerHTML == "管理活动"){
             btns[i].style.backgroundColor = "rgb(0,196,109)";
             btns[i].style.color = "white";
