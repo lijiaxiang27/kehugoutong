@@ -108,15 +108,17 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 			</ul>
 
 		</div>
-		<if condition="$status gt 1">
+		<if condition="($status gt 1) and ($status lt 3)">
 			<div class="c_m_r_block"></div>
 			<div class="c_m_r_text">
 				<h3>评价</h3>
+				<input type="hidden" name="id" value="{$id}">
+				<input type="hidden" name="db" value="{$db}">
 				<volist name="send_users" id="vo">
 					<h4>{$vo.user_nicename}</h4>
 					<div class="my-rating-box">
 						<span class="my-rating-left">满意程度</span>
-						<div class="my-rating"></div>
+						<div class="my-rating" id="my-rating-{$vo.send_id}"></div>
 					</div>
 					<div class="my-rating-box">
 						<span class="my-rating-left">评价内容</span>
@@ -124,76 +126,124 @@ document.body.style.height=document.documentElement.clientHeight+"px";
 					</div>
 				</volist>
 			</div>
-			<button class="open-rating-btn">发布评论</button>
-
-
+			<button class="open-rating-btn">发布评价</button>
+		<elseif condition="$status eq 3 "/>
+			<div class="c_m_r_block"></div>
+			<div class="c_m_r_text">
+				<h3>评价</h3>
+				<volist name="judges" id="vo">
+					<h4>{$vo.user_id|sp_get_master_name=###}</h4>
+					<div class="my-rating-box">
+						<span class="my-rating-left">满意程度</span>
+						<div class="my-rating" id="my-rating-{$vo.user_id}" star="{$vo.star}"></div>
+					</div>
+					<div class="my-rating-box">
+						<span class="my-rating-left">评价内容</span>
+						<textarea name="" id="" cols="30" rows="10">{$vo.judge}</textarea>
+					</div>
+				</volist>
+			</div>
 		</if>
 	</div>
 <!--五星评论的js-->
 <script src="__PUBLIC__/simpleboot/headmaster/js/star-rating-svg.js"></script>
 <script>
 	var star_width = 0;
-	var star_arr = [];
+	var global_arr = [];//全局数组，保存所有星星的个数
+	var send_texts = [];//全局数组，保存星星的个数
+	var btn = $('.open-rating-btn');//获取发布按钮
+	var texts = $('textarea');
+	console.log(texts);
+
+
 	window.onload = function(){
-		var width = document.body.clientWidth;
+		var had_judge = [];
+		var index = $('.my-rating-box').length / 2;//获取经理的个数
+		var ids = $('.my-rating');//获取所有ID
+		var read_br = false;//初始值设为false,默认可以编辑星星************9.1
+		var yes_or_no = {$status};
+
+		if(yes_or_no === 3){
+			read_br = true;
+			$.each(texts,function (i,e) {
+				e.setAttribute('readonly','readonly');
+			});
+			$.each(ids,function (i,e) {
+				had_judge.push(e.getAttribute('star'));
+				console.log(had_judge);
+			})
+		}
+
+		var width = document.body.clientWidth;//根据屏幕尺寸适配星星的大小
 		console.log(width);
-		if(width >= 320){
-			star_width = 20;
-		}
-		if(width >= 375) {
-			star_width = 22;
-		}
-		if(width >= 414) {
-			star_width = 24;
-		}
-		//初始化五星评论
-		$(".my-rating").starRating({
-			starSize: star_width,
-			disableAfterRate: false,
-			useFullStars: true,
-			callback: function(currentRating, $el){
-				console.log(currentRating);
-				star_arr[0] = currentRating;
-			}
+		if(width >= 320){star_width = 20;}
+		if(width >= 375) {star_width = 22;}
+		if(width >= 414) {star_width = 24;}
+
+
+
+		var arr_persons = [];
+		$.each(ids,function(i,e){
+			var x = e.getAttribute('id');
+			x = x.slice(10);
+			arr_persons.push(x);
 		});
-	};
-</script>
-<script>
-	var tip=['','1.0','2.0','3.0','4.0','5.0'];
-	var tip2=['','差','一般','中等','良','优秀'];
-	$('.pf').on('mousedown','.glyphicon',function(){
-		if($(this).hasClass('glyphicon-star')){
-			var score = 0;
-			$(this).parent().attr('data-rh-score' ,score);
-			$(this).addClass('glyphicon-star-empty').removeClass('glyphicon-star').siblings('.glyphicon').addClass('glyphicon-star-empty').removeClass('glyphicon-star');
-			$(this).nextAll('.tip').text(tip[0]);
-			$(this).nextAll('.tip2').text(tip2[0]);
-		}else{
-			var score = $(this).index();
-			$(this).parent().attr('data-rh-score' ,score);
-			$(this).addClass('glyphicon-star').removeClass('glyphicon-star-empty').prevAll('.glyphicon').addClass('glyphicon-star').removeClass('glyphicon-star-empty');
-			$(this).nextAll('.tip').text(tip[score]);
-			$(this).nextAll('.tip2').text(tip2[score]);
+		console.log(arr_persons);
+
+
+		//初始化五星评论
+
+		for(var i = 0; i < arr_persons.length;i++){
+			(function(j){
+				// console.log(arr_persons[j]);
+				$('#my-rating-'+arr_persons[j]).starRating({
+					starSize: star_width,
+					disableAfterRate: false,
+					initialRating:had_judge[j],
+					readOnly:read_br,
+					useFullStars: true,
+					callback: function(currentRating, $el){
+
+						var obj = {};
+						obj.id = arr_persons[j];
+						obj.star_count = currentRating;
+						global_arr[j] = obj;
+
+					}
+				});
+			})(i)
 		}
-	});
-	function pingjia(){
-		var score=[];
-		score[0] = $('.pf li:eq(0)').attr('data-rh-score');
-		score[1] = $('.pf li:eq(1)').attr('data-rh-score');
-		score[2] = $('.pf li:eq(2)').attr('data-rh-score');
+	};
+
+
+	btn.click(function(){
+		$.each(texts,function(i,e){
+			if(e.value == ''){
+				alert('第'+(i+1)+'评论不能为空');
+				return false;
+			}
+			global_arr[i].texts = e.value;
+		});
+		var want = JSON.stringify(global_arr);
+		console.log(want);
 		var id = $("[name='id']").val();
 		var db = $("[name='db']").val();
 		$.ajax({
 			url: "{:U('Headmaster/User/pingjia')}",
 			type: 'post',
-			dataType:'html',
-			data: {"score":score,"id":id,"db":db},
-			success: function() {
-				location.href = location.href;
+			dataType:'json',
+			data: {"want":want,"id":id,"db":db},
+			success: function(msg) {
+				if (msg.code == 200) {
+					alert(msg.info);
+					location.href = location.href;
+				} else {
+					alert(msg.info);
+				}
 			}
 		});
-
-	}
+	})
 </script>
+
 </body>
 </html>

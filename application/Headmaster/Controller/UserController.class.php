@@ -161,11 +161,17 @@ class UserController extends AdminbaseController{
         $data = M("$db")->where(array('id'=>$id))->find();
         $db_user = $db."_user";
         $db_user_model = M("$db_user");
+        //已完成
+        if ($data['status'] == 3){
+            $judges = $db_user_model->where(array('app_id'=>$data['id']))->select();
+            $this->assign("judges", $judges);
+        }
         $send_users = $db_user_model->where(array('app_id'=>$id))->select();
         $users_model = M('users');
         foreach ($send_users as $k=>$v){
-            $name = $users_model->field('user_nicename')->where(array('id'=>$v['user_id']))->find();
+            $name = $users_model->field('id,user_nicename')->where(array('id'=>$v['user_id']))->find();
             $send_users[$k]['user_nicename'] = $name['user_nicename'];
+            $send_users[$k]['send_id'] = $name['id'];
         }
         $this->assign('send_users', $send_users);
         $this->assign($data);
@@ -177,11 +183,62 @@ class UserController extends AdminbaseController{
         $data= I('post.');
         $post['status'] = 3;
         $post['id'] = $data['id'];
+
         $post['judge_time'] = time();
         $db = $data['db'];
-        $post['judge'] = serialize($data['score']);
-        M("$db")->create($post);
-        $res = M("$db")->save();
+        $db_user = $db."_user";
+        $db_model = M("$db");
+        $db_user_model = M("$db_user");
+        $tmp = '{"tmp":'.$data['want'].'}';
+        $tmp = htmlspecialchars_decode($tmp);
+        $tmp = json_decode($tmp,true);
+        $judge = array();
+        foreach ($tmp['tmp'] as $kk=>$vv){
+            $judge[$kk]['user_id'] = $vv['id'];
+            $judge[$kk]['app_id'] = $data['id'];
+            $judge[$kk]['star'] = $vv['star_count'];
+            $judge[$kk]['judge'] = $vv['texts'];
+            $judge[$kk]['ju_time'] = $post['judge_time'];
+        }
+
+        if ($db_model->create($post) !== false){
+            $res = $db_model->save($post);
+            if ($res){
+                foreach ($judge as $k=>$v){
+                    if ($db_user_model->create($v) !== false){
+                        $rs = $db_user_model->where(array('app_id'=>$v['app_id'],'user_id'=>$v['user_id']))->save($v);
+                        if ($rs){
+                            $msg = array(
+                                'code' => 200,
+                                'info' => "评价成功！"
+                            );
+                        } else {
+                            $msg = array(
+                                'code' => 403,
+                                'info' => "评论失败！"
+                            );
+                        }
+                    } else {
+                        $msg = array(
+                            'code' => 402,
+                            'info' => "评论失败！"
+                        );
+                    }
+                }
+
+            } else {
+                $msg = array(
+                    'code' => 401,
+                    'info' => "评论失败！"
+                );
+            }
+        } else {
+            $msg = array(
+                'code' => 400,
+                'info' => "评论失败！"
+            );
+        }
+        $this->ajaxReturn($msg);
     }
     // 密码修改
     public function password(){

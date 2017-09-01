@@ -86,7 +86,7 @@
 
         .to-activity-detail>a>.input_count{
             -webkit-appearance: none;
-            width:1.3rem;
+            width:2rem;
             height:0.5rem;
             border:1px solid #ddd;
             border-radius:0.05rem;
@@ -210,6 +210,9 @@
         .money_standard,.money_url {
             display:none;
         }
+        .form-group > input{
+            margin-left: 0;
+        }
     </style>
 </head>
 <body>
@@ -232,7 +235,7 @@
                 </div>
                 <!--预览容器-->
                 <div class="js_showBox">
-                    <img class="js_logoBox" name="image" src="" width="100px" >
+                    <img class="js_logoBox" name="image" src="" width="100%" >
                 </div>
             </div>
         </div>
@@ -254,7 +257,7 @@
             <p class="to-activity-detail">人数限制<a href="javascript:void(0);"><input class="input_count" name="num" placeholder="默认0不限制" type="number">人</a></p>
         </div>
         <div class="add-activity-box">
-            <p class="to-activity-detail">报名信息<a href=""><img src="__PUBLIC__/simpleboot/manager/images/arrow.png" alt="报名信息"></a></p>
+            <!--<p class="to-activity-detail">报名信息<a href=""><img src="__PUBLIC__/simpleboot/manager/images/arrow.png" alt="报名信息"></a></p>-->
         </div>
         <div class="add-activity-box money_box">
             <p>
@@ -264,7 +267,7 @@
             </p>
         </div>
         <div class="add-activity-box money_standard" id="money_standard">
-            <p>收费标准 <input name="price" type="text">元/人</p>
+            <p>收费标准 <input name="price" type="number">元/人</p>
         </div>
         <div class="add-activity-box money_url" id="money_url">
             <p>收费链接 <input type="text" name="price_url" placeholder="http://..." onfocus="this.placeholder='' " onblur="this.placeholder='http://...'"></p>
