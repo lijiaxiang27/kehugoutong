@@ -122,8 +122,8 @@
         <div class="area-div"></div>
         <div class="c_and_s_lists">
             <volist name="arr" id="vo">
-            <div class="c_and_s_list" onclick="location='{:leuu('Manager/Complain/detail',array('id'=>$vo['id']))}'">
-               <?php $length = count($vo);if($length>8)$type='投诉';else $type='建议'; ?>
+                <?php $length = count($vo);if($length>8)$type='投诉';else $type='建议'; ?>
+            <div class="c_and_s_list" onclick="location='{:leuu('Manager/Complain/detail',array('id'=>$vo['id'],'type'=>$type))}'">
                <h3>
                    <if condition="$length gt 8">
                        <img class="c_and_s_img" src="__PUBLIC__/simpleboot/manager/images/su.png" alt="">{$vo.userid|sp_get_school_name}{$type}
