@@ -149,7 +149,7 @@
                                 <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
                                 <a class="data_btn" href="">下载</a>
                                 <a class="data_btn" href="{:leuu('Material/edit_material',array('id'=>$v['id']))}">编辑</a>
-                                <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                <a class="data_btn delete_data" href="#1" get_id="{$v.id}">删除</a>
                             </p>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                                     <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
                                     <a class="data_btn" href="">下载</a>
                                     <a class="data_btn" href="">编辑</a>
-                                    <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                    <a class="data_btn delete_data" href="#1" get_id="{$v.id}">删除</a>
                                 </p>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                                     <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
                                     <a class="data_btn" href="">下载</a>
                                     <a class="data_btn" href="">编辑</a>
-                                    <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                    <a class="data_btn delete_data" href="#1" get_id="{$v.id}">删除</a>
                                 </p>
                             </div>
                         </div>
@@ -218,7 +218,7 @@
                                     <span class="data_time">{:date('Y-m-d H:i:s',$v['time'])}</span>
                                     <a class="data_btn" href="">下载</a>
                                     <a class="data_btn" href="">编辑</a>
-                                    <a class="data_btn delete_data" href="#1" god="{$v.id}">删除</a>
+                                    <a class="data_btn delete_data" href="#1" get_id="{$v.id}">删除</a>
                                 </p>
                             </div>
                         </div>
@@ -278,8 +278,7 @@
                 var br = confirm("确认删除此选项？");
                 if(br){
                     var obj = $(this);
-                    var id  = obj.attr('god');
-
+                    var id  = obj.attr('get_id');
                     $.ajax({
                         url:"{:U('Material/delete_material')}",
                         type:'get',
@@ -288,12 +287,14 @@
                         success:function(msg){
                             if (msg.code==200){
                                 alert(msg.info);
-                                obj.parent().parent().parent().remove();
+                                window.location.reload();
                             }else{
                                 alert(msg.info);
                             }
                         }
-                    })
+
+                    });
+
 
                 }
             })

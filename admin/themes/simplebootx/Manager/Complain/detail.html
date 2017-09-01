@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>入校支持申请详情</title>
+    <title>投诉建议详情</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <include file="Manager:header" />
 
@@ -190,25 +190,25 @@
     <div class="list-om">
         <div class="Application-detail-header">
             <div class="detail-header-right">
-                <p class="school-name">河北沧州凹凸学习中心投诉运营服务</p>
-                <span class="approval-result approval-result-detail" id="approvalResult">待处理</span>
+                <p class="school-name">{$data.s_name}</p>
+                <span class="approval-result approval-result-detail" id="approvalResult"><if condition="$data['status'] eq 0 ">待处理<else/>已处理</if></span>
             </div>
         </div>
         <hr/>
         <div class="Application-detail-content">
-            <p><span class="detail-content-name">投诉时间： </span><span class="d-c-n-2">2017-6-30 9:00</span></p>
-            <p><span class="detail-content-name">投诉人： </span><span class="d-c-n-2">刘校长</span></p>
-            <p><span class="detail-content-name">投诉内容： </span><span class="d-c-n-2">帮助校区构建标准化的运营服务体系，帮助校区建立师资库并配合进行兼职教师面试和培训。</span></p>
-            <p><span class="detail-content-name">期望解决方案： </span ><span class="d-c-n-2">帮助校区构建标准化的运营服务体系，帮助校区建立师资库并配合进行兼职教师面试和培训。</span></p>
+            <p><span class="detail-content-name">投诉时间： </span><span class="d-c-n-2">{:date('Y-m-d H:i:s',$data['time']);}</span></p>
+            <p><span class="detail-content-name">投诉人： </span><span class="d-c-n-2">{$data.u_name}</span></p>
+            <p><span class="detail-content-name">投诉内容： </span><span class="d-c-n-2">{$data.descript}</span></p>
+            <p><span class="detail-content-name">期望解决方案： </span ><span class="d-c-n-2">{$data.solution}</span></p>
             <div class="detail-content-bottom">
                 <span class="detail-content-name  support-content">附件：</span>
                 <div class="c_and_s_enclosure">
-
+                    <!--@loading…… 数据后台已获取-->
                 </div>
             </div>
         </div>
         <div  class="application-status" id="apply_box">
-           <p class="your_reply_box">您的回复：<br><span class="your_reply" style="margin-left:1.5rem"></span></p><!--运营经理输入框的内容-->
+           <p class="your_reply_box"><?php if(!isset($data['manager'])||empty($data['manager'])){ echo '您的回复';}else{ echo $data['manager']; }?>：<br><span class="your_reply" style="margin-left:1.5rem">{$data.reply}</span></p><!--运营经理输入框的内容-->
            <p class="return_box">
                <span style="vertical-align:top;font-size:0.3rem;">请回复：</span>
                <textarea class="return_input" id="return_input">
@@ -226,9 +226,9 @@
     </div>
 </div>
 <script>
-    var spans = document.querySelector('.approval-result');
-    var textarea = $('#return_input');
-    var return_btn = $('#return_button');
+    var spans = document.querySelector('.approval-result'); //判断当前状态
+    var textarea = $('#return_input'); //回复的内容
+    var return_btn = $('#return_button'); //回复按钮
     var box = $('#apply_box');
     var manager_text = $('.your_reply');
     var manager_text_box = $('.your_reply_box');
@@ -236,7 +236,7 @@
 
 
 
-        if(spans.innerHTML == "已完成" || spans.innerHTML == "已同意"){
+        if(spans.innerHTML == "已完成" || spans.innerHTML == "已同意" || spans.innerHTML == "已处理"){
             manager_text_box.show();
             $('.return_box').hide();
             return_btn.hide();
@@ -249,6 +249,10 @@
 
 
     return_btn.click(function () {
+        var data = $('#return_input').val(); //获取内容
+        var nid  = {$data['id']};
+        var ntype= "{$data['type']}";
+
         var val = textarea.val();
         if(val.trim() === ''){
             alert('请填写对投诉或建议的回复');
@@ -265,18 +269,17 @@
             $('.return_box').fadeOut(200);
             return_btn.fadeOut(200);
             $('.master_reply').fadeIn(200);
-            alert("提交成功");
+
             $.ajax({
-                url:'',
-                type:'',
-                data:{},
+                url:"{:U('Complain/detail')}",
+                type:'post',
+                data:{'reply':data,'id':nid,'type':ntype},
                 dataType:'json',
                 success:function(msg){
+                    alert(msg.info);
 
-                },
-                error:function(msg){
-                    //alert(msg);
                 }
+
             })
         }
     });

@@ -116,7 +116,7 @@ class MaterialController extends AdminbaseController
 
     /**
      * Effect : 资料删除动作
-     * @return  json
+     * @return  Json
      */
     public function delete_material(){
         $id = I('get.id');

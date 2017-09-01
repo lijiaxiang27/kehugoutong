@@ -28,6 +28,7 @@ class ComplainController extends AdminbaseController
         } elseif($post == 2) {
             $where['status'] = array('gt', 1);
         }
+
         $user_model = A('Index','Controller');
         $sub_ids = $user_model->get_schools();
         $where['userid'] = array('IN', "$sub_ids");
@@ -47,6 +48,55 @@ class ComplainController extends AdminbaseController
     }
 //    投诉建议详情页
     public function detail(){
-        $this->display();
+
+        if(IS_GET){
+            $get = I('get.');
+            if ($get['type']=='投诉'){
+                $db = M('complain');
+                $file = M('complain_file') -> where('complain_id = '.$get['id']) -> select();
+            }else{
+                $db = M('adv');
+                $file = M('adv_file') -> where('complain_id = '.$get['id']) -> select();
+            }
+
+            $data = $db -> find($get['id']);
+            $data['u_name'] = sp_get_master_name($data['userid']);
+            $data['s_name'] = sp_get_school_name($data['userid']);
+            $data['type']   = $get['type'];
+            if ($data['reply']!=''){
+                $manager = M('users')-> field('user_nicename') -> where('id='.$data['reuser']) -> find();
+                $data['manager']=$manager['user_nicename'];
+            }
+
+            $this -> assign('file',$file);
+            $this -> assign('data',$data);
+            $this -> display();
+        }
+
+        if(IS_POST){
+            $data = I('post.');
+            $data['reply'] = trim($data['reply']);
+            $data['reuser'] = sp_get_current_admin_id();
+            $data['status'] = 2;
+            if ($data['type']=='投诉'){
+                $db = M('complain');
+            }else{
+                $db = M('adv');
+            }
+
+            unset($data['type']);
+            if($db -> save($data))
+            {
+                $msg['code'] = 200;
+                $msg['info'] = '回复成功';
+                $this -> ajaxReturn($msg);
+            }else{
+                $msg['code'] = 400;
+                $msg['info'] = '回复失败';
+                $this -> ajaxReturn($msg);
+            }
+
+        }
+
     }
 }
