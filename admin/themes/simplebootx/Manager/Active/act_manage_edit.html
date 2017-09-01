@@ -222,7 +222,7 @@
             <p>活动主题<input type="text" name="title" value="{$act.title}" placeholder="请输入活动的主题" onfocus="this.placeholder='' " onblur="this.placeholder='请输入活动的主题'"></p>
         </div>
         <div class="add-activity-box theme-img-box" >
-            <p>主题图片<span>750×400像素，jpg或png格式</span></p>
+            <p>主题图片<span>750×590像素，jpg或png格式</span></p>
             <div class="control-group js_uploadBox">
                 <div class="btn-upload">
                     <a href="javascript:void(0);">
@@ -230,9 +230,19 @@
                     </a>
                     <input class="js_upFile" type="file" name="cover">
                 </div>
+                <?php
+					if(strpos($act['image'],'admin') !== false){
+					$tag = 1;
+					} else {
+					$tag = 0;
+				} ?>
                 <!--预览容器-->
                 <div class="js_showBox">
-                    <img class="js_logoBox" name="image" src="{$act.image}" width="100%" >
+                    <if condition="$tag eq 1 ">
+                        <img class="js_logoBox" name="image" src="{:sp_get_image_preview_url($act['image'])}" width="100%" >
+                        <elseif condition="$tag eq 0 " />
+                        <img class="js_logoBox" name="image" src="{$act['image']}" width="100%" >
+                    </if>
                 </div>
             </div>
         </div>

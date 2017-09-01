@@ -134,11 +134,15 @@
     <div class="list-om" style="">
         <div class="data_box">
             <h3>资料列表</h3>
-
+            <notempty name="yy_data">
             <div class="data_lists">
                 <h4 class="data_header clear">
                     <span class="data_text">运营资料</span>
-                    <a href="" class="find_more">查看更多></a>
+                    <if condition="$tag eq 'all'">
+                    <a href="{:leuu('Manager/Material/index',array('type'=>1))}" class="find_more">查看更多></a>
+                        <else/>
+                        <a href="{:leuu('Manager/Material/index')}" class="find_more">返回</a>
+                    </if>
                 </h4>
                 <div class="data_list_box">
                     <volist name="yy_data" id="v">
@@ -157,11 +161,16 @@
             </volist>
                 </div>
             </div>
-
+            </notempty>
+            <notempty name="sc_data">
             <div class="data_lists">
                 <h4 class="data_header clear">
                     <span class="data_text">市场方案</span>
-                    <a href="" class="find_more">查看更多></a>
+                    <if condition="$tag eq 'all'">
+                        <a href="{:leuu('Manager/Material/index',array('type'=>2))}" class="find_more">查看更多></a>
+                        <else/>
+                        <a href="{:leuu('Manager/Material/index')}" class="find_more">返回</a>
+                    </if>
                 </h4>
                 <div class="data_list_box">
                     <volist name="sc_data" id="v">
@@ -180,11 +189,16 @@
                     </volist>
                 </div>
             </div>
-
+            </notempty>
+            <notempty name="px_data">
             <div class="data_lists">
                 <h4 class="data_header clear">
                     <span class="data_text">培训资料</span>
-                    <a href="" class="find_more">查看更多></a>
+                    <if condition="$tag eq 'all'">
+                        <a href="{:leuu('Manager/Material/index',array('type'=>3))}" class="find_more">查看更多></a>
+                        <else/>
+                        <a href="{:leuu('Manager/Material/index')}" class="find_more">返回</a>
+                    </if>
                 </h4>
                 <div class="data_list_box">
                     <volist name="px_data" id="v">
@@ -203,11 +217,16 @@
                     </volist>
                 </div>
             </div>
-
+            </notempty>
+            <notempty name="qt_data">
             <div class="data_lists">
                 <h4 class="data_header clear">
                     <span class="data_text">其他资料</span>
-                    <a href="" class="find_more">查看更多></a>
+                    <if condition="$tag eq 'all'">
+                        <a href="{:leuu('Manager/Material/index',array('type'=>4))}" class="find_more">查看更多></a>
+                        <else/>
+                        <a href="{:leuu('Manager/Material/index')}" class="find_more">返回</a>
+                    </if>
                 </h4>
                 <div class="data_list_box">
                     <volist name="qt_data" id="v">
@@ -226,7 +245,7 @@
                     </volist>
                 </div>
             </div>
-
+            </notempty>
         </div>
         <div class="upload_container block" id="block">
             <a class="upload_data_btn" href="{:leuu('Material/add_material')}">

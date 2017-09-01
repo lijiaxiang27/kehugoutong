@@ -16,34 +16,54 @@ class MaterialController extends AdminbaseController
     }
 //    资料更新首页
     public function index(){
-//        运营资料
-        $yy_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
-            ->where(array('typeid'=>1))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
-            ->limit(2)
-            ->order('time desc')
-            ->select();
-//      市场方案
-        $sc_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
-            ->where(array('typeid'=>2))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
-            ->limit(2)
-            ->order('time desc')
-            ->select();
-//        培训资料
-        $px_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
-            ->where(array('typeid'=>3))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
-            ->limit(2)
-            ->order('time desc')
-            ->select();
-//        其他资料
-        $qt_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
-            ->where(array('typeid'=>4))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
-            ->limit(2)
-            ->order('time desc')
-            ->select();
-        $this->assign('yy_data', $yy_data);
-        $this->assign('sc_data', $sc_data);
-        $this->assign('px_data', $px_data);
-        $this->assign('qt_data', $qt_data);
+        $type_id = I('get.type',0);
+        if ($type_id){
+            $data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
+                ->where(array('typeid'=>$type_id))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
+                ->order('time desc')
+                ->select();
+            $this->assign('tag','one');
+            if ($type_id == 1){
+                $this->assign('yy_data', $data);
+            } elseif ($type_id == 2){
+                $this->assign('sc_data', $data);
+            } elseif ($type_id == 3){
+                $this->assign('px_data', $data);
+            } elseif ($type_id == 4){
+                $this->assign('qt_data', $data);
+            }
+        } else {
+            //        运营资料
+            $yy_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
+                ->where(array('typeid'=>1))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
+                ->limit(2)
+                ->order('time desc')
+                ->select();
+            //      市场方案
+            $sc_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
+                ->where(array('typeid'=>2))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
+                ->limit(2)
+                ->order('time desc')
+                ->select();
+            //        培训资料
+            $px_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
+                ->where(array('typeid'=>3))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
+                ->limit(2)
+                ->order('time desc')
+                ->select();
+            //        其他资料
+            $qt_data = M('material as a')->join('cmf_doctype as b on a.doctype = b.id')
+                ->where(array('typeid'=>4))->field('a.id,a.title,a.content,a.pwd,a.time,b.icon')
+                ->limit(2)
+                ->order('time desc')
+                ->select();
+            $this->assign('yy_data', $yy_data);
+            $this->assign('sc_data', $sc_data);
+            $this->assign('px_data', $px_data);
+            $this->assign('qt_data', $qt_data);
+            $this->assign('tag','all');
+        }
+
         $this->display();
     }
 
